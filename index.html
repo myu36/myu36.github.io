@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全屏进度条</title>
+    <!-- 引入Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: #f8f9fa;
+        }
+        
+        .full-progress-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .progress {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #e9ecef;
+            overflow: hidden;
+            border-radius: 0;
+        }
+        
+        .progress-bar {
+            position: relative;
+            background-color: #0d6efd; /* 蓝色主题 */
+            height: 100%;
+            width: 0%;
+            transition: width 3s ease-in-out;
+        }
+        
+        .progress-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 8rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+        
+        .progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            animation: shine 3s infinite;
+            z-index: 1;
+        }
+        
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        
+        /* 响应式设计 */
+        @media screen and (min-width: 1921px), screen and (min-height: 1081px) {
+            body {
+                transform: scale(calc(min(100vw/1920, 100vh/1080)));
+                transform-origin: center;
+            }
+        }
+        
+        @media screen and (max-width: 1920px) and (max-height: 1080px) {
+            body {
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="full-progress-container">
+        <div class="progress">
+            <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><div class="progress-value" id="progressValue">0.0%</div></div>
+            
+        </div>
+    </div>
+
+    <!-- 引入Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 设置时区为GMT+8
+        function getChinaTime(date) {
+            return new Date(date.getTime() + date.getTimezoneOffset() * 60000 + 8 * 3600000);
+        }
+        
+        // 计算两个日期之间的天数差
+        function getDaysDiff(startDate, endDate) {
+            // 将日期转换为GMT+8时间
+            const start = getChinaTime(new Date(startDate));
+            const end = getChinaTime(new Date(endDate));
+            
+            // 获取日期部分（忽略时间）
+            const startDay = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+            const endDay = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+            
+            // 计算天数差
+            const diffTime = Math.abs(endDay - startDay);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            return diffDays;
+        }
+        
+        // 初始化日期
+        const beginDate = new Date('1997-09-24'); // 示例开始日期
+        const endDate = new Date('2097-09-24');   // 示例结束日期
+        const today = new Date();                 // 当前日期
+        
+        // 计算总天数和已完成天数
+        const totalDays = getDaysDiff(beginDate, endDate);
+        let completedDays = getDaysDiff(beginDate, today);
+        
+        // 确保完成天数不超过总天数
+        if (completedDays > totalDays) {
+            completedDays = totalDays;
+        }
+        
+        // 计算进度百分比
+        const progressPercent = totalDays > 0 ? (completedDays / totalDays) * 100 : 0;
+        const formattedPercent = progressPercent.toFixed(1);
+        
+        // 更新进度条和数值
+        const progressBar = document.getElementById('progressBar');
+        const progressValue = document.getElementById('progressValue');
+        
+        setTimeout(() => {
+            progressBar.style.width = formattedPercent + '%';
+            progressBar.setAttribute('aria-valuenow', formattedPercent);
+            progressValue.textContent = Math.floor(formattedPercent);
+        }, 100); // 延迟一点时间让页面先渲染
+    </script>
+</body>
+</html>
