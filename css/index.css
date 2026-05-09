@@ -55,7 +55,7 @@ body {
   background: #fff;
   top: -100px;
   right: -100px;
-  animation: blob-animation 8s infinite;
+  animation: blob-animation 8s infinite 2s;
 }
 
 .blob-2 {
@@ -64,7 +64,7 @@ body {
   background: #fff;
   bottom: -50px;
   left: -100px;
-  animation: blob-animation 10s infinite reverse;
+  animation: blob-animation 10s infinite reverse 2.5s;
 }
 
 .blob-3 {
@@ -73,7 +73,7 @@ body {
   background: #fff;
   bottom: 100px;
   right: 50px;
-  animation: blob-animation 7s infinite;
+  animation: blob-animation 7s infinite 3s;
 }
 
 @keyframes blob-animation {
@@ -97,17 +97,15 @@ body {
   color: white;
   max-width: 600px;
   padding: 20px;
-  animation: fade-in-up 0.8s ease-out;
+  animation: fade-in 0.8s ease-out;
 }
 
-@keyframes fade-in-up {
+@keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(30px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -146,7 +144,7 @@ body {
   text-transform: uppercase;
   opacity: 0.9;
   margin: 0;
-  animation: fade-in-up 0.8s ease-out 0.2s both;
+  animation: fade-in 0.8s ease-out 0.2s both;
 }
 
 /* 动画下划线 */
@@ -177,7 +175,7 @@ body {
   margin-top: 2rem;
   width: 100%;
   max-width: 600px;
-  animation: fade-in-up 0.8s ease-out 1s both;
+  animation: fade-in 0.8s ease-out 1s both;
 }
 
 .tech-category {
