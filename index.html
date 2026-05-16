@@ -1,64 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Michael Yu's HomePage</title>
-    <link rel="shortcut icon" type="images/x-icon" href="public/favicon.ico" />
-    <link rel="stylesheet" href="css/index.css" />
-  </head>
-  <body>
-    <div class="page-container">
-      <!-- 浮动背景元素 -->
-      <div class="background-decoration">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-      </div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股深度研究 · 报告导航</title>
+<style>
+:root{--bg:#0c0f15;--card:#1a1c24;--border:#2a2d3a;--gold:#d4a853;--gold-light:#e3c26d;--red:#f55656;--text:#e8e9ec;--text-sec:#b0b3be;--text-muted:#7a7d8a;--radius:10px;--transition:0.2s ease}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;font-size:14px;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px}
+.container{max-width:700px;width:100%}
+h1{font-size:26px;font-weight:800;letter-spacing:1px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h1 .badge{background:linear-gradient(135deg,#c0392b,#8b0000);color:#fff;font-size:12px;padding:2px 11px;border-radius:10px;font-weight:600}
+.subtitle{color:var(--text-muted);font-size:13px;margin:8px 0 32px;border-left:3px solid var(--gold);padding-left:14px}
+.stock-list{display:flex;flex-direction:column;gap:12px}
+.stock-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;transition:var(--transition)}
+.stock-card:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.stock-icon{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#2c1a1a,#1c1010);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:var(--gold);border:1px solid var(--gold-light);flex-shrink:0}
+.stock-name{font-size:17px;font-weight:700}
+.stock-code{font-size:12px;color:var(--text-muted);font-family:"JetBrains Mono","Consolas",monospace;margin-top:1px}
+.stock-arrow{color:var(--gold-light);font-size:13px;margin-left:auto;opacity:0.6}
+.stock-card:hover .stock-arrow{opacity:1}
+.empty{text-align:center;padding:60px 20px;color:var(--text-muted);font-size:14px;border:2px dashed var(--border);border-radius:var(--radius)}
+footer{margin-top:48px;font-size:12px;color:var(--text-muted);text-align:center;padding-top:20px;border-top:1px solid var(--border);width:100%}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📊 个股深度研究 <span class="badge">v2.2</span></h1>
+<div class="subtitle">AI全自动生成 · 三层架构（数据采集 → 深度分析 → HTML可视化）</div>
+<div class="stock-list">
 
-      <!-- 主提案内容 -->
-      <div class="content-wrapper">
-        <div class="hero-content">
-          <h1 class="name-text">Michael Yu</h1>
-          <p class="subtitle">Java Full Stack Developer</p>
+<a class="stock-card" href="英维克002837.SZ/20260517.html">
+<div class="stock-icon">英</div>
+<div>
+<div class="stock-name">英维克</div>
+<div class="stock-code">002837.SZ · 2026-05-17</div>
+</div>
+<div class="stock-arrow">→</div>
+</a>
 
-          <!-- 流动下划线 -->
-          <div class="animated-line"></div>
+<a class="stock-card" href="利通电子603629.SH/20260516.html">
+<div class="stock-icon">利</div>
+<div>
+<div class="stock-name">利通电子</div>
+<div class="stock-code">603629.SH · 2026-05-16</div>
+</div>
+<div class="stock-arrow">→</div>
+</a>
 
-          <!-- 技术栈 -->
-          <div class="tech-stack">
-            <div class="tech-category">
-              <h3 class="tech-title">Frontend</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">HTML/CSS</span>
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">Vue.js</span>
-                <span class="tech-tag">React</span>
-              </div>
-            </div>
-            <div class="tech-category">
-              <h3 class="tech-title">Backend</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">Java</span>
-                <span class="tech-tag">Spring Boot</span>
-                <span class="tech-tag">MySQL</span>
-                <span class="tech-tag">Redis</span>
-              </div>
-            </div>
-            <div class="tech-category">
-              <h3 class="tech-title">Tools</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">Git</span>
-                <span class="tech-tag">Docker</span>
-                <span class="tech-tag">Webpack</span>
-                <span class="tech-tag">Linux</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<a class="stock-card" href="深圳华强000062.SZ/20260517.html">
+<div class="stock-icon">华</div>
+<div>
+<div class="stock-name">深圳华强</div>
+<div class="stock-code">000062.SZ · 2026-05-17</div>
+</div>
+<div class="stock-arrow">→</div>
+</a>
 
-    <script type="module" src="js/index.js"></script>
-  </body>
+</div>
+<footer>
+<p>⚠️ 本系统所有分析仅供研究参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+<p style="margin-top:4px;">个股深度研究系统 v2.2 · @明立玩AI</p>
+</footer>
+</div>
+</body>
 </html>

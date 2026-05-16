@@ -1,0 +1,1 @@
+- [股票分析默认使用 stock-analysis-main skill](prefer_stock_skill.md) — 用户要求股票分析请求默认走 skill 路由，无需确认

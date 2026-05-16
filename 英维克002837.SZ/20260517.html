@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>英维克 002837 · 深度研报</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#0c0f15;--card-bg:#1a1c24;--card-bg-alt:#1e2029;--border:#2a2d3a;--text-primary:#e8e9ec;--text-secondary:#b0b3be;--text-muted:#7a7d8a;--red-up:#f55656;--green-down:#28c75b;--gold:#d4a853;--gold-light:#e3c26d;--blue-accent:#4a90d9;--orange-warn:#e8923a;--shadow:0 4px 20px rgba(0,0,0,0.3);--radius:10px;--font-sans:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;--font-mono:"JetBrains Mono","SF Mono","Consolas",monospace;--transition:0.2s ease;}
+body.light-mode{--bg:#fdf8f0;--card-bg:#fffbf5;--card-bg-alt:#fef5e7;--border:#e2cfa2;--text-primary:#2a1f12;--text-secondary:#6b5634;--text-muted:#9c8b6e;--red-up:#dc2626;--green-down:#16a34a;--gold:#b38a3c;--gold-light:#d4a853;--blue-accent:#2563eb;--orange-warn:#c2410c;--shadow:0 4px 20px rgba(162,125,57,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text-primary);font-family:var(--font-sans);line-height:1.7;font-size:14px;background-image:radial-gradient(circle at 15% 10%,rgba(212,168,83,0.03) 0%,transparent 35%),radial-gradient(circle at 85% 70%,rgba(212,168,83,0.03) 0%,transparent 35%);background-attachment:fixed}
+.top-nav{position:sticky;top:0;z-index:100;background:rgba(10,12,18,0.92);backdrop-filter:blur(12px);border-bottom:2px solid var(--gold-light);padding:10px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.top-nav .logo{display:flex;align-items:center;gap:10px;color:#fff}
+.top-nav .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#c0392b,#8b0000);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:#fff}
+.top-nav .stock-name{font-weight:700;font-size:17px;letter-spacing:0.5px}
+.top-nav .stock-code{font-size:12px;opacity:0.7;font-family:var(--font-mono)}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap}
+.nav-links a{font-size:12px;padding:5px 14px;border-radius:16px;color:var(--gold-light);text-decoration:none;border:1px solid transparent;transition:var(--transition);font-weight:500;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.08);color:#fff;border-color:var(--gold)}
+.theme-toggle{background:rgba(255,255,255,0.08);border:1px solid var(--gold-light);color:var(--gold-light);padding:5px 14px;border-radius:16px;font-size:12px;cursor:pointer;transition:var(--transition);margin-left:12px}
+.theme-toggle:hover{background:rgba(255,255,255,0.15)}
+.container{max-width:1300px;margin:0 auto;padding:24px 20px 40px}
+.hero{background:linear-gradient(105deg,#1c1010 0%,#2c1a1a 50%,#3d2424 100%);border-radius:var(--radius);padding:28px 32px;margin-bottom:24px;border:1px solid var(--gold-light);box-shadow:0 8px 28px rgba(100,55,55,0.2);display:flex;flex-wrap:wrap;gap:24px;align-items:center;color:#fff;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-price-block{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;z-index:1}
+.hero-price{font-size:56px;font-weight:900;line-height:1;font-family:var(--font-mono)}
+.hero-change{font-size:20px;font-weight:700;padding:4px 12px;border-radius:6px;background:rgba(245,86,86,0.2);color:#f87171;font-family:var(--font-mono)}
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;z-index:1}
+.hero-meta-item{text-align:center}
+.hero-meta-item .val{font-size:22px;font-weight:700;font-family:var(--font-mono);color:var(--gold-light)}
+.hero-meta-item .label{font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:1px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;z-index:1}
+.hero-tag{background:rgba(255,255,255,0.08);border:1px solid rgba(255,215,0,0.3);color:var(--gold-light);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500}
+.conclusion-top{background:linear-gradient(135deg,#1e1a10 0%,#241f14 100%);border:2px solid var(--gold);border-radius:var(--radius);padding:22px 28px;margin-bottom:24px;position:relative}
+.conclusion-top::before{content:'核心结论';position:absolute;top:-13px;left:24px;background:var(--gold);color:#000;padding:3px 16px;border-radius:12px;font-weight:700;font-size:12px;letter-spacing:1px}
+.conclusion-top .big-verdict{font-weight:800;font-size:20px;color:#fff;margin-top:8px}
+.conclusion-top .verdict-detail{font-size:14px;color:var(--text-secondary);margin-top:8px;line-height:1.7}
+.conclusion-top .verdict-tags{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:22px 28px;margin-bottom:20px;box-shadow:var(--shadow);transition:var(--transition)}
+.card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.5);border-color:var(--gold)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+.card-header .icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:var(--gold)}
+.card-header h2{font-size:18px;font-weight:700;color:#fff;letter-spacing:0.5px}
+.card-header .sub{margin-left:auto;font-size:11px;color:var(--text-muted)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.news-list{max-height:300px;overflow-y:auto;font-size:13px}
+.news-item{display:flex;align-items:baseline;gap:6px;padding:7px 0;border-bottom:1px dashed var(--border);color:var(--text-secondary)}
+.news-item .bullet{color:var(--red-up);font-weight:700;font-size:16px}
+.tag{display:inline-block;padding:3px 12px;border-radius:14px;font-size:11px;font-weight:600;background:rgba(212,168,83,0.15);color:var(--gold-light);border:1px solid var(--gold);margin-right:6px;margin-bottom:4px}
+table.cons{width:100%;border-collapse:collapse;font-size:13px;background:var(--card-bg-alt);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:12px 0}
+table.cons thead th{background:linear-gradient(180deg,#2c1a1a 0%,#1c1010 100%);color:#fff;font-weight:600;padding:10px 12px;text-align:left;font-size:12px;letter-spacing:1px}
+table.cons tbody tr{border-bottom:1px dashed var(--border)}
+table.cons tbody tr:hover{background:rgba(255,255,255,0.02)}
+table.cons tbody td{padding:9px 12px;vertical-align:middle;color:var(--text-secondary)}
+.val-up{color:var(--red-up);font-weight:600}
+.val-down{color:var(--green-down);font-weight:600}
+.chain-svg{background:var(--card-bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:16px 0;text-align:center}
+.scenario{background:var(--card-bg-alt);border:1px solid var(--border);border-radius:8px;padding:14px 16px;text-align:center;border-left:4px solid var(--gold)}
+.scenario.bear{border-left-color:var(--green-down)}
+.scenario.bull{border-left-color:var(--red-up)}
+.scenario .prob{font-size:11px;color:var(--text-muted)}
+.alert-list{list-style:none;padding:0}
+.alert-list li{padding:8px 14px;margin:6px 0;border-radius:6px;background:var(--card-bg-alt);border-left:4px solid var(--orange-warn);font-size:13px;font-weight:500;color:var(--text-secondary)}
+.rating-callout{background:linear-gradient(135deg,#1e1a10 0%,#241f14 100%);border:2px solid var(--gold);border-radius:var(--radius);padding:18px 24px;margin-top:16px;display:flex;align-items:center;gap:16px}
+.rating-callout .badge{min-width:64px;height:64px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;letter-spacing:1px}
+.rating-callout .body{flex:1}
+.rating-callout .body .title{font-size:16px;font-weight:700;color:#fff}
+.rating-callout .body .desc{font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.6}
+.verdict-highlight{background:var(--card-bg-alt);border-radius:10px;padding:18px 22px;margin-top:8px}
+.verdict-highlight .judgment{font-size:22px;font-weight:800;color:var(--gold);text-align:center;margin-bottom:12px}
+.verdict-highlight .verdict-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.verdict-highlight .verdict-item{text-align:center;padding:8px}
+.verdict-highlight .verdict-item .v-val{font-size:18px;font-weight:800}
+.verdict-highlight .verdict-item .v-label{font-size:11px;color:var(--text-muted);margin-top:2px}
+.score-bar{display:flex;align-items:center;gap:8px;margin:6px 0}
+.score-bar .score-label{width:100px;text-align:right;font-size:12px;color:var(--text-muted)}
+.score-bar .score-track{flex:1;height:8px;background:#2a2d3a;border-radius:6px;overflow:hidden}
+.score-bar .score-fill{height:100%;border-radius:6px;background:var(--gold)}
+.score-bar .score-num{width:50px;font-size:13px;font-weight:700;text-align:center;color:var(--text-primary)}
+.kpi-info-row{display:flex;justify-content:space-around;margin-top:18px;padding-top:14px;border-top:2px solid var(--border)}
+.kpi-info-item{text-align:center}
+.kpi-info-item .label{font-size:12px;color:var(--text-muted)}
+.kpi-info-item .value{font-size:20px;font-weight:700;color:var(--gold-light)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;font-size:13px}
+.info-grid dt{color:var(--text-muted)}
+.info-grid dd{color:var(--text-secondary);font-weight:500}
+.checklist{list-style:none;padding:0;font-size:13px}
+.checklist li{padding:5px 0;color:var(--text-secondary)}
+.checklist li::before{content:'☐ ';color:var(--gold)}
+@media(max-width:850px){.grid-2,.grid-3{grid-template-columns:1fr}.hero{flex-direction:column;align-items:flex-start}.hero-price{font-size:40px}}
+footer{text-align:center;padding:24px 16px;font-size:12px;color:var(--text-muted);border-top:1px solid var(--border);margin-top:24px}
+body.light-mode .top-nav{background:rgba(255,251,245,0.92);border-bottom-color:var(--gold)}
+body.light-mode .nav-links a{color:var(--gold)}
+body.light-mode .nav-links a:hover,body.light-mode .nav-links a.active{background:rgba(0,0,0,0.05);color:#7f1d1d}
+body.light-mode .hero{background:linear-gradient(105deg,#fef5e7,#fffbf5);color:var(--text-primary);border-color:var(--gold)}
+body.light-mode .hero-price{color:var(--text-primary)}
+body.light-mode .hero-change{background:rgba(220,38,38,0.1);color:var(--red-up)}
+body.light-mode .hero-meta-item .val{color:var(--gold)}
+body.light-mode .hero-meta-item .label{color:var(--text-muted)}
+body.light-mode .hero-tag{background:rgba(212,168,83,0.15);border-color:var(--gold);color:var(--gold)}
+body.light-mode .conclusion-top{background:linear-gradient(135deg,#fff9f0,#fef5e7)}
+body.light-mode .conclusion-top .big-verdict{color:var(--text-primary)}
+body.light-mode .card-header h2{color:var(--text-primary)}
+body.light-mode .tag{background:rgba(212,168,83,0.15);color:var(--gold);border-color:var(--gold)}
+body.light-mode table.cons thead th{background:linear-gradient(180deg,#f55656,#c0392b)}
+body.light-mode .score-bar .score-track{background:#f0e4ce}
+body.light-mode .rating-callout{background:linear-gradient(135deg,#fff9f0,#fef5e7)}
+body.light-mode .rating-callout .body .title{color:var(--text-primary)}
+body.light-mode .verdict-highlight{background:#fef5e7}
+body.light-mode .verdict-highlight .judgment{color:var(--gold)}
+body.light-mode .verdict-highlight .v-val{color:var(--text-primary)}
+.chain-svg .svg-hdr{fill:#e8e9ec}
+.chain-svg .svg-sub{fill:#b0b3be}
+body.light-mode .chain-svg .svg-hdr{fill:#2a1f12}
+body.light-mode .chain-svg .svg-sub{fill:#6b5634}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+<div class="logo"><div class="logo-icon">英</div><span class="stock-name">英维克</span><span class="stock-code">002837.SZ</span></div>
+<div class="nav-links">
+<a href="#hero" class="active">行情</a><a href="#conclusion-top">结论</a><a href="#profile">画像</a><a href="#kline-section">K线</a><a href="#mission">任务</a><a href="#macro">宏观</a><a href="#chain">产业链</a><a href="#quality">质量</a><a href="#elasticity">弹性</a><a href="#risk">风险</a><a href="#valuation">估值</a><a href="#compare">对标</a><a href="#tracking">跟踪</a>
+</div>
+<button class="theme-toggle" id="themeToggle">☀️ 浅色模式</button>
+</nav>
+<div class="container">
+
+<div class="hero" id="hero">
+<div class="hero-price-block"><span class="hero-price">100.49</span><span class="hero-change">-1.67%</span></div>
+<div class="hero-meta">
+<div class="hero-meta-item"><div class="val">B级</div><div class="label">公司质地</div></div>
+<div class="hero-meta-item"><div class="val">130-150元</div><div class="label">中期目标价</div></div>
+<div class="hero-meta-item"><div class="val">1.4:1</div><div class="label">盈亏比(基准)</div></div>
+<div class="hero-meta-item"><div class="val" style="color:var(--orange-warn);">⚠️ 高</div><div class="label">风险等级</div></div>
+</div>
+<div class="hero-tags"><span class="hero-tag">液冷龙头</span><span class="hero-tag">英伟达认证</span><span class="hero-tag">AI算力</span><span class="hero-tag">全链条自研</span></div>
+</div>
+
+<div class="conclusion-top" id="conclusion-top">
+<div class="big-verdict">🎯 结论：液冷赛道A股最具全球竞争力的标的，2026H2是"故事兑现"关键验证期，等待业绩拐点确认</div>
+<div class="verdict-detail">
+英维克是国内精密温控龙头，CDU市占率42%，拥有英伟达NPN Tier1（大陆唯一）、谷歌CDU认证等核心壁垒。2025年营收60.68亿(+32%)，但利润增速(+15%)低于营收增速。当前核心矛盾：<strong style="color:#f55656;">Q1利润暴跌(-82%)</strong> vs <strong style="color:var(--gold-light);">在手液冷订单150亿</strong>的巨大预期差。H2海外大客户（谷歌TPU CDU、英伟达NVL72）液冷订单能否顺利放量，将决定全年业绩走向。TTM PE 186x已隐含极高期望，建议等待回调至60日均线(~95元)附近或右侧确认信号再参与。
+</div>
+<div class="verdict-tags"><span class="tag">左侧博弈型</span><span class="tag">液冷赛道</span><span class="tag">海外放量验证</span><span class="tag">等待安全边际</span><span class="tag">仓位≤15%</span><span class="tag">五维综合80/100</span></div>
+</div>
+
+<div class="grid-2" id="profile">
+<div class="card">
+<div class="card-header"><span class="icon">🏢</span><h2>公司画像</h2></div>
+<p><strong style="color:#f55656;">主营业务：</strong>精密温控节能解决方案 — 数据中心液冷(57%)、机柜温控(33%)、储能温控(8%)、客车空调(1.5%)、轨交空调(0.7%)</p>
+<div style="margin:12px 0;"><span class="tag">液冷龙头</span><span class="tag">英伟达Tier1</span><span class="tag">全链条自研</span><span class="tag">CDU市占率42%</span></div>
+<dl class="info-grid" style="margin-top:12px;">
+<dt>公司全称</dt><dd>深圳市英维克科技股份有限公司</dd>
+<dt>上市日期</dt><dd>2016-12-29 · 深交所中小板</dd>
+<dt>注册地</dt><dd>广东省深圳市龙华区</dd>
+<dt>所属行业</dt><dd>专用设备 / 温控节能</dd>
+<dt>总股本</dt><dd>~9.67亿股</dd>
+<dt>总市值</dt><dd>~972亿元</dd>
+<dt>创始人/董事长</dt><dd>齐勇（华为电气/艾默生背景）</dd>
+<dt>核心客户</dt><dd>腾讯/字节/阿里/英伟达/谷歌</dd>
+</dl>
+<p style="font-size:12px;color:var(--text-secondary);margin-top:10px;">国内少数具备"全链条、全自研"液冷解决方案能力的企业（冷板→CDU→快接头→Manifold），Coolinside方案已进入批量交付。2026年5月液冷大会披露在手订单约150亿元，排产至2028年Q2。</p>
+</div>
+<div class="card">
+<div class="card-header"><span class="icon">📰</span><h2>近期动态</h2></div>
+<div class="news-list">
+<div class="news-item"><span class="bullet">•</span> 2026-05-15 液冷大会披露在手订单约150亿，排产至2028年Q2</div>
+<div class="news-item"><span class="bullet">•</span> 2026-05-12 年度股东大会，董秘回应未计划披露具体客户合作信息</div>
+<div class="news-item"><span class="bullet">•</span> 2026-04-24 国金证券"买入"评级，预计2026E EPS 1.203元</div>
+<div class="news-item"><span class="bullet">•</span> 2026-04-22 开源证券"买入"，看好下半年液冷兑现</div>
+<div class="news-item"><span class="bullet">•</span> 2026-04-21 Q1归母净利865.76万(-82%)，受汇兑损失+信用减值拖累</div>
+<div class="news-item"><span class="bullet">•</span> 2026-04-21 跌停(-10%)，龙虎榜净卖出1.72亿元</div>
+<div class="news-item"><span class="bullet">•</span> 英伟达Rubin NVL72确定100%全液冷架构，利好龙头</div>
+<div class="news-item"><span class="bullet">•</span> 谷歌TPU v7 CDU锁定20-25%份额，对应订单20-30亿元</div>
+</div>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="card">
+<div class="card-header"><span class="icon">📊</span><h2>主营业务构成</h2><span class="sub">FY2025年报</span></div>
+<div id="chart-business-pie" style="width:100%;height:280px;"></div>
+<div style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:6px;">
+机房温控(56.8%·毛利率28.4%) | 机柜温控(32.6%·毛利率27.2%) | 其他(10.6%)
+</div>
+</div>
+<div class="card">
+<div class="card-header"><span class="icon">📈</span><h2>关键财务指标</h2><span class="sub">FY2023-FY2025</span></div>
+<table class="cons">
+<thead><tr><th>指标</th><th>FY2025</th><th>FY2024</th><th>FY2023</th></tr></thead>
+<tbody>
+<tr><td>营收(亿)</td><td>60.68</td><td>45.89</td><td>35.29</td></tr>
+<tr><td>营收增速</td><td class="val-up">+32.2%</td><td class="val-up">+30.0%</td><td class="val-up">+20.7%</td></tr>
+<tr><td>归母净利(亿)</td><td>5.22</td><td>4.53</td><td>3.44</td></tr>
+<tr><td>扣非净利(亿)</td><td>5.04</td><td>4.30</td><td>3.16</td></tr>
+<tr><td>毛利率</td><td>27.9%</td><td>28.8%</td><td>32.4%</td></tr>
+<tr><td>ROE</td><td>16.6%</td><td>16.9%</td><td>15.0%</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<div class="card" id="kline-section">
+<div class="card-header"><span class="icon">📈</span><h2>K线图 · 近120个交易日</h2><span class="sub">前复权日K · MA5/MA20/MA60</span></div>
+<div id="chart-kline-full" style="width:100%;height:480px;"></div>
+<div class="kpi-info-row">
+<div class="kpi-info-item"><div class="label">向上空间(目标140元)</div><div class="value">+39%</div></div>
+<div class="kpi-info-item"><div class="label">盈亏比(95元介入)</div><div class="value">1.4-3.1x</div></div>
+<div class="kpi-info-item"><div class="label">目标价(中期)</div><div class="value">130-150元</div></div>
+<div class="kpi-info-item"><div class="label">建议周期</div><div class="value">6-12月</div></div>
+</div>
+</div>
+
+<!-- Step 0: 任务锁定 -->
+<div class="card" id="mission">
+<div class="card-header"><span class="icon">🎯</span><h2>任务锁定与核心矛盾</h2></div>
+<p style="color:var(--text-secondary);line-height:1.8;">英维克是国内液冷温控龙头（CDU市占率42%），在AI算力爆发（英伟达Rubin全液冷）和全球数据中心扩张的产业趋势下，<strong style="color:var(--red-up);">2026H2海外液冷大单放量</strong>是核心验证点。当前处于"预期先行→业绩兑现"的关键转换期。</p>
+<div style="margin-top:14px;display:flex;gap:16px;flex-wrap:wrap;">
+<div style="background:var(--card-bg-alt);padding:10px 16px;border-radius:8px;text-align:center;"><div style="font-size:11px;color:var(--text-muted);">标的</div><div style="font-weight:700;color:#fff;">英维克 002837.SZ</div></div>
+<div style="background:var(--card-bg-alt);padding:10px 16px;border-radius:8px;text-align:center;"><div style="font-size:11px;color:var(--text-muted);">周期</div><div style="font-weight:700;color:var(--gold-light);">中线6-12月</div></div>
+<div style="background:var(--card-bg-alt);padding:10px 16px;border-radius:8px;text-align:center;"><div style="font-size:11px;color:var(--text-muted);">风格预判</div><div style="font-weight:700;color:var(--orange-warn);">左侧博弈型</div></div>
+<div style="background:var(--card-bg-alt);padding:10px 16px;border-radius:8px;text-align:center;"><div style="font-size:11px;color:var(--text-muted);">核心命题</div><div style="font-weight:700;color:#fff;">海外液冷放量验证</div></div>
+</div>
+</div>
+<!-- Step 1: 宏观与周期定位 -->
+<div class="card" id="macro">
+<div class="card-header"><span class="icon">🌍</span><h2>宏观与周期定位</h2></div>
+<div style="margin-bottom:16px;">
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">经济周期映射</h3>
+<ul style="list-style:none;padding:0;font-size:13px;color:var(--text-secondary);">
+<li style="padding:4px 0;">• 全球库存周期：处于主动补库初期，数据中心资本开支上行，利好液冷设备采购</li>
+<li style="padding:4px 0;">• AI产业周期：处于<strong style="color:var(--red-up);">加速扩张期</strong>，英伟达Rubin全液冷架构确立行业标杆</li>
+<li style="padding:4px 0;">• 国内信贷环境：宽松，M2增速平稳，公司产能扩张融资成本下降</li>
+<li style="padding:4px 0;">• 公司所处阶段：营收高增长期（+30%+），但利润增速持续低于营收，处于"增收不增利"的阵痛期</li>
+</ul>
+</div>
+<div style="margin-bottom:16px;">
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">政策与环境扫描</h3>
+<ul style="list-style:none;padding:0;font-size:13px;color:var(--text-secondary);">
+<li style="padding:4px 0;">• "东数西算"工程推动PUE≤1.25，液冷成为新建数据中心标配</li>
+<li style="padding:4px 0;">• 美国对华AI芯片出口管制加码，倒逼国产芯片加速替代，同等算力下功耗更高→液冷需求更强</li>
+<li style="padding:4px 0;">• 碳达峰政策持续收紧，工信部要求新建大型数据中心PUE≤1.25</li>
+<li style="padding:4px 0;">• 英伟达GB300功耗135-140kW，Rubin有望突破200kW，液冷从"可选"变为"必选"</li>
+</ul>
+</div>
+<div style="background:var(--card-bg-alt);padding:14px 18px;border-radius:8px;border-left:4px solid var(--gold);">
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:6px;">核心矛盾</h3>
+<p style="font-size:14px;color:var(--text-secondary);"><strong style="color:var(--red-up);">Q1利润暴跌(-82%)</strong> vs <strong style="color:var(--gold-light);">在手订单150亿</strong> — 短期费用前置（汇兑+减值+利息）与中长期海外液冷放量之间的预期差。H2海外大客户订单能否顺利交付并确认收入，将决定全年业绩走向。</p>
+</div>
+</div>
+
+<!-- Step 2: 产业链深度拆解 -->
+<div class="card" id="chain">
+<div class="card-header"><span class="icon">🔗</span><h2>产业链深度拆解</h2></div>
+<div style="margin-bottom:16px;">
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">题材来源判断</h3>
+<p style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
+1. <strong style="color:var(--red-up);">AI液冷（核心增量逻辑）：</strong>AI芯片功耗每代翻倍（GB300 135kW→Rubin 200kW），液冷渗透率2024年14%→2026年预计40%<br>
+2. <strong style="color:var(--red-up);">出海替代（利润弹性逻辑）：</strong>英维克获英伟达NPN Tier1认证（大陆唯一）+谷歌TPU v7 CDU 20-25%份额，海外毛利率52.6%<br>
+3. <strong style="color:var(--gold-light);">储能温控（辅助增长逻辑）：</strong>储能装机高增（+200%），但体量尚小（~8%营收）
+</p>
+</div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">产业链图谱</h3>
+<div class="chain-svg">
+<svg viewBox="0 0 800 175" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto"><polygon points="0 0,10 4,0 8" fill="#d4a853"/></marker></defs>
+<rect x="10" y="35" width="150" height="100" fill="var(--card-bg-alt)" stroke="#d4a853" stroke-width="2" rx="10"/>
+<text x="85" y="62" text-anchor="middle" font-weight="700" font-size="14" class="svg-hdr">上游·零部件</text>
+<text x="85" y="82" text-anchor="middle" font-size="11" class="svg-sub">水泵/压缩机/快接头</text>
+<text x="85" y="98" text-anchor="middle" font-size="11" class="svg-sub">史陶比尔(30%)/派克(15%)</text>
+<text x="85" y="114" text-anchor="middle" font-size="11" class="svg-sub">冷却液(3M/陶氏)</text>
+<line x1="160" y1="85" x2="230" y2="85" stroke="#d4a853" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="235" y="20" width="220" height="130" fill="var(--card-bg-alt)" stroke="#f55656" stroke-width="3" rx="12"/>
+<text x="345" y="50" text-anchor="middle" font-weight="800" font-size="16" fill="#f55656">中游·系统集成</text>
+<text x="345" y="72" text-anchor="middle" font-size="12" class="svg-hdr">英维克(CDU 42%市占率)</text>
+<text x="345" y="92" text-anchor="middle" font-size="12" class="svg-sub">申菱环境(华为唯一伙伴)</text>
+<text x="345" y="112" text-anchor="middle" font-size="12" class="svg-sub">高澜股份(字节浸没式)</text>
+<text x="345" y="132" text-anchor="middle" font-size="12" class="svg-sub">维谛Vertiv(全球35%份额)</text>
+<line x1="455" y1="85" x2="525" y2="85" stroke="#d4a853" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="530" y="35" width="250" height="100" fill="var(--card-bg-alt)" stroke="#d4a853" stroke-width="2" rx="10"/>
+<text x="655" y="62" text-anchor="middle" font-weight="700" font-size="14" class="svg-hdr">下游·应用场景</text>
+<text x="655" y="82" text-anchor="middle" font-size="11" class="svg-sub">AI数据中心(英伟达/谷歌)</text>
+<text x="655" y="98" text-anchor="middle" font-size="11" class="svg-sub">互联网大厂(腾讯/字节/阿里)</text>
+<text x="655" y="114" text-anchor="middle" font-size="11" class="svg-sub">储能/新能源/轨道交通</text>
+</svg>
+</div>
+<div class="grid-2" style="margin-top:16px;">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">趋势三要素</h3>
+<table class="cons"><thead><tr><th>维度</th><th>评估</th><th>打分</th></tr></thead>
+<tbody>
+<tr><td>需求趋势</td><td>AI芯片功耗翻倍，液冷渗透率14%→40%</td><td>⭐⭐⭐⭐⭐</td></tr>
+<tr><td>供给格局</td><td>竞争加剧（蓝思/领益入局），但海外认证壁垒高</td><td>⭐⭐⭐</td></tr>
+<tr><td>政策驱动</td><td>PUE≤1.25硬约束+算力基建国家战略</td><td>⭐⭐⭐⭐</td></tr>
+</tbody></table>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">价值链利润分布</h3>
+<table class="cons"><thead><tr><th>环节</th><th>代表企业</th><th>毛利率</th></tr></thead>
+<tbody>
+<tr><td>快接头/连接器</td><td>史陶比尔/派克</td><td>40-60%</td></tr>
+<tr><td>CDU制造</td><td>英维克/申菱/维谛</td><td>25-35%</td></tr>
+<tr><td>冷板</td><td>英维克/高澜</td><td style="color:var(--orange-warn);">20-30%</td></tr>
+<tr><td>冷却液</td><td>3M/陶氏</td><td>50%+</td></tr>
+</tbody></table>
+</div>
+</div>
+<p style="font-size:13px;color:var(--text-secondary);margin-top:12px;padding:10px 14px;background:var(--card-bg-alt);border-radius:6px;">💡 <strong>关键判断：</strong>英维克"全链条自研"（冷板→CDU→快接头→Manifold）构建了独特的一站式交付能力，叠加英伟达/谷歌认证壁垒，在国内厂商中具备明显的全球化先发优势。海外业务52.6%的毛利率是利润弹性的核心来源。</p>
+</div>
+
+<!-- Step 3: 公司筛选与质量评分 -->
+<div class="card" id="quality">
+<div class="card-header"><span class="icon">⭐</span><h2>公司筛选与质量评分</h2><span class="sub">78.8/100 · B级</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">正面清单</h3>
+<table class="cons"><tbody>
+<tr><td>✅ 行业空间大</td><td>全球液冷市场2026年~800亿，CAGR>40%</td></tr>
+<tr><td>✅ 竞争壁垒高</td><td>英伟达NPN Tier1（大陆唯一）+谷歌CDU认证</td></tr>
+<tr><td>✅ 管理层优秀</td><td>创始人齐勇华为电气/艾默生背景，上市以来专注温控</td></tr>
+<tr><td>⚠️ 财务健康</td><td>营收高增但毛利率下行，应收账款30.6亿偏高</td></tr>
+<tr><td>✅ 股东回报</td><td>每年分红，连续5年10转增3</td></tr>
+<tr><td>❌ 估值合理</td><td>TTM PE ~186x，已包含较多乐观预期</td></tr>
+</tbody></table>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">负面排查</h3>
+<table class="cons"><tbody>
+<tr><td>✅ 大股东质押</td><td>正常，未见高比例质押</td></tr>
+<tr><td>✅ 商誉风险</td><td>商誉规模小，风险可控</td></tr>
+<tr><td>✅ 财务造假</td><td>多年审计无保留意见</td></tr>
+<tr><td>✅ 关联交易</td><td>关联交易透明</td></tr>
+<tr><td>⚠️ 融资压力</td><td>产能扩张融资增加，利息支出上升</td></tr>
+</tbody></table>
+</div>
+</div>
+<div style="margin-top:16px;">
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">质量评分 · 100分制</h3>
+<div class="score-bar"><span class="score-label">行业地位</span><div class="score-track"><div class="score-fill" style="width:90%;"></div></div><span class="score-num">18/20</span></div>
+<div class="score-bar"><span class="score-label">竞争优势</span><div class="score-track"><div class="score-fill" style="width:85%;"></div></div><span class="score-num">21.3/25</span></div>
+<div class="score-bar"><span class="score-label">成长性</span><div class="score-track"><div class="score-fill" style="width:80%;"></div></div><span class="score-num">16/20</span></div>
+<div class="score-bar"><span class="score-label">盈利能力</span><div class="score-track"><div class="score-fill" style="width:60%;background:var(--orange-warn);"></div></div><span class="score-num">9/15</span></div>
+<div class="score-bar"><span class="score-label">财务健康</span><div class="score-track"><div class="score-fill" style="width:65%;background:var(--orange-warn);"></div></div><span class="score-num">6.5/10</span></div>
+<div class="score-bar"><span class="score-label">管理层</span><div class="score-track"><div class="score-fill" style="width:80%;"></div></div><span class="score-num">8/10</span></div>
+<div class="rating-callout">
+<div class="badge">78.8</div>
+<div class="body"><div class="title">78.8 / 100 · B级 · 液冷龙头认证壁垒突出，但盈利趋势需重点跟踪</div><div class="desc">行业龙头地位（CDU市占率42%）和英伟达/谷歌认证是核心优势，管理层专业背景强。但毛利率从2014年38.6%持续下行至27.9%、Q1进一步降至24.3%，盈利趋势恶化需重点关注。应收账款30.6亿（占营收50%）也是潜在风险点。</div></div>
+</div>
+</div>
+</div>
+<!-- Step 4: 业绩弹性测算 -->
+<div class="card" id="elasticity">
+<div class="card-header"><span class="icon">⚡</span><h2>业绩弹性测算</h2></div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">分业务弹性树</h3>
+<div style="background:var(--card-bg-alt);border:2px solid var(--gold);border-radius:10px;padding:16px;margin-bottom:16px;">
+<div style="display:flex;flex-direction:column;align-items:center;">
+<div style="background:linear-gradient(135deg,#1e1a10,#2c1a1a);border:2px solid var(--gold);border-radius:10px;padding:10px 24px;font-weight:700;font-size:15px;color:#fff;">英维克 FY2025营收 60.68亿</div>
+<div style="text-align:center;width:100%;"><span style="display:inline-block;width:2px;height:6px;background:var(--gold);vertical-align:top;"></span></div>
+<div style="display:flex;width:100%;">
+<div style="flex:2;padding-right:5px;text-align:center;border-top:2px solid var(--gold);"><span style="display:inline-block;width:2px;height:8px;background:var(--gold);vertical-align:top;"></span></div>
+<div style="flex:1;padding:0 5px;text-align:center;border-top:2px solid var(--gold);"><span style="display:inline-block;width:2px;height:8px;background:var(--gold);vertical-align:top;"></span></div>
+<div style="flex:1;padding-left:5px;text-align:center;border-top:2px solid var(--gold);"><span style="display:inline-block;width:2px;height:8px;background:var(--gold);vertical-align:top;"></span></div>
+</div>
+<div style="display:flex;gap:10px;width:100%;">
+<div style="flex:2;background:rgba(245,86,86,0.08);border:1px solid rgba(245,86,86,0.3);border-radius:8px;padding:12px;text-align:center;">
+<div style="font-weight:700;color:var(--red-up);font-size:14px;">🔴 机房温控</div>
+<div style="font-size:11px;color:var(--text-muted);">56.8%营收·34.48亿·毛利率28.4%</div>
+<div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">数据中心液冷CDU<br>Coolinside全链条方案<br>谷歌TPU v7 CDU H2放量</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:4px;">弹性系数1.5x·核心增量来源</div>
+</div>
+<div style="flex:1;background:rgba(212,168,83,0.08);border:1px solid rgba(212,168,83,0.3);border-radius:8px;padding:12px;text-align:center;">
+<div style="font-weight:700;color:var(--gold-light);font-size:13px;">🟡 机柜温控</div>
+<div style="font-size:11px;color:var(--text-muted);">32.6%营收·19.77亿·毛利率27.2%</div>
+<div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">储能温控(+200%)<br>通信/IDC机柜<br>传统业务平稳增长</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:4px;">弹性系数0.8x·储能贡献增量</div>
+</div>
+<div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;">
+<div style="font-weight:700;color:var(--text-secondary);font-size:13px;">⚪ 其他</div>
+<div style="font-size:11px;color:var(--text-muted);">10.6%营收·6.42亿·毛利率较低</div>
+<div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">客车空调<br>轨交列车空调<br>其他零散业务</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:4px;">弹性弱·稳定贡献</div>
+</div>
+</div>
+</div>
+</div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">价格敏感度公式</h3>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:14px 18px;margin-bottom:12px;">
+<div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;text-align:center;">核心公式</div>
+<div style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);text-align:center;padding:10px 16px;background:rgba(245,86,86,0.06);border-radius:8px;margin-bottom:10px;">
+<strong>\(\Delta\) 液冷收入 = AI服务器出货增速 \(\times\) 液冷渗透率提升 \(\times\) 英维克份额</strong>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+<div style="background:rgba(245,86,86,0.06);border-radius:8px;padding:12px;text-align:center;">
+<div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">利润对毛利率敏感度</div>
+<div style="font-size:14px;font-family:var(--font-mono);color:var(--text-primary);">
+\(\Delta \text{毛利} = \text{营收} \times \Delta \text{毛利率}\)
+</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:2px;">60.68亿 × ±1pp = ±6068万</div>
+</div>
+<div style="background:rgba(40,199,91,0.06);border-radius:8px;padding:12px;text-align:center;">
+<div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">海外业务利润贡献</div>
+<div style="font-size:14px;font-family:var(--font-mono);color:var(--text-primary);">
+\(\text{海外毛利} = 8.49\text{亿} \times 52.6\% \approx 4.46\text{亿}\)
+</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:2px;">海外每增10亿营收→毛利增5.26亿</div>
+</div>
+</div>
+<div style="margin-top:10px;font-size:12px;color:var(--text-muted);padding:8px 12px;background:rgba(212,168,83,0.08);border-radius:6px;">💡 关键结论：利润弹性核心在<strong style="color:var(--gold-light);">海外液冷放量</strong>。海外52.6%毛利率是国内的2.2倍，每增加10亿海外收入贡献5.26亿毛利（接近2025全年利润）。2026H2谷歌20-30亿CDU订单若顺利交付，将显著提升盈利水平。</div>
+</div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">情景分析</h3>
+<div class="grid-3">
+<div class="scenario bull"><strong>🟢 乐观</strong><div class="prob">概率 20%</div><div style="font-size:13px;color:var(--text-secondary);margin-top:6px;">海外订单超预期兑现<br>谷歌+英伟达H2大单<br>海外毛利率维持50%+<br>FY2026营收85-90亿<br>净利15-18亿 · EPS 1.55-1.86<br><strong style="color:var(--red-up);">目标价180-220元</strong></div></div>
+<div class="scenario"><strong>🟡 基准</strong><div class="prob">概率 50%</div><div style="font-size:13px;color:var(--text-secondary);margin-top:6px;">海外H2按计划放量<br>谷歌CDU交付20-30亿<br>毛利率企稳于27%<br>FY2026营收75-80亿<br>净利10-12亿 · EPS 1.03-1.24<br><strong style="color:var(--gold-light);">目标价130-150元</strong></div></div>
+<div class="scenario bear"><strong>🔴 悲观</strong><div class="prob">概率 30%</div><div style="font-size:13px;color:var(--text-secondary);margin-top:6px;">海外交付推迟至2027<br>国内竞争致毛利率<25%<br>应收账款继续恶化<br>FY2026营收65-70亿<br>净利4.5-5.0亿 · EPS 0.47-0.52<br><strong style="color:var(--green-down);">目标价65-80元</strong></div></div>
+</div>
+</div>
+
+<!-- Step 5: 风险分析 -->
+<div class="card" id="risk">
+<div class="card-header"><span class="icon">⚠️</span><h2>风险分析</h2><span class="sub">5个强制止损信号</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">风险清单</h3>
+<table class="cons"><thead><tr><th>风险类型</th><th>描述</th><th>影响</th><th>概率</th></tr></thead>
+<tbody>
+<tr><td>🔴 竞争加剧</td><td>蓝思/领益跨界入局；申菱/高澜争夺份额</td><td class="val-down">高</td><td>中高</td></tr>
+<tr><td>🔴 毛利率下行</td><td>国内集采压价+标准化→毛利率持续下滑</td><td class="val-down">高</td><td>高</td></tr>
+<tr><td>🟡 海外不及预期</td><td>谷歌/英伟达订单交付延迟或份额不及预期</td><td style="color:var(--orange-warn);">高</td><td>中</td></tr>
+<tr><td>🟡 汇兑损失</td><td>人民币升值持续产生汇兑损失</td><td style="color:var(--orange-warn);">中</td><td>中高</td></tr>
+<tr><td>🟡 应收账款减值</td><td>30.6亿应收账款，Q1已计提3016万减值</td><td style="color:var(--orange-warn);">中</td><td>中</td></tr>
+<tr><td>⚪ 技术路线切换</td><td>浸没式取代冷板式，或颠覆性散热方案出现</td><td>低</td><td>低</td></tr>
+</tbody></table>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--orange-warn);margin-bottom:10px;">逻辑破坏条件（止损信号）</h3>
+<ul class="alert-list">
+<li><strong>1.</strong> 海外大客户订单取消 → 谷歌/英伟达公开更换液冷供应商</li>
+<li><strong>2.</strong> 毛利率跌破22%且连续两个季度无改善 → 盈利模型崩溃</li>
+<li><strong>3.</strong> 应收账款周转天数>200天或单季减值>5000万 → 现金流恶化</li>
+<li><strong>4.</strong> 国内CDU市占率跌破30% → 龙头地位被侵蚀</li>
+<li><strong>5.</strong> 创始人齐勇或核心技术团队离职 → 核心竞争力受损</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Step 6: 估值与买卖时机 -->
+<div class="card" id="valuation">
+<div class="card-header"><span class="icon">💰</span><h2>估值与买卖时机</h2><span class="sub">TTM PE ~186x · 盈亏比 1.4:1</span></div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">三档目标价</h3>
+<table class="cons"><thead><tr><th>档位</th><th>目标价</th><th>依据</th><th>对应PE</th></tr></thead>
+<tbody>
+<tr><td><strong>短期(3个月)</strong></td><td>90-110元</td><td>箱体震荡，等待H2业绩指引</td><td>—</td></tr>
+<tr><td><strong style="color:var(--gold-light);">中期(6-12个月)</strong></td><td style="color:var(--gold-light);">130-150元</td><td>基准情景：H2液冷放量，EPS 1.1-1.2，PE 110-120x</td><td>110-120x</td></tr>
+<tr><td><strong style="color:var(--red-up);">长期(1-2年)</strong></td><td style="color:var(--red-up);">180-220元</td><td>乐观：海外收入占比>25%，毛利率企稳</td><td>70-80x 2027E</td></tr>
+</tbody></table>
+<div class="grid-2" style="margin-top:12px;">
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;font-size:13px;">
+<strong style="color:var(--gold);">资金面分析</strong>
+<p style="color:var(--text-secondary);margin-top:4px;">· 融资余额39.2亿（占流通市值~4%），杠杆参与度高<br>· 北向资金持股12.22%（第二大股东），外资持仓稳定<br>· 2026Q1股东户数从15.9万暴增至21.0万（+32%），散户化明显<br>· 4月回落至18.0万户，筹码仍在分散过程中</p>
+</div>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;font-size:13px;">
+<strong style="color:var(--gold);">技术面分析</strong>
+<p style="color:var(--text-secondary);margin-top:4px;">· 4/21暴雷跌停(108.97→98.07)，随后92-107箱体震荡<br>· 5/13放量突破至107.2，次日冲高回落(111.29→102.2)<br>· 60日均线~95元构成中期支撑<br>· 短期多空分歧大，等待方向选择</p>
+</div>
+</div>
+<div style="margin-top:16px;">
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">盈亏比量化</h3>
+<table class="cons"><thead><tr><th>情景</th><th>概率</th><th>目标价</th><th>涨跌幅</th></tr></thead>
+<tbody>
+<tr><td>基准（H2放量）</td><td>50%</td><td>130-150元</td><td class="val-up">+29% ~ +49%</td></tr>
+<tr><td>乐观（超预期）</td><td>20%</td><td>180-200元</td><td class="val-up">+79% ~ +99%</td></tr>
+<tr><td>悲观（交付延迟）</td><td>30%</td><td>65-80元</td><td class="val-down">-35% ~ -20%</td></tr>
+</tbody></table>
+<div style="margin-top:8px;padding:10px 14px;background:rgba(212,168,83,0.08);border-radius:6px;font-size:13px;color:var(--text-secondary);">
+💡 <strong>当前盈亏比 1.4:1（基准情景）</strong> — 向上空间约+40% vs 向下约-28%。建议等待回调至60日均线(~95元)附近入场，此时向上空间约+50%，向下约-15%，盈亏比改善至3:1以上。或等待H2海外订单明确放量的右侧信号。
+</div>
+</div>
+</div>
+<!-- Step 7: 对标分析 -->
+<div class="card" id="compare">
+<div class="card-header"><span class="icon">📊</span><h2>对标分析</h2><span class="sub">英维克 = 唯一具备全球竞争力的A股液冷标的</span></div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">案例类比</h3>
+<table class="cons"><thead><tr><th>维度</th><th>英维克</th><th>申菱环境</th><th>高澜股份</th><th>维谛Vertiv</th></tr></thead>
+<tbody>
+<tr><td>核心定位</td><td style="color:var(--gold-light);">全链条液冷龙头</td><td>华为液冷唯一伙伴</td><td>冷板+浸没双路线</td><td>全球液冷龙头</td></tr>
+<tr><td>FY2025营收</td><td>60.7亿</td><td>~30亿</td><td>~25亿</td><td>~95亿美元</td></tr>
+<tr><td>毛利率</td><td>27.9%</td><td>~28%</td><td>~25%</td><td>~36%</td></tr>
+<tr><td>CDU市占率</td><td style="color:var(--red-up);">42%（国内）</td><td>~30%</td><td>~15%</td><td>35%（全球）</td></tr>
+<tr><td>海外占比</td><td>14%</td><td>~10%</td><td>~5%</td><td>70%+</td></tr>
+<tr><td>海外毛利率</td><td style="color:var(--red-up);">52.6%</td><td>~40%</td><td>~35%</td><td>~38%</td></tr>
+<tr><td>核心壁垒</td><td>英伟达Tier1+谷歌认证</td><td>华为深度绑定</td><td>字节独家供应</td><td>全球品牌+渠道</td></tr>
+<tr><td>2026E PE</td><td>~80x</td><td>~40x</td><td>~35x</td><td>~30x</td></tr>
+</tbody></table>
+<p style="font-size:13px;color:var(--text-secondary);margin-top:10px;">英维克是A股液冷板块中唯一具备全球竞争力和海外大客户认证的公司，理应享有PE溢价。但当前TTM PE ~186x确实偏高，反映了市场对H2业绩拐点的极高期望。与维谛相比，海外收入仅14% vs 70%+，海外拓展空间大但不确定性也高。</p>
+<h3 style="font-size:15px;color:var(--gold-light);margin:16px 0 10px;">增长引擎切换</h3>
+<div style="display:flex;gap:12px;font-size:13px;color:var(--text-secondary);flex-wrap:wrap;">
+<div style="flex:1;min-width:180px;background:var(--card-bg-alt);padding:12px;border-radius:8px;opacity:0.6;"><strong>第一引擎(过去)：</strong><br>国内数据中心风冷/液冷 → 成熟业务，毛利率承压</div>
+<div style="flex:1;min-width:180px;background:var(--card-bg-alt);padding:12px;border-radius:8px;border:1px solid var(--gold);"><strong style="color:var(--gold-light);">第二引擎(现在)：</strong><br>AI液冷(7-8%→~20%) + 储能温控(~8%) → 正在放量</div>
+<div style="flex:1;min-width:180px;background:var(--card-bg-alt);padding:12px;border-radius:8px;border:1px solid var(--red-up);"><strong style="color:var(--red-up);">第三引擎(未来)：</strong><br>海外液冷(谷歌/英伟达) → 52.6%高毛利率，利润弹性最大</div>
+</div>
+</div>
+
+<!-- Step 8: 跟踪计划与综合结论 -->
+<div class="card" id="tracking">
+<div class="card-header"><span class="icon">📋</span><h2>跟踪计划与综合结论</h2><span class="sub">五维 80/100 · 左侧博弈型 · 等待安全边际</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">分层跟踪锚点</h3>
+<table class="cons"><thead><tr><th>频率</th><th>跟踪指标</th><th>数据来源</th></tr></thead>
+<tbody>
+<tr><td>🔴 高频(日/周)</td><td>股价、成交量、融资融券、北向资金</td><td>东方财富/同花顺</td></tr>
+<tr><td>🟡 中频(月)</td><td>谷歌/英伟达订单进度、液冷渗透率数据</td><td>券商研报/TrendForce</td></tr>
+<tr><td>⚪ 低频(季)</td><td>财报(毛利率、营收增速、应收账款)、股东户数</td><td>季报/年报</td></tr>
+<tr><td>📌 事件驱动</td><td>英伟达Rubin发布、海外大单公告、汇率变动</td><td>公司公告</td></tr>
+</tbody></table>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">执行清单</h3>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;font-size:13px;">
+<p style="color:var(--red-up);font-weight:600;">短线（1-3个月）：</p>
+<ul class="checklist">
+<li>等待回调至60日均线(~95元)分批建仓</li>
+<li>设置止损：跌破90元减仓，跌破85元止损</li>
+<li>关注Q2业绩预告（需看到毛利率环比改善）</li>
+</ul>
+<p style="color:var(--red-up);font-weight:600;margin-top:8px;">中线（6-12个月）：</p>
+<ul class="checklist">
+<li>核心持仓等待H2海外液冷放量验证</li>
+<li>若130-150元目标价提前达到，适量减仓锁定利润</li>
+<li>若H2业绩仍不及预期，重新评估投资逻辑</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="grid-2" style="margin-top:14px;">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">综合结论</h3>
+<div class="verdict-highlight">
+<div class="judgment">液冷赛道最具全球竞争力的A股标的，2026H2是关键验证期</div>
+<div class="verdict-grid">
+<div class="verdict-item"><div class="v-val" style="color:var(--red-up);">⚠️ 高</div><div class="v-label">风险等级</div></div>
+<div class="verdict-item"><div class="v-val" style="color:var(--gold-light);">等待介入</div><div class="v-label">操作建议</div></div>
+<div class="verdict-item"><div class="v-val" style="color:var(--red-up);">≤15%</div><div class="v-label">仓位上限</div></div>
+<div class="verdict-item"><div class="v-val">6-12月</div><div class="v-label">持仓周期</div></div>
+</div>
+</div>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">五维综合评分</h3>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;">
+<div class="score-bar"><span class="score-label">基本面 80 (30%)</span><div class="score-track"><div class="score-fill" style="width:80%;"></div></div><span class="score-num">24.0</span></div>
+<div class="score-bar"><span class="score-label">资金面 60 (20%)</span><div class="score-track"><div class="score-fill" style="width:60%;background:var(--orange-warn);"></div></div><span class="score-num">12.0</span></div>
+<div class="score-bar"><span class="score-label">技术面 60 (15%)</span><div class="score-track"><div class="score-fill" style="width:60%;background:var(--orange-warn);"></div></div><span class="score-num">9.0</span></div>
+<div class="score-bar"><span class="score-label">情绪面 80 (15%)</span><div class="score-track"><div class="score-fill" style="width:80%;"></div></div><span class="score-num">12.0</span></div>
+<div class="score-bar"><span class="score-label">事件催化 100 (20%)</span><div class="score-track"><div class="score-fill" style="width:100%;"></div></div><span class="score-num">20.0</span></div>
+<div class="score-bar" style="margin-top:8px;padding-top:8px;border-top:2px solid var(--border);">
+<span class="score-label" style="font-weight:700;color:var(--text-primary);">加权总评</span>
+<div class="score-track"><div class="score-fill" style="width:77%;background:var(--gold);"></div></div>
+<span class="score-num" style="font-size:16px;font-weight:800;color:var(--gold);">77.0</span>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top:14px;padding:14px 18px;background:rgba(245,86,86,0.08);border-left:4px solid var(--red-up);border-radius:6px;font-size:13px;color:var(--text-secondary);line-height:1.75;">
+<strong style="color:var(--red-up);font-size:15px;">📌 总结</strong><br>
+英维克是国内精密温控龙头，CDU市占率42%，拥有英伟达NPN Tier1（大陆唯一）和谷歌CDU认证等核心壁垒。2025年营收60.68亿(+32%)，在手订单150亿排产至2028年。当前核心矛盾：Q1利润暴跌(-82%) vs 在手订单饱满的巨大预期差。2026H2海外液冷大单放量是核心验证点。<strong style="color:var(--red-up);">建议等待回调至95元附近或H2订单放量的右侧信号再参与，仓位≤15%。</strong>
+</div>
+</div>
+
+<footer>
+<p>⚠️ 免责声明：本报告仅供研究参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+<p>数据截止：2026-05-16 | 研究状态：首次覆盖</p>
+<p style="font-size:11px;color:var(--text-muted);">数据来源：akshare · 智谱AI搜索 · DeepSeek-V4 · Claude · 2026-05-17 · 个股深度研究系统 v2.2</p>
+<p style="margin-top:6px;">作者：明立 · AI教育资深玩家 · AI应用落地近4年经验</p>
+<p>📮 联系作者获取更多skill：ll-mingli1221</p>
+</footer>
+</div>
+<!-- .container end -->
+<script>
+(function() {
+const rawData = [
+["2025-11-13",67.0,73.71,66.67,73.71,87624212.0],
+["2025-11-14",72.87,73.33,69.79,70.17,62536359.0],
+["2025-11-17",72.0,76.0,71.22,74.42,75711922.0],
+["2025-11-18",73.13,76.5,72.7,74.36,62215290.0],
+["2025-11-19",74.0,74.98,71.16,72.29,44110665.0],
+["2025-11-20",75.08,75.49,70.7,72.92,49078342.0],
+["2025-11-21",70.29,70.99,67.41,68.9,46214141.0],
+["2025-11-24",69.6,70.55,64.9,68.88,46898146.0],
+["2025-11-25",69.39,75.77,69.12,73.37,89739419.0],
+["2025-11-26",71.6,76.6,70.54,74.78,67794958.0],
+["2025-11-27",74.1,76.47,72.08,72.52,47702113.0],
+["2025-11-28",72.42,73.78,70.95,71.81,30319836.0],
+["2025-12-01",72.0,74.74,71.5,73.63,34356272.0],
+["2025-12-02",73.26,73.66,70.7,71.37,30102023.0],
+["2025-12-03",71.55,73.4,70.7,71.3,32132508.0],
+["2025-12-04",70.86,71.7,68.8,70.88,26513208.0],
+["2025-12-05",71.54,72.14,69.51,71.61,24394275.0],
+["2025-12-08",71.66,77.29,71.62,76.37,58798027.0],
+["2025-12-09",76.89,79.94,76.5,78.64,60417898.0],
+["2025-12-10",77.25,78.0,75.06,77.09,39300537.0],
+["2025-12-11",76.31,78.23,75.06,75.22,30621331.0],
+["2025-12-12",75.01,80.0,73.29,78.87,52307620.0],
+["2025-12-15",78.04,83.33,77.81,81.98,59956608.0],
+["2025-12-16",82.0,87.0,81.0,84.5,72721507.0],
+["2025-12-17",88.0,92.95,87.96,92.95,71676856.0],
+["2025-12-18",95.01,99.44,94.01,94.15,107801910.0],
+["2025-12-19",94.16,94.9,90.21,91.13,71297340.0],
+["2025-12-22",92.8,95.28,91.96,94.4,56855666.0],
+["2025-12-23",93.94,103.84,93.46,103.84,76749030.0],
+["2025-12-24",106.0,112.73,105.0,111.17,84185538.0],
+["2025-12-25",110.6,116.5,109.88,110.81,71440099.0],
+["2025-12-26",110.33,113.77,109.5,110.59,53606469.0],
+["2025-12-29",110.59,111.65,106.8,109.32,55584682.0],
+["2025-12-30",109.36,117.3,107.55,113.2,65481064.0],
+["2025-12-31",111.17,112.0,106.0,106.89,64250927.0],
+["2026-01-05",107.2,108.5,104.0,106.0,57181582.0],
+["2026-01-06",106.9,107.28,101.5,102.5,64324280.0],
+["2026-01-07",100.67,106.6,100.67,104.5,63098843.0],
+["2026-01-08",104.5,105.5,100.56,101.56,44109347.0],
+["2026-01-09",101.11,103.94,98.8,102.19,49978569.0],
+["2026-01-12",101.0,102.0,98.35,100.08,55425810.0],
+["2026-01-13",99.85,102.66,96.2,96.69,54364251.0],
+["2026-01-14",97.88,102.17,95.53,99.0,63749123.0],
+["2026-01-15",98.16,105.0,97.81,103.33,77224698.0],
+["2026-01-16",105.0,105.2,100.92,102.64,52539730.0],
+["2026-01-19",100.12,105.0,100.1,102.39,41588730.0],
+["2026-01-20",101.5,102.67,95.7,96.31,58423438.0],
+["2026-01-21",96.0,100.38,95.0,99.37,38104072.0],
+["2026-01-22",99.62,101.0,97.81,99.5,28067515.0],
+["2026-01-23",99.5,99.65,96.7,97.35,30127742.0],
+["2026-01-26",96.5,100.76,96.25,97.34,28263474.0],
+["2026-01-27",96.37,98.79,94.07,97.92,31035184.0],
+["2026-01-28",98.07,106.9,97.0,104.24,81124017.0],
+["2026-01-29",101.01,102.5,98.87,99.35,49675859.0],
+["2026-01-30",97.0,107.31,97.0,106.99,86032885.0],
+["2026-02-02",107.51,109.9,103.51,103.81,50612670.0],
+["2026-02-03",106.0,110.0,101.11,109.77,78141249.0],
+["2026-02-04",109.78,111.39,103.89,106.31,55054547.0],
+["2026-02-05",104.01,106.8,98.18,99.27,49836220.0],
+["2026-02-06",96.9,103.68,96.54,99.69,42820383.0],
+["2026-02-09",102.68,105.0,100.86,103.82,38643226.0],
+["2026-02-10",104.22,107.0,103.13,103.79,30355520.0],
+["2026-02-11",104.11,106.5,99.06,99.5,40185311.0],
+["2026-02-12",105.11,109.45,105.11,109.45,80493174.0],
+["2026-02-13",109.51,116.5,109.0,113.14,80649318.0],
+["2026-02-24",112.01,113.0,105.73,109.1,49711235.0],
+["2026-02-25",110.0,110.53,107.6,109.72,32793069.0],
+["2026-02-26",111.08,115.72,106.22,113.7,67195627.0],
+["2026-02-27",109.01,110.5,107.31,108.5,45566290.0],
+["2026-03-02",105.5,112.72,105.03,111.05,50852493.0],
+["2026-03-03",111.66,111.8,102.14,102.4,51803350.0],
+["2026-03-04",101.14,105.49,100.68,102.48,28367359.0],
+["2026-03-05",104.55,105.33,100.53,102.1,35079180.0],
+["2026-03-06",100.88,103.26,100.88,101.3,23970448.0],
+["2026-03-09",98.5,98.74,93.0,97.0,41004814.0],
+["2026-03-10",99.9,100.99,98.49,99.2,36997562.0],
+["2026-03-11",99.6,102.84,98.6,100.21,38783558.0],
+["2026-03-12",100.7,101.83,97.22,97.97,28261017.0],
+["2026-03-13",96.0,98.7,96.0,97.22,22401493.0],
+["2026-03-16",98.38,105.5,96.5,105.08,63501117.0],
+["2026-03-17",107.0,107.5,100.0,101.28,48365126.0],
+["2026-03-18",102.31,107.33,101.4,106.68,59646119.0],
+["2026-03-19",103.0,106.48,103.0,104.07,36387780.0],
+["2026-03-20",105.0,108.46,103.0,105.0,49695261.0],
+["2026-03-23",100.66,102.4,97.6,98.0,43737877.0],
+["2026-03-24",99.0,99.5,95.5,98.4,28382839.0],
+["2026-03-25",99.51,101.2,98.0,98.5,32376275.0],
+["2026-03-26",97.52,97.65,95.07,95.51,28113425.0],
+["2026-03-27",93.0,94.29,90.88,93.13,40213268.0],
+["2026-03-30",90.0,90.83,88.01,89.77,36809333.0],
+["2026-03-31",88.89,89.5,83.8,84.35,51803264.0],
+["2026-04-01",86.9,87.4,85.31,87.18,34381443.0],
+["2026-04-02",86.08,86.63,82.5,82.77,34006687.0],
+["2026-04-03",84.01,85.49,82.8,83.63,28181021.0],
+["2026-04-07",84.01,86.35,83.71,84.84,26360378.0],
+["2026-04-08",88.88,91.77,87.95,91.5,44383453.0],
+["2026-04-09",90.0,94.88,89.51,93.09,42179743.0],
+["2026-04-10",94.95,102.4,94.65,99.05,75955430.0],
+["2026-04-13",99.06,103.3,99.05,102.86,61006295.0],
+["2026-04-14",103.16,111.7,101.51,109.79,65768773.0],
+["2026-04-15",110.01,110.09,104.36,105.31,59069221.0],
+["2026-04-16",106.9,106.91,104.2,106.18,36624006.0],
+["2026-04-17",105.68,112.63,104.41,110.67,57543019.0],
+["2026-04-20",113.2,121.74,111.68,121.08,84798684.0],
+["2026-04-21",108.97,108.97,108.97,108.97,5979300.0],
+["2026-04-22",98.07,108.97,98.07,104.2,159447742.0],
+["2026-04-23",100.0,103.0,99.29,100.68,93511975.0],
+["2026-04-24",99.14,99.97,94.0,95.21,69024622.0],
+["2026-04-27",94.21,97.94,94.16,96.0,43115816.0],
+["2026-04-28",95.8,96.99,92.16,92.84,34918839.0],
+["2026-04-29",92.27,95.8,92.27,94.5,29715448.0],
+["2026-04-30",95.02,96.38,93.06,94.6,29212287.0],
+["2026-05-06",96.03,100.4,95.8,97.77,50908974.0],
+["2026-05-07",98.5,103.5,97.01,102.53,58731478.0],
+["2026-05-08",101.0,104.32,99.01,102.28,44557274.0],
+["2026-05-11",102.4,103.0,97.29,102.16,59957865.0],
+["2026-05-12",102.16,102.6,99.58,99.99,44321054.0],
+["2026-05-13",99.0,107.2,97.8,106.38,69324481.0],
+["2026-05-14",108.9,111.29,102.19,102.2,54047989.0],
+["2026-05-15",104.0,105.0,99.63,100.49,43686627.0]
+];
+const pieData = [
+{name:"机房温控节能产品", value:3448477492.62},
+{name:"机柜温控节能产品", value:1977423139.19},
+{name:"其他业务", value:506679178.72},
+{name:"客车空调", value:90266641.17},
+{name:"轨交列车空调", value:44912639.85}
+];
+
+// Data processing
+const dates = [], ohlc = [], volumesRaw = [];
+rawData.forEach(d => {
+  dates.push(d[0]);
+  ohlc.push([d[1], d[4], d[3], d[2]]);
+  volumesRaw.push(d[5]);
+});
+const closes = ohlc.map(d => d[1]);
+const calcMA = (arr, n) => arr.map((_, i) => {
+  if (i < n - 1) return null;
+  let sum = arr.slice(i - n + 1, i + 1).reduce((a, b) => a + b, 0);
+  return +(sum / n).toFixed(2);
+});
+const ma5 = calcMA(closes, 5), ma20 = calcMA(closes, 20), ma60 = calcMA(closes, 60);
+const volumes = volumesRaw.map(v => +(v / 10000).toFixed(2));
+const dateLabels = dates.map(d => { const parts = d.split('-'); return parts[1] + '-' + parts[2]; });
+
+function getThemeColors() {
+  const isLight = document.body.classList.contains('light-mode');
+  return {
+    textColor: isLight ? '#2a1f12' : '#e8e9ec',
+    textSecondary: isLight ? '#6b5634' : '#b0b3be',
+    textMuted: isLight ? '#9c8b6e' : '#7a7d8a',
+    upColor: isLight ? '#dc2626' : '#f55656',
+    downColor: isLight ? '#16a34a' : '#28c75b',
+    ma5Color: isLight ? '#2563eb' : '#4a90d9',
+    ma20Color: isLight ? '#16a34a' : '#28c75b',
+    ma60Color: isLight ? '#c2410c' : '#e8923a',
+    volUpColor: isLight ? 'rgba(220,38,38,0.25)' : 'rgba(245,86,86,0.35)',
+    volDownColor: isLight ? 'rgba(22,163,74,0.25)' : 'rgba(40,199,91,0.35)',
+  };
+}
+
+let pieChart, klineChart;
+function renderPie() {
+  if (pieChart) pieChart.dispose();
+  pieChart = echarts.init(document.getElementById('chart-business-pie'));
+  const c = getThemeColors();
+  pieChart.setOption({
+    tooltip: { trigger: 'item', formatter: '{b}: {d}% (营收{c}亿)' },
+    series: [{
+      type: 'pie', radius: ['45%', '70%'],
+      data: pieData,
+      label: { fontSize: 11, color: c.textSecondary },
+      color: ['#f55656', '#d4a853', '#e8923a', '#4a90d9', '#e3c26d']
+    }]
+  });
+}
+
+function renderKline() {
+  if (klineChart) klineChart.dispose();
+  klineChart = echarts.init(document.getElementById('chart-kline-full'));
+  const c = getThemeColors();
+  const volData = volumes.map((v, i) => ({
+    value: v,
+    itemStyle: { color: ohlc[i][1] >= ohlc[i][0] ? c.volUpColor : c.volDownColor }
+  }));
+  klineChart.setOption({
+    grid: [
+      { left: '9%', right: '6%', top: '12%', height: '55%' },
+      { left: '9%', right: '6%', top: '74%', height: '14%' }
+    ],
+    xAxis: [
+      { type: 'category', data: dateLabels, gridIndex: 0,
+        axisLabel: { color: c.textMuted, fontSize: 9, interval: 5 },
+        axisLine: { lineStyle: { color: c.textMuted } }, splitLine: { show: false } },
+      { type: 'category', data: dateLabels, gridIndex: 1, show: false, splitLine: { show: false } }
+    ],
+    yAxis: [
+      { scale: true, gridIndex: 0, axisLabel: { color: c.textMuted, fontSize: 10 }, splitLine: { show: false } },
+      { scale: true, gridIndex: 1, axisLabel: { color: c.textMuted, fontSize: 10, formatter: '{value}万' }, splitLine: { show: false } }
+    ],
+    dataZoom: [{ type: 'inside', xAxisIndex: [0, 1] }],
+    tooltip: { trigger: 'axis', axisPointer: { type: 'cross' },
+      formatter: function(params) {
+        const k = params.find(p => p.seriesName === 'K线');
+        const vol = params.find(p => p.seriesName === '成交量');
+        if (!k || !vol) return '';
+        return k.axisValue + '<br/>开: ' + k.data[0] + '  收: ' + k.data[1] + '<br/>低: ' + k.data[2] + '  高: ' + k.data[3] + '<br/>成交量: ' + vol.data.value + '万手';
+      }
+    },
+    legend: { data: ['K线', 'MA5', 'MA20', 'MA60'], top: 0, textStyle: { color: c.textSecondary } },
+    series: [
+      { name: 'K线', type: 'candlestick', data: ohlc, xAxisIndex: 0, yAxisIndex: 0,
+        itemStyle: { color: c.upColor, color0: c.downColor, borderColor: c.upColor, borderColor0: c.downColor } },
+      { name: 'MA5', type: 'line', data: ma5, smooth: true,
+        lineStyle: { width: 1.5, color: c.ma5Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+      { name: 'MA20', type: 'line', data: ma20, smooth: true,
+        lineStyle: { width: 1.5, color: c.ma20Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+      { name: 'MA60', type: 'line', data: ma60, smooth: true,
+        lineStyle: { width: 1.5, color: c.ma60Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+      { name: '成交量', type: 'bar', data: volData, xAxisIndex: 1, yAxisIndex: 1 }
+    ]
+  });
+}
+
+function renderCharts() { renderPie(); renderKline(); }
+
+const toggleBtn = document.getElementById('themeToggle');
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  toggleBtn.textContent = document.body.classList.contains('light-mode') ? '🌙 深色模式' : '☀️ 浅色模式';
+  renderCharts();
+});
+renderCharts();
+
+const sections = document.querySelectorAll('.card[id], .hero[id], .conclusion-top[id]');
+const navs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  navs.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + cur) a.classList.add('active');
+  });
+});
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+window.addEventListener('resize', () => {
+  pieChart && pieChart.resize();
+  klineChart && klineChart.resize();
+});
+})();
+</script>
+</body>
+</html>

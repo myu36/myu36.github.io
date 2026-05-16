@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -n '/<footer/,/<\\\\/footer>/p' \"C:\\\\Users\\\\Sama\\\\.claude\\\\skills\\\\stock-analysis-main\\\\output\\\\个股研究-英维克.html\" | grep -c '<p>')",
+      "Bash(sed -n '/<footer>/,/<\\\\/footer>/p' \"C:\\\\Users\\\\Sama\\\\.claude\\\\skills\\\\stock-analysis-main\\\\output\\\\个股研究-英维克.html\")",
+      "Bash(rm \"C:\\\\Users\\\\Sama\\\\.claude\\\\skills\\\\stock-analysis-main\\\\output\\\\_h_part0.html\" \"C:\\\\Users\\\\Sama\\\\.claude\\\\skills\\\\stock-analysis-main\\\\output\\\\_h_part1.html\" \"C:\\\\Users\\\\Sama\\\\.claude\\\\skills\\\\stock-analysis-main\\\\output\\\\_h_part2.html\" \"C:\\\\Users\\\\Sama\\\\.claude\\\\skills\\\\stock-analysis-main\\\\output\\\\_h_part3.html\" \"C:\\\\Users\\\\Sama\\\\.claude\\\\skills\\\\stock-analysis-main\\\\output\\\\_h_part4.html\" \"C:\\\\Users\\\\Sama\\\\.claude\\\\skills\\\\stock-analysis-main\\\\output\\\\_h_part5.html\" \"C:\\\\Users\\\\Sama\\\\.claude\\\\skills\\\\stock-analysis-main\\\\output\\\\_kline_data.txt\")",
+      "Bash(mkdir -p \"C:\\\\Users\\\\Sama\\\\AppData\\\\Local\\\\Agent\\\\ClaudeCode\\\\stock-analysis\\\\英维克002837.SZ\" && cp \"C:\\\\Users\\\\Sama\\\\.claude\\\\skills\\\\stock-analysis-main\\\\output\\\\个股研究-英维克.html\" \"C:\\\\Users\\\\Sama\\\\AppData\\\\Local\\\\Agent\\\\ClaudeCode\\\\stock-analysis\\\\英维克002837.SZ\\\\20260517.html\" && ls -la \"C:\\\\Users\\\\Sama\\\\AppData\\\\Local\\\\Agent\\\\ClaudeCode\\\\stock-analysis\\\\英维克002837.SZ\\\\\")",
+      "Bash(mkdir -p \"C:\\\\Users\\\\Sama\\\\AppData\\\\Local\\\\Agent\\\\ClaudeCode\\\\stock-analysis\\\\英维克002837.SZ\" && cp \"C:\\\\Users\\\\Sama\\\\.claude\\\\skills\\\\stock-analysis-main\\\\output\\\\个股研究-英维克.html\" \"C:\\\\Users\\\\Sama\\\\AppData\\\\Local\\\\Agent\\\\ClaudeCode\\\\stock-analysis\\\\英维克002837.SZ\\\\20260517.html\" && ls -la \"C:\\\\Users\\\\Sama\\\\AppData\\\\Local\\\\Agent\\\\ClaudeCode\\\\stock-analysis/英维克002837.SZ/\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Sama\\.claude\\skills\\stock-analysis-main\\output"
+    ]
+  }
+}
