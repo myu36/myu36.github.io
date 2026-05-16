@@ -2,6 +2,11 @@
   "permissions": {
     "allow": [
       "Bash",
+      "Bash(python stock_full_report.py *)",
+      "Bash(rm _h_part)",
+      "Bash(rm -rf _h_part)",
+      "Bash(mkdir -p *)",
+      "Bash(mv *)",
       "Read",
       "Write",
       "Edit",
