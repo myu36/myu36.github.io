@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>中恒电气 002364 · 深度研报</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#0c0f15;--card-bg:#1a1c24;--card-bg-alt:#1e2029;--border:#2a2d3a;--text-primary:#e8e9ec;--text-secondary:#b0b3be;--text-muted:#7a7d8a;--red-up:#f55656;--green-down:#28c75b;--gold:#d4a853;--gold-light:#e3c26d;--blue-accent:#4a90d9;--orange-warn:#e8923a;--shadow:0 4px 20px rgba(0,0,0,0.3);--radius:10px;--font-sans:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;--font-mono:"JetBrains Mono","SF Mono","Consolas",monospace;--transition:0.2s ease;}
+body.light-mode{--bg:#fdf8f0;--card-bg:#fffbf5;--card-bg-alt:#fef5e7;--border:#e2cfa2;--text-primary:#2a1f12;--text-secondary:#6b5634;--text-muted:#9c8b6e;--red-up:#dc2626;--green-down:#16a34a;--gold:#b38a3c;--gold-light:#d4a853;--blue-accent:#2563eb;--orange-warn:#c2410c;--shadow:0 4px 20px rgba(162,125,57,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text-primary);font-family:var(--font-sans);line-height:1.7;font-size:14px;background-image:radial-gradient(circle at 15% 10%,rgba(212,168,83,0.03) 0%,transparent 35%),radial-gradient(circle at 85% 70%,rgba(212,168,83,0.03) 0%,transparent 35%);background-attachment:fixed}
+.top-nav{position:sticky;top:0;z-index:100;background:rgba(10,12,18,0.92);backdrop-filter:blur(12px);border-bottom:2px solid var(--gold-light);padding:10px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.top-nav .logo{display:flex;align-items:center;gap:10px;color:#fff}
+.top-nav .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#c0392b,#8b0000);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:#fff}
+.top-nav .stock-name{font-weight:700;font-size:17px;letter-spacing:0.5px}
+.top-nav .stock-code{font-size:12px;opacity:0.7;font-family:var(--font-mono)}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap}
+.nav-links a{font-size:12px;padding:5px 14px;border-radius:16px;color:var(--gold-light);text-decoration:none;border:1px solid transparent;transition:var(--transition);font-weight:500;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.08);color:#fff;border-color:var(--gold)}
+.theme-toggle{background:rgba(255,255,255,0.08);border:1px solid var(--gold-light);color:var(--gold-light);padding:5px 14px;border-radius:16px;font-size:12px;cursor:pointer;transition:var(--transition);margin-left:12px}
+.theme-toggle:hover{background:rgba(255,255,255,0.15)}
+.container{max-width:1300px;margin:0 auto;padding:24px 20px 40px}
+.hero{background:linear-gradient(105deg,#1c1010 0%,#2c1a1a 50%,#3d2424 100%);border-radius:var(--radius);padding:28px 32px;margin-bottom:24px;border:1px solid var(--gold-light);box-shadow:0 8px 28px rgba(100,55,55,0.2);display:flex;flex-wrap:wrap;gap:24px;align-items:center;color:#fff;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-price-block{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;z-index:1}
+.hero-price{font-size:56px;font-weight:900;line-height:1;font-family:var(--font-mono)}
+.hero-change{font-size:20px;font-weight:700;padding:4px 12px;border-radius:6px;background:rgba(245,86,86,0.2);color:#f87171;font-family:var(--font-mono)}
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;z-index:1}
+.hero-meta-item{text-align:center}
+.hero-meta-item .val{font-size:22px;font-weight:700;font-family:var(--font-mono);color:var(--gold-light)}
+.hero-meta-item .label{font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:1px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;z-index:1}
+.hero-tag{background:rgba(255,255,255,0.08);border:1px solid rgba(255,215,0,0.3);color:var(--gold-light);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500}
+.conclusion-top{background:linear-gradient(135deg,#1e1a10 0%,#241f14 100%);border:2px solid var(--gold);border-radius:var(--radius);padding:22px 28px;margin-bottom:24px;position:relative}
+.conclusion-top::before{content:'核心结论';position:absolute;top:-13px;left:24px;background:var(--gold);color:#000;padding:3px 16px;border-radius:12px;font-weight:700;font-size:12px;letter-spacing:1px}
+.conclusion-top .big-verdict{font-weight:800;font-size:20px;color:#fff;margin-top:8px}
+.conclusion-top .verdict-detail{font-size:14px;color:var(--text-secondary);margin-top:8px;line-height:1.7}
+.conclusion-top .verdict-tags{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:22px 28px;margin-bottom:20px;box-shadow:var(--shadow);transition:var(--transition)}
+.card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.5);border-color:var(--gold)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+.card-header .icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:var(--gold)}
+.card-header h2{font-size:18px;font-weight:700;color:#fff;letter-spacing:0.5px}
+.card-header .sub{margin-left:auto;font-size:11px;color:var(--text-muted)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.news-list{max-height:300px;overflow-y:auto;font-size:13px}
+.news-item{display:flex;align-items:baseline;gap:6px;padding:7px 0;border-bottom:1px dashed var(--border);color:var(--text-secondary)}
+.news-item .bullet{color:var(--red-up);font-weight:700;font-size:16px}
+.tag{display:inline-block;padding:3px 12px;border-radius:14px;font-size:11px;font-weight:600;background:rgba(212,168,83,0.15);color:var(--gold-light);border:1px solid var(--gold);margin-right:6px;margin-bottom:4px}
+table.cons{width:100%;border-collapse:collapse;font-size:13px;background:var(--card-bg-alt);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:12px 0}
+table.cons thead th{background:linear-gradient(180deg,#2c1a1a 0%,#1c1010 100%);color:#fff;font-weight:600;padding:10px 12px;text-align:left;font-size:12px;letter-spacing:1px}
+table.cons tbody tr{border-bottom:1px dashed var(--border)}
+table.cons tbody tr:hover{background:rgba(255,255,255,0.02)}
+table.cons tbody td{padding:9px 12px;vertical-align:middle;color:var(--text-secondary)}
+.val-up{color:var(--red-up);font-weight:600}
+.val-down{color:var(--green-down);font-weight:600}
+.chain-svg{background:var(--card-bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:16px 0;text-align:center}
+.scenario{background:var(--card-bg-alt);border:1px solid var(--border);border-radius:8px;padding:14px 16px;text-align:center;border-left:4px solid var(--gold)}
+.scenario.bear{border-left-color:var(--green-down)}
+.scenario.bull{border-left-color:var(--red-up)}
+.scenario .prob{font-size:11px;color:var(--text-muted)}
+.alert-list{list-style:none;padding:0}
+.alert-list li{padding:8px 14px;margin:6px 0;border-radius:6px;background:var(--card-bg-alt);border-left:4px solid var(--orange-warn);font-size:13px;font-weight:500;color:var(--text-secondary)}
+.rating-callout{background:linear-gradient(135deg,#1e1a10 0%,#241f14 100%);border:2px solid var(--gold);border-radius:var(--radius);padding:18px 24px;margin-top:16px;display:flex;align-items:center;gap:16px}
+.rating-callout .badge{min-width:64px;height:64px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;letter-spacing:1px}
+.rating-callout .body{flex:1}
+.rating-callout .body .title{font-size:16px;font-weight:700;color:#fff}
+.rating-callout .body .desc{font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.6}
+.verdict-highlight{background:var(--card-bg-alt);border-radius:10px;padding:18px 22px;margin-top:8px}
+.verdict-highlight .judgment{font-size:22px;font-weight:800;color:var(--gold);text-align:center;margin-bottom:12px}
+.verdict-highlight .verdict-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.verdict-highlight .verdict-item{text-align:center;padding:8px}
+.verdict-highlight .verdict-item .v-val{font-size:18px;font-weight:800}
+.verdict-highlight .verdict-item .v-label{font-size:11px;color:var(--text-muted);margin-top:2px}
+.score-bar{display:flex;align-items:center;gap:8px;margin:6px 0}
+.score-bar .score-label{width:100px;text-align:right;font-size:12px;color:var(--text-muted)}
+.score-bar .score-track{flex:1;height:8px;background:#2a2d3a;border-radius:6px;overflow:hidden}
+.score-bar .score-fill{height:100%;border-radius:6px;background:var(--gold)}
+.score-bar .score-num{width:50px;font-size:13px;font-weight:700;text-align:center;color:var(--text-primary)}
+.kpi-info-row{display:flex;justify-content:space-around;margin-top:18px;padding-top:14px;border-top:2px solid var(--border)}
+.kpi-info-item{text-align:center}
+.kpi-info-item .label{font-size:12px;color:var(--text-muted)}
+.kpi-info-item .value{font-size:20px;font-weight:700;color:var(--gold-light)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;font-size:13px}
+.info-grid dt{color:var(--text-muted)}
+.info-grid dd{color:var(--text-secondary);font-weight:500}
+.checklist{list-style:none;padding:0;font-size:13px}
+.checklist li{padding:5px 0;color:var(--text-secondary)}
+.checklist li::before{content:'☐ ';color:var(--gold)}
+@media(max-width:850px){.grid-2,.grid-3{grid-template-columns:1fr}.hero{flex-direction:column;align-items:flex-start}.hero-price{font-size:40px}}
+footer{text-align:center;padding:24px 16px;font-size:12px;color:var(--text-muted);border-top:1px solid var(--border);margin-top:24px}
+body.light-mode .top-nav{background:rgba(255,251,245,0.92);border-bottom-color:var(--gold)}
+body.light-mode .nav-links a{color:var(--gold)}
+body.light-mode .nav-links a:hover,body.light-mode .nav-links a.active{background:rgba(0,0,0,0.05);color:#7f1d1d}
+body.light-mode .hero{background:linear-gradient(105deg,#fef5e7,#fffbf5);color:var(--text-primary);border-color:var(--gold)}
+body.light-mode .hero-price{color:var(--text-primary)}
+body.light-mode .hero-change{background:rgba(220,38,38,0.1);color:var(--red-up)}
+body.light-mode .hero-meta-item .val{color:var(--gold)}
+body.light-mode .hero-meta-item .label{color:var(--text-muted)}
+body.light-mode .hero-tag{background:rgba(212,168,83,0.15);border-color:var(--gold);color:var(--gold)}
+body.light-mode .conclusion-top{background:linear-gradient(135deg,#fff9f0,#fef5e7)}
+body.light-mode .conclusion-top .big-verdict{color:var(--text-primary)}
+body.light-mode .card-header h2{color:var(--text-primary)}
+body.light-mode .tag{background:rgba(212,168,83,0.15);color:var(--gold);border-color:var(--gold)}
+body.light-mode table.cons thead th{background:linear-gradient(180deg,#f55656,#c0392b)}
+body.light-mode .score-bar .score-track{background:#f0e4ce}
+body.light-mode .rating-callout{background:linear-gradient(135deg,#fff9f0,#fef5e7)}
+body.light-mode .rating-callout .body .title{color:var(--text-primary)}
+body.light-mode .verdict-highlight{background:#fef5e7}
+body.light-mode .verdict-highlight .judgment{color:var(--gold)}
+body.light-mode .verdict-highlight .v-val{color:var(--text-primary)}
+.chain-svg .svg-hdr{fill:#e8e9ec}
+.chain-svg .svg-sub{fill:#b0b3be}
+body.light-mode .chain-svg .svg-hdr{fill:#2a1f12}
+body.light-mode .chain-svg .svg-sub{fill:#6b5634}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+<div class="logo"><div class="logo-icon">中</div><span class="stock-name">中恒电气</span><span class="stock-code">002364.SZ</span></div>
+<div class="nav-links">
+<a href="#hero" class="active">行情</a><a href="#conclusion-top">结论</a><a href="#profile">画像</a><a href="#kline-section">K线</a><a href="#mission">任务</a><a href="#macro">宏观</a><a href="#chain">产业链</a><a href="#quality">质量</a><a href="#elasticity">弹性</a><a href="#risk">风险</a><a href="#valuation">估值</a><a href="#compare">对标</a><a href="#tracking">跟踪</a>
+</div>
+<button class="theme-toggle" id="themeToggle">☀️ 浅色模式</button>
+</nav>
+<div class="container">
+
+<div class="hero" id="hero">
+<div class="hero-price-block"><span class="hero-price">47.85</span><span class="hero-change" style="color:var(--green-down);background:rgba(40,199,91,0.2);">-1.83%</span></div>
+<div class="hero-meta">
+<div class="hero-meta-item"><div class="val">A- 81分</div><div class="label">公司质地</div></div>
+<div class="hero-meta-item"><div class="val">35-65元</div><div class="label">中期目标价</div></div>
+<div class="hero-meta-item"><div class="val">1:1.5</div><div class="label">期望盈亏比</div></div>
+<div class="hero-meta-item"><div class="val" style="color:var(--orange-warn);">⚠️ 中高</div><div class="label">风险等级</div></div>
+</div>
+<div class="hero-tags"><span class="hero-tag">HVDC龙头</span><span class="hero-tag">宁德时代入股</span><span class="hero-tag">AI数据中心</span><span class="hero-tag">出海加速</span><span class="hero-tag">800V技术</span></div>
+</div>
+
+<div class="conclusion-top" id="conclusion-top">
+<div class="big-verdict">🎯 结论：国内HVDC绝对龙头，处于AI数据中心渗透率提升+海外突破+宁德时代入股的三重驱动窗口，但当前PE~110x需等待业绩消化</div>
+<div class="verdict-detail">
+中恒电气是国内HVDC（高压直流）供电方案的先行者和市占率第一（约31%），深度绑定阿里巴巴、腾讯等核心客户。FY2025营收21.37亿（+8.9%），归母净利润1.26亿（+15.3%），2026Q1净利润+22.9%加速。宁德时代以41亿元战略入股17.4%，海外HVDC营收同比+178%。全球HVDC市场预计从2025年27.9亿→2027年144.4亿（CAGR>100%）。<strong style="color:#f55656;">但PE~110x、年内涨幅80%+，广发证券目标价35元低于现价，建议等待回调至40-42元区间分批关注。</strong>核心跟踪：2026H1 HVDC营收增速及海外大单落地。
+</div>
+<div class="verdict-tags"><span class="tag">成长配置型</span><span class="tag">HVDC</span><span class="tag">宁德时代</span><span class="tag">回调介入</span><span class="tag">仓位≤15%</span><span class="tag">五维68/100</span></div>
+</div>
+
+<div class="grid-2" id="profile">
+<div class="card">
+<div class="card-header"><span class="icon">🏢</span><h2>公司画像</h2></div>
+<p><strong style="color:#f55656;">主营业务：</strong>数据中心电源(36.3%)、电力操作电源(22.2%)、软件开发(19.6%)、通信电源(18.0%)、其他(3.4%) — HVDC龙头+通信/电力电源+电力软件</p>
+<div style="margin:12px 0;"><span class="tag">HVDC市占率第一</span><span class="tag">国家标准制定者</span><span class="tag">宁德时代战略投资</span><span class="tag">制造业单项冠军</span></div>
+<dl class="info-grid" style="margin-top:12px;">
+<dt>公司全称</dt><dd>杭州中恒电气股份有限公司</dd>
+<dt>上市日期</dt><dd>2010-03-05 · 深交所主板</dd>
+<dt>注册地</dt><dd>浙江省杭州市高新区</dd>
+<dt>所属行业</dt><dd>电力设备 / 电源设备</dd>
+<dt>总股本</dt><dd>5.64亿股</dd>
+<dt>控股股东</dt><dd>杭州中恒科技投资（35.56%）</dd>
+<dt>总市值</dt><dd>~270亿元</dd>
+<dt>PE(TTM)</dt><dd>~110x</dd>
+</dl>
+</div>
+<div class="card">
+<div class="card-header"><span class="icon">📰</span><h2>近期动态</h2><span class="sub">2026-05-17</span></div>
+<div class="news-list">
+<div class="news-item"><span class="bullet">•</span><span class="news-date">05-13</span>龙虎榜：涨停日机构净卖出1.24亿，游资净买入1亿+，资金分歧大</div>
+<div class="news-item"><span class="bullet">•</span><span class="news-date">04-28</span>2026Q1营收4.18亿(+7.8%)，归母净利润2494万(+22.9%)，业绩加速</div>
+<div class="news-item"><span class="bullet">•</span><span class="news-date">04月</span>宁德时代41亿增资控股股东，间接持股17.4%</div>
+<div class="news-item"><span class="bullet">•</span><span class="news-date">04-24</span>东吴证券年报点评：业绩符合预期，HVDC业务加速向上</div>
+<div class="news-item"><span class="bullet">•</span><span class="news-date">04-21</span>计划10派1元（含税），持续分红回馈股东</div>
+<div class="news-item"><span class="bullet">•</span><span class="news-date">01月</span>施耐德CEO率团访问中恒电气，商讨数据中心电源深度合作</div>
+<div class="news-item"><span class="bullet">•</span><span class="news-date">2025</span>海外HVDC营收8789万(+178%)，新加坡Enervell子公司运营</div>
+<div class="news-item"><span class="bullet">•</span><span class="news-date">2025</span>800V SuperX Panama/Aurora产品发布，获莱茵TUV认证</div>
+</div>
+</div>
+</div>
+<div class="grid-2">
+<div class="card">
+<div class="card-header"><span class="icon">📊</span><h2>主营业务构成</h2><span class="sub">2025年</span></div>
+<div id="pieChart" style="height:300px;"></div>
+</div>
+<div class="card">
+<div class="card-header"><span class="icon">📈</span><h2>关键财务指标</h2><span class="sub">近三年</span></div>
+<table class="cons">
+<thead><tr><th>指标</th><th>2023</th><th>2024</th><th>2025</th><th>2026Q1</th></tr></thead>
+<tbody>
+<tr><td>营业收入</td><td>15.55亿</td><td>19.62亿</td><td class="val-up">21.37亿</td><td>4.18亿</td></tr>
+<tr><td>归母净利润</td><td>0.39亿</td><td>1.10亿</td><td class="val-up">1.26亿</td><td>0.25亿</td></tr>
+<tr><td>扣非净利润</td><td>0.20亿</td><td>0.83亿</td><td class="val-up">1.15亿</td><td>0.22亿</td></tr>
+<tr><td>毛利率</td><td>24.5%</td><td>26.2%</td><td>24.8%</td><td>—</td></tr>
+<tr><td>净利率</td><td>2.5%</td><td>5.6%</td><td>6.2%</td><td>6.0%</td></tr>
+</tbody>
+</table>
+<div style="margin-top:8px;font-size:12px;color:var(--text-muted);text-align:center;">2025年HVDC收入7.76亿(+16.1%)，海外收入0.88亿(+178%)</div>
+</div>
+</div>
+
+<div class="card" id="kline-section">
+<div class="card-header"><span class="icon">📉</span><h2>K线走势（3年日K）</h2><span class="sub">红涨绿跌 · akshare</span></div>
+<div id="klineChart" style="height:480px;"></div>
+<div class="kpi-info-row">
+<div class="kpi-info-item"><div class="label">向上空间(基准)</div><div class="value">+15%</div></div>
+<div class="kpi-info-item"><div class="label">期望盈亏比</div><div class="value">1:1.5</div></div>
+<div class="kpi-info-item"><div class="label">中期目标价</div><div class="value">35-65元</div></div>
+<div class="kpi-info-item"><div class="label">研究周期</div><div class="value">中线</div></div>
+</div>
+</div>
+
+<!-- Step 0: 任务锁定 -->
+<div class="card" id="mission">
+<div class="card-header"><span class="icon">🎯</span><h2>任务锁定与核心矛盾</h2><span class="sub">Step 0</span></div>
+<div class="grid-2" style="margin-bottom:16px;">
+<div><span class="tag">标的</span> 中恒电气 002364.SZ</div>
+<div><span class="tag">周期</span> 中线(3-6月) / 长线跟踪</div>
+<div><span class="tag">研究状态</span> 首次覆盖</div>
+<div><span class="tag">风格预判</span> 交易型+成长配置型</div>
+</div>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:16px 20px;border-left:4px solid var(--red-up);margin-top:8px;">
+<strong style="color:var(--gold);font-size:15px;">核心矛盾：</strong>
+<p style="margin-top:6px;color:var(--text-secondary);font-size:14px;"><strong style="color:#f55656;">HVDC渗透率加速提升 vs 短期估值透支</strong> — 中恒电气是国内HVDC龙头（市占率约31%），技术壁垒显著，深度绑定阿里、腾讯。全球AI数据中心建设驱动HVDC渗透率从10-15%向30%+提升。但股价年内涨幅80%+，PE(TTM)~110x，广发证券目标价35元低于现价30%，高估值需业绩消化。</p>
+</div>
+</div>
+
+<!-- Step 1: 宏观与周期定位 -->
+<div class="card" id="macro">
+<div class="card-header"><span class="icon">🌍</span><h2>宏观与周期定位</h2><span class="sub">Step 1</span></div>
+<p style="margin-bottom:12px;color:var(--text-secondary);font-size:13px;">2026年全球AI数据中心建设加速，阿里巴巴CAPEX 3800→4800亿，HVDC凭借高效率(97.5%+)对传统UPS形成替代之势。</p>
+<table class="cons">
+<thead><tr><th>维度</th><th>判断</th><th>依据</th></tr></thead>
+<tbody>
+<tr><td>宏观周期</td><td>弱复苏</td><td>GDP增速5.0%，制造业PMI 49-51</td></tr>
+<tr><td>产业周期</td><td style="color:var(--red-up);font-weight:600;">上行期</td><td>AI基建投资爆发，海内外资本开支持续上修</td></tr>
+<tr><td>电力设备周期</td><td>结构性景气</td><td>传统投资平稳，AI供电设备高增</td></tr>
+</tbody>
+</table>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:16px 20px;border-left:4px solid var(--gold);margin-top:12px;">
+<strong style="color:var(--gold);">核心矛盾提炼：</strong> HVDC渗透率加速提升 vs 短期估值透支。中恒电气处AI供电技术升级+宁德时代入股+海外市场突破三重驱动窗口。
+</div>
+</div>
+
+<!-- Step 2: 产业链 -->
+<div class="card" id="chain">
+<div class="card-header"><span class="icon">🔗</span><h2>产业链深度拆解</h2><span class="sub">Step 2</span></div>
+<p style="margin-bottom:8px;color:var(--text-secondary);font-size:13px;">中恒电气位于产业链中游（HVDC电源系统制造），上游IGBT/MOSFET等功率器件，下游AI数据中心/通信运营商/电网。</p>
+<div class="chain-svg">
+<svg viewBox="0 0 860 260" width="860" height="260">
+<!-- 上游 -->
+<rect x="30" y="20" width="240" height="200" rx="8" fill="none" stroke="#d4a853" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="150" y="50" class="svg-hdr" text-anchor="middle">上游 · 元器件</text>
+<text x="150" y="78" class="svg-sub" text-anchor="middle">IGBT/MOSFET（英飞凌/安森美）</text>
+<text x="150" y="100" class="svg-sub" text-anchor="middle">电容电阻电感（村田/TDK）</text>
+<text x="150" y="122" class="svg-sub" text-anchor="middle">铜材/硅钢/结构件</text>
+<text x="150" y="144" class="svg-sub" text-anchor="middle">PCB/连接器/传感器</text>
+<!-- 中游 -->
+<rect x="310" y="20" width="240" height="200" rx="8" fill="none" stroke="#f55656" stroke-width="2"/>
+<text x="430" y="50" class="svg-hdr" text-anchor="middle">中游 · HVDC电源系统</text>
+<text x="430" y="78" class="svg-sub" text-anchor="middle">🔴 中恒电气（市占率31% 第一）</text>
+<text x="430" y="100" class="svg-sub" text-anchor="middle">台达电子/维谛技术（三强90%）</text>
+<text x="430" y="122" class="svg-sub" text-anchor="middle">科华数据/科士达/麦格米特</text>
+<text x="430" y="144" class="svg-sub" text-anchor="middle">通合科技/动力源</text>
+<text x="430" y="170" class="svg-sub" text-anchor="middle" fill="#d4a853">通信电源/电力电源/软件</text>
+<!-- 下游 -->
+<rect x="590" y="20" width="240" height="200" rx="8" fill="none" stroke="#d4a853" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="710" y="50" class="svg-hdr" text-anchor="middle">下游 · 应用市场</text>
+<text x="710" y="78" class="svg-sub" text-anchor="middle">🔴 AI数据中心（阿里/腾讯/字节）</text>
+<text x="710" y="100" class="svg-sub" text-anchor="middle">通信运营商（移动/电信/铁塔）</text>
+<text x="710" y="122" class="svg-sub" text-anchor="middle">国家电网/南方电网</text>
+<text x="710" y="144" class="svg-sub" text-anchor="middle">金融数据中心（中国银行等）</text>
+<!-- 箭头 -->
+<text x="278" y="110" class="svg-sub" fill="#d4a853" font-size="22">→</text>
+<text x="558" y="110" class="svg-sub" fill="#d4a853" font-size="22">→</text>
+</svg>
+</div>
+<div class="grid-2" style="margin-top:12px;">
+<div><span class="tag" style="background:rgba(245,86,86,0.2);border-color:#f55656;">题材来源</span>技术升级(核心)+政策驱动+龙头订单+宁德时代入股+出海逻辑</div>
+<div><span class="tag">趋势评分</span> 渗透率⭐⭐⭐⭐⭐ · 格局⭐⭐⭐⭐ · 持续性⭐⭐⭐⭐</div>
+</div>
+</div>
+
+<!-- Step 3: 质量评分 -->
+<div class="card" id="quality">
+<div class="card-header"><span class="icon">⭐</span><h2>公司筛选与质量评分</h2><span class="sub">Step 3 / 公司质地评分</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:14px;color:var(--gold);margin-bottom:6px;">正面筛选</h3>
+<div style="font-size:13px;color:var(--text-secondary);">
+<div>✅ 行业空间大：全球HVDC 2027E达144亿</div>
+<div>✅ 竞争壁垒高：国家标准制定者，阿里独供90%</div>
+<div>✅ 财务健康：负债率40.8%，低于行业均值</div>
+<div>✅ 成长路径清晰：国内渗透+海外突破+宁德赋能</div>
+<div>⚠️ 估值偏高：PE~110x，需时间消化</div>
+</div>
+</div>
+<div>
+<h3 style="font-size:14px;color:var(--orange-warn);margin-bottom:6px;">风险排查</h3>
+<div style="font-size:13px;color:var(--text-secondary);">
+<div>✅ 实控人减持：未触发（引入宁德时代）</div>
+<div>✅ 财务造假：未触发</div>
+<div>✅ 行业坍塌：未触发</div>
+<div>⚠️ 技术替代风险：关注超级电容/氢能</div>
+<div>⚠️ 客户集中度：阿里占HVDC收入~50%</div>
+</div>
+</div>
+</div>
+<div style="margin-top:16px;">
+<div class="score-bar"><span class="score-label">行业地位(18/20)</span><div class="score-track"><div class="score-fill" style="width:90%;"></div></div><span class="score-num" style="color:var(--gold);">90%</span></div>
+<div class="score-bar"><span class="score-label">财务健康(15/20)</span><div class="score-track"><div class="score-fill" style="width:75%;"></div></div><span class="score-num" style="color:var(--gold);">75%</span></div>
+<div class="score-bar"><span class="score-label">技术壁垒(18/20)</span><div class="score-track"><div class="score-fill" style="width:90%;"></div></div><span class="score-num" style="color:var(--gold);">90%</span></div>
+<div class="score-bar"><span class="score-label">成长性(16/20)</span><div class="score-track"><div class="score-fill" style="width:80%;"></div></div><span class="score-num" style="color:var(--gold);">80%</span></div>
+<div class="score-bar"><span class="score-label">管理层(7/10)</span><div class="score-track"><div class="score-fill" style="width:70%;"></div></div><span class="score-num" style="color:var(--orange-warn);">70%</span></div>
+<div class="score-bar"><span class="score-label">ESG(7/10)</span><div class="score-track"><div class="score-fill" style="width:70%;"></div></div><span class="score-num" style="color:var(--orange-warn);">70%</span></div>
+</div>
+<div class="rating-callout">
+<div class="badge">A-</div>
+<div class="body">
+<div class="title">公司质地评级：A-（81/100分）</div>
+<div class="desc">高成长赛道中的龙头标的。行业地位和技术壁垒突出，财务健康度良好，但ROE偏低(4.35%)、客户集中度较高。整体质地优良，适合作为AI基建主题的核心配置。</div>
+</div>
+</div>
+</div>
+<!-- Step 4: 业绩弹性 -->
+<div class="card" id="elasticity">
+<div class="card-header"><span class="icon">⚡</span><h2>业绩弹性测算</h2><span class="sub">Step 4</span></div>
+<p style="margin-bottom:12px;color:var(--text-secondary);font-size:13px;">弹性树展示了各业务线对总收入和利润的贡献及增长弹性。海外HVDC（+178%）和数据中心电源（+16.1%）是核心增长引擎。</p>
+<div style="display:flex;flex-direction:column;gap:6px;padding:16px;background:var(--card-bg-alt);border-radius:8px;margin-bottom:16px;">
+<div style="text-align:center;padding:8px;border:2px solid var(--gold);border-radius:8px;font-weight:700;color:var(--gold);">2025年总营收 21.37亿 ｜ HVDC营收占比提升趋势</div>
+<div style="display:flex;justify-content:center;margin:2px 0;"><div style="width:2px;height:6px;background:var(--gold);"></div></div>
+<div style="border-top:2px solid var(--gold);display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding-top:12px;">
+<div style="border:1px solid var(--border);border-radius:6px;padding:10px;text-align:center;background:var(--card-bg);">
+<div style="font-size:11px;color:var(--text-muted);">数据中心电源</div>
+<div style="font-weight:700;color:var(--gold);">7.76亿</div>
+<div style="font-size:11px;color:var(--red-up);">YoY +16.1%</div>
+<div style="font-size:11px;color:var(--text-muted);">毛利率20.7%</div>
+</div>
+<div style="border:1px solid var(--border);border-radius:6px;padding:10px;text-align:center;background:var(--card-bg);">
+<div style="font-size:11px;color:var(--text-muted);">电力操作电源</div>
+<div style="font-weight:700;color:var(--gold);">4.74亿</div>
+<div style="font-size:11px;color:var(--text-secondary);">YoY -1.1%</div>
+<div style="font-size:11px;color:var(--text-muted);">毛利率24.2%</div>
+</div>
+<div style="border:1px solid var(--border);border-radius:6px;padding:10px;text-align:center;background:var(--card-bg);">
+<div style="font-size:11px;color:var(--text-muted);">软件开发服务</div>
+<div style="font-weight:700;color:var(--gold);">4.19亿</div>
+<div style="font-size:11px;color:var(--text-secondary);">YoY +8.0%</div>
+<div style="font-size:11px;color:var(--text-muted);">毛利率34.6%</div>
+</div>
+</div>
+<div style="border-top:2px solid var(--border);display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding-top:12px;">
+<div style="border:1px solid var(--border);border-radius:6px;padding:10px;text-align:center;background:var(--card-bg);">
+<div style="font-size:11px;color:var(--text-muted);">通信电源系统</div>
+<div style="font-weight:700;color:var(--gold);">3.84亿</div>
+<div style="font-size:11px;color:var(--red-up);">YoY +25.8%</div>
+<div style="font-size:11px;color:var(--text-muted);">毛利率24.9%</div>
+</div>
+<div style="border:1px solid var(--gold);border-radius:6px;padding:10px;text-align:center;background:var(--card-bg);border-color:var(--red-up);">
+<div style="font-size:11px;color:var(--red-up);font-weight:600;">海外业务（高弹性）</div>
+<div style="font-weight:700;color:var(--red-up);">0.88亿</div>
+<div style="font-size:11px;color:var(--red-up);">YoY +178%</div>
+<div style="font-size:11px;color:var(--text-muted);">毛利率~40%</div>
+</div>
+<div style="border:1px solid var(--border);border-radius:6px;padding:10px;text-align:center;background:var(--card-bg);">
+<div style="font-size:11px;color:var(--text-muted);">其他业务</div>
+<div style="font-weight:700;color:var(--gold);">0.72亿</div>
+<div style="font-size:11px;color:var(--text-secondary);">—</div>
+<div style="font-size:11px;color:var(--text-muted);">—</div>
+</div>
+</div>
+</div>
+<div class="grid-2" style="margin-bottom:12px;">
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:14px;border-left:4px solid var(--gold);">
+<div style="font-size:12px;color:var(--text-muted);">📐 弹性公式 1</div>
+<div style="font-size:14px;font-weight:600;margin-top:4px;">\(E_{HVDC} = \frac{\Delta\text{HVDC营收}}{\Delta\text{客户CAPEX}} \approx 0.3\sim0.5\)</div>
+<div style="font-size:11px;color:var(--text-secondary);margin-top:4px;">阿里每增100亿AI投入，HVDC营收增3000-5000万</div>
+</div>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:14px;border-left:4px solid var(--gold);">
+<div style="font-size:12px;color:var(--text-muted);">📐 弹性公式 2</div>
+<div style="font-size:14px;font-weight:600;margin-top:4px;">\(\Delta NP_{overseas} = \Delta Rev \times 40\% - \Delta SGA\)</div>
+<div style="font-size:11px;color:var(--text-secondary);margin-top:4px;">海外每1亿收入贡献约2500-3000万毛利润</div>
+</div>
+</div>
+<div class="grid-3">
+<div class="scenario bear">
+<div class="prob">概率 20%</div>
+<div style="font-weight:700;font-size:16px;margin:4px 0;">悲观</div>
+<div style="font-size:13px;color:var(--text-secondary);">HVDC+10% | 海外0.5亿</div>
+<div style="font-size:14px;font-weight:700;margin-top:4px;color:var(--green-down);">净利润1.8亿</div>
+</div>
+<div class="scenario">
+<div class="prob">概率 55%</div>
+<div style="font-weight:700;font-size:16px;margin:4px 0;">基准</div>
+<div style="font-size:13px;color:var(--text-secondary);">HVDC+40% | 海外1.5亿</div>
+<div style="font-size:14px;font-weight:700;margin-top:4px;color:var(--gold);">净利润2.5亿</div>
+</div>
+<div class="scenario bull">
+<div class="prob">概率 25%</div>
+<div style="font-weight:700;font-size:16px;margin:4px 0;">乐观</div>
+<div style="font-size:13px;color:var(--text-secondary);">HVDC+70% | 海外3.0亿</div>
+<div style="font-size:14px;font-weight:700;margin-top:4px;color:var(--red-up);">净利润3.5亿</div>
+</div>
+</div>
+</div>
+
+<!-- Step 5: 风险分析 -->
+<div class="card" id="risk">
+<div class="card-header"><span class="icon">🛡️</span><h2>风险分析</h2><span class="sub">Step 5</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:14px;color:var(--orange-warn);margin-bottom:8px;">风险清单</h3>
+<table class="cons">
+<thead><tr><th>风险类型</th><th>程度</th><th>概率</th></tr></thead>
+<tbody>
+<tr><td>客户集中度（阿里占~50%）</td><td style="color:var(--red-up);">🔴高</td><td>🟡中</td></tr>
+<tr><td>竞争加剧（科华/科士达布局）</td><td>🟡中</td><td>🟡中</td></tr>
+<tr><td>技术路线变化</td><td style="color:var(--red-up);">🔴高</td><td>🟢低</td></tr>
+<tr><td>海外拓展受阻</td><td>🟡中</td><td>🟡中</td></tr>
+<tr><td>高估值回调（PE~110x）</td><td style="color:var(--red-up);">🔴高</td><td>🟡中</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3 style="font-size:14px;color:var(--red-up);margin-bottom:8px;">逻辑破坏条件（止损信号）</h3>
+<ul class="alert-list">
+<li>❌ 单季HVDC收入同比增速＜15%</li>
+<li>❌ HVDC毛利率跌破18%</li>
+<li>❌ 阿里巴巴下调AI基础设施CAPEX</li>
+<li>❌ 宁德时代减持或终止战略合作</li>
+<li>❌ 股价跌破30日线+周线放量长阴</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Step 6: 估值与买卖时机 -->
+<div class="card" id="valuation">
+<div class="card-header"><span class="icon">💰</span><h2>估值与买卖时机</h2><span class="sub">Step 6</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:14px;color:var(--gold);margin-bottom:8px;">三档目标价</h3>
+<table class="cons">
+<thead><tr><th>期限</th><th>目标价</th><th>空间</th><th>依据</th></tr></thead>
+<tbody>
+<tr><td>短期(1月)</td><td>42-50元</td><td>-12%~+4.5%</td><td>高位震荡消化估值</td></tr>
+<tr><td>中期(3-6月)</td><td>35-65元</td><td>—</td><td>取决于2026H1业绩</td></tr>
+<tr><td>长期(12月)</td><td>55-80元</td><td>+15%~+67%</td><td>HVDC渗透+海外放量</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3 style="font-size:14px;color:var(--gold);margin-bottom:8px;">盈亏比量化</h3>
+<table class="cons">
+<thead><tr><th>情景</th><th>目标价</th><th>概率</th><th>加权回报</th></tr></thead>
+<tbody>
+<tr><td>悲观</td><td>30元(-37%)</td><td>20%</td><td>-7.4%</td></tr>
+<tr><td>基准</td><td>55元(+15%)</td><td>55%</td><td>+8.3%</td></tr>
+<tr><td>乐观</td><td>80元(+67%)</td><td>25%</td><td>+16.8%</td></tr>
+<tr><td style="font-weight:700;color:var(--gold);">期望值</td><td style="font-weight:700;color:var(--gold);">55.5元</td><td>—</td><td style="font-weight:700;color:var(--gold);">+17.6%</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:14px 18px;margin-top:12px;border-left:4px solid var(--blue-accent);">
+<div style="font-size:12px;color:var(--text-muted);">📌 估值方法</div>
+<div style="font-size:13px;color:var(--text-secondary);margin-top:4px;">
+<strong>主用PEG：</strong>2026E净利润增速+154%，PEG 0.6（基于2026E）→ 合理市值140-220亿，当前270亿偏高。<br>
+<strong>广发证券目标价35元</strong>（低于现价30%），但该研报在宁德入股前发布。关注更新目标价。
+</div>
+</div>
+</div>
+<!-- Step 7: 对标分析 -->
+<div class="card" id="compare">
+<div class="card-header"><span class="icon">🔍</span><h2>对标分析</h2><span class="sub">Step 7</span></div>
+<table class="cons">
+<thead><tr><th>公司</th><th>市值</th><th>营收(2025)</th><th>PE(TTM)</th><th>核心业务</th><th>可比程度</th></tr></thead>
+<tbody>
+<tr><td><strong style="color:var(--gold);">中恒电气</strong></td><td><strong style="color:var(--gold);">~270亿</strong></td><td><strong style="color:var(--gold);">21.4亿</strong></td><td><strong style="color:var(--gold);">~110x</strong></td><td>HVDC龙头</td><td>—</td></tr>
+<tr><td>科华数据</td><td>~150亿</td><td>65亿</td><td>~25x</td><td>UPS+数据中心</td><td>中</td></tr>
+<tr><td>科士达</td><td>~120亿</td><td>40亿</td><td>~20x</td><td>UPS出口龙头</td><td>中</td></tr>
+<tr><td>麦格米特</td><td>~300亿</td><td>70亿</td><td>~40x</td><td>工业电源平台</td><td>中-高</td></tr>
+<tr><td>Vertiv（维谛）</td><td>~3000亿RMB</td><td>~500亿RMB</td><td>~35x</td><td>全球数据中心电源</td><td>高</td></tr>
+</tbody>
+</table>
+<div style="margin-top:12px;font-size:13px;color:var(--text-secondary);">
+<strong style="color:var(--gold);">估值贵的原因：</strong>① HVDC渗透率提升的更高增速预期（2026E +154%）；② A股纯正HVDC标的稀缺溢价；③ 宁德时代入股催化剂溢价
+</div>
+
+<h3 style="font-size:14px;color:var(--gold);margin-top:16px;margin-bottom:8px;">增长引擎切换</h3>
+<div class="grid-3">
+<div style="border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center;background:var(--card-bg-alt);">
+<div style="font-size:11px;color:var(--text-muted);">旧引擎（占比↓）</div>
+<div style="font-weight:700;font-size:15px;margin:6px 0;">通信+电力电源</div>
+<div style="font-size:12px;color:var(--text-secondary);">55%→40%</div>
+</div>
+<div style="border:1px solid var(--red-up);border-radius:8px;padding:14px;text-align:center;background:var(--card-bg-alt);">
+<div style="font-size:11px;color:var(--red-up);font-weight:600;">新引擎（占比↑）</div>
+<div style="font-weight:700;font-size:15px;margin:6px 0;">🏭 HVDC数据中心</div>
+<div style="font-size:12px;color:var(--text-secondary);">28%→36%</div>
+</div>
+<div style="border:2px solid var(--gold);border-radius:8px;padding:14px;text-align:center;background:var(--card-bg-alt);">
+<div style="font-size:11px;color:var(--gold);font-weight:600;">未来引擎（高弹性）</div>
+<div style="font-weight:700;font-size:15px;margin:6px 0;">🌍 海外HVDC</div>
+<div style="font-size:12px;color:var(--red-up);">1%→4% &#8593;178%</div>
+</div>
+</div>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:14px 18px;margin-top:12px;border-left:4px solid var(--gold);">
+<div style="font-size:13px;color:var(--text-secondary);"><strong>判定：</strong>增长引擎切换已实质性发生。HVDC收入从~5亿增至7.76亿（占比28%→36%），海外从零增至0.88亿(+178%)，是未来最大增量弹性来源。</div>
+</div>
+</div>
+
+<!-- Step 8: 跟踪计划与综合结论 -->
+<div class="card" id="tracking">
+<div class="card-header"><span class="icon">📋</span><h2>跟踪计划与综合结论</h2><span class="sub">Step 8</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:14px;color:var(--gold);margin-bottom:8px;">分层跟踪锚点</h3>
+<table class="cons">
+<thead><tr><th>频率</th><th>跟踪指标</th><th>阈值</th></tr></thead>
+<tbody>
+<tr><td>高频(周)</td><td>股价与成交量</td><td>跌破30日线+放量</td></tr>
+<tr><td>高频(周)</td><td>HVDC行业动态</td><td>阿里/腾讯CAPEX指引</td></tr>
+<tr><td>季度</td><td>财报跟踪</td><td>HVDC增速>15%</td></tr>
+<tr><td>季度</td><td>宁德合作进展</td><td>双方合作项目落地</td></tr>
+<tr><td>事件</td><td>海外大单公告</td><td>海外营收占比达10%</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3 style="font-size:14px;color:var(--gold);margin-bottom:8px;">执行清单</h3>
+<ul class="checklist">
+<li>等待回调至40-42区间再考虑建仓</li>
+<li>关注宁德时代入股细节公告及更新研报</li>
+<li>设置止损30日线（约42元附近）</li>
+<li>2026中报验证HVDC增速是否加速</li>
+<li>关注阿里巴巴新财年CAPEX指引（6-8月）</li>
+<li>海外业务占比能否从4%提升至15%+</li>
+</ul>
+</div>
+</div>
+
+<div class="verdict-highlight" style="margin-top:16px;">
+<div class="judgment">中恒电气 — HVDC绝对龙头的三重驱动窗口</div>
+<div class="verdict-grid">
+<div class="verdict-item"><div class="v-val" style="color:var(--gold);">81分</div><div class="v-label">公司质地</div></div>
+<div class="verdict-item"><div class="v-val" style="color:var(--orange-warn);">⚠️中高</div><div class="v-label">风险等级</div></div>
+<div class="verdict-item"><div class="v-val" style="color:var(--gold);">68分</div><div class="v-label">综合交易评分</div></div>
+<div class="verdict-item"><div class="v-val" style="color:var(--blue-accent);">中线</div><div class="v-label">推荐周期</div></div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+<div>
+<h3 style="font-size:14px;color:var(--gold);margin-bottom:8px;">综合交易评分</h3>
+<div class="score-bar"><span class="score-label">基本面(25%)</span><div class="score-track"><div class="score-fill" style="width:80%;"></div></div><span class="score-num">80</span></div>
+<div class="score-bar"><span class="score-label">资金面(25%)</span><div class="score-track"><div class="score-fill" style="width:60%;"></div></div><span class="score-num">60</span></div>
+<div class="score-bar"><span class="score-label">技术面(20%)</span><div class="score-track"><div class="score-fill" style="width:55%;"></div></div><span class="score-num">55</span></div>
+<div class="score-bar"><span class="score-label">情绪面(15%)</span><div class="score-track"><div class="score-fill" style="width:75%;"></div></div><span class="score-num">75</span></div>
+<div class="score-bar"><span class="score-label">事件面(15%)</span><div class="score-track"><div class="score-fill" style="width:70%;"></div></div><span class="score-num">70</span></div>
+</div>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:16px 20px;border:1px solid var(--border);">
+<h3 style="font-size:14px;color:var(--gold);margin-bottom:8px;">操作建议</h3>
+<div style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
+<strong style="color:var(--orange-warn);">中线关注，等待回调</strong><br>
+当前非理想买点。PE~110x、年内涨幅80%+，建议等回调至40-42元区间分批建仓。核心验证点：2026H1 HVDC增速及海外大单。
+</div>
+</div>
+</div>
+
+<div style="border-left:4px solid var(--red-up);background:var(--card-bg-alt);border-radius:8px;padding:18px 22px;margin-top:20px;">
+<strong style="font-size:16px;color:var(--gold);">📌 总结</strong>
+<p style="margin-top:8px;font-size:14px;color:var(--text-secondary);line-height:1.7;">
+中恒电气是国内HVDC龙头，处于AI数据中心供电渗透率提升+海外市场突破+宁德时代战略入股的三重驱动窗口。全球HVDC市场预计从2025年27.9亿→2027年144.4亿（CAGR>100%），中恒市占率第一（~31%）、技术壁垒显著。但PE~110x、年内涨幅80%+意味着大部分乐观预期已定价。建议等待2026H1业绩验证或技术面回调至40-42元区间介入，核心观察HVDC营收增速及海外大单落地情况。
+</p>
+</div>
+</div>
+
+<!-- Footer -->
+<footer>
+<p>⚠️ 本系统所有分析仅供研究参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+<p style="margin-top:4px;">数据截止：2026-05-17 · 研究状态：首次覆盖 · 周期：中线</p>
+<p style="margin-top:2px;">数据来源：akshare / 东方财富 / 同花顺 / 券商研报</p>
+<p style="margin-top:8px;">个股深度研究系统 v2.2 · @明立玩AI</p>
+<p>联系方式：ll-mingli1221</p>
+</footer>
+
+</div>
+</body>
+</html>
+<script>
+// ===== K线数据（最近120日）=====
+const rawData = [[23.6,24.19,23.39,24.21],[23.5,22.86,22.84,23.55],[22.69,23.03,22.69,23.28],[22.88,22.9,22.68,23.21],[22.9,22.68,22.52,23.05],[22.96,22.53,22.33,23.2],[22.11,21.51,21.48,22.26],[21.61,22.69,21.46,23.0],[22.7,24.16,22.69,24.4],[24.05,23.89,23.72,24.46],[23.8,23.53,23.42,24.27],[23.58,23.77,23.48,24.13],[23.65,23.72,23.45,23.97],[23.69,23.48,23.31,23.9],[23.45,23.53,23.4,24.2],[23.3,23.53,23.1,23.67],[23.5,23.71,23.06,23.86],[23.77,24.38,23.77,24.6],[24.75,24.97,24.71,25.91],[25.02,25.56,23.9,25.6],[25.66,24.32,24.27,25.88],[24.29,25.33,24.2,25.58],[25.1,24.59,24.52,25.48],[24.6,23.68,23.33,24.66],[23.65,24.4,23.41,24.68],[24.02,23.2,23.2,24.1],[24.41,23.28,23.16,25.19],[23.36,24.65,23.31,24.96],[24.64,25.15,24.2,25.42],[25.15,27.67,25.08,27.67],[27.54,27.01,26.5,27.54],[27.01,26.92,26.52,27.3],[26.79,26.39,26.26,27.06],[26.1,26.4,25.92,26.66],[26.38,26.44,26.21,27.01],[26.45,26.63,25.9,27.18],[26.6,27.5,26.32,27.88],[27.19,29.1,27.05,29.72],[29.77,29.27,28.77,30.65],[29.98,31.62,29.13,32.2],[33.25,32.97,32.66,34.77],[32.65,33.09,32.33,34.49],[33.34,35.06,32.09,36.39],[34.0,32.34,31.72,34.08],[32.9,31.43,31.32,33.34],[30.78,31.55,30.51,32.3],[31.42,29.88,29.64,31.44],[29.51,31.09,29.5,31.3],[31.14,30.65,30.26,32.06],[30.69,30.29,30.2,30.85],[31.05,31.29,30.38,32.28],[31.11,31.35,29.86,31.8],[31.3,32.4,31.28,32.46],[32.4,32.72,31.49,33.49],[33.26,31.4,30.81,33.76],[30.87,29.76,29.66,31.73],[30.29,32.74,29.5,32.74],[32.7,33.07,32.5,34.2],[32.48,29.76,29.76,32.71],[29.26,29.61,28.59,30.56],[30.35,31.43,29.74,32.14],[31.28,31.95,31.03,32.45],[31.97,31.79,31.71,32.97],[32.29,34.97,32.1,34.97],[34.43,33.76,33.66,34.74],[34.22,34.62,32.73,35.5],[34.94,35.48,34.51,36.19],[35.43,35.48,34.2,35.8],[34.75,34.68,34.35,35.2],[34.1,35.66,34.06,36.99],[35.74,32.09,32.09,35.94],[31.53,32.2,31.3,33.44],[33.21,32.82,32.45,33.8],[33.3,35.66,33.2,36.1],[34.1,35.12,33.01,35.49],[35.66,36.51,35.31,36.7],[36.85,36.29,36.02,37.37],[36.3,34.63,34.06,36.49],[33.84,32.86,32.65,34.28],[32.31,32.61,31.15,32.65],[32.69,30.35,30.11,32.89],[30.6,31.23,30.1,31.39],[30.01,30.32,30.01,30.88],[30.68,29.11,29.1,30.86],[28.87,29.02,28.42,30.5],[29.31,29.04,27.79,29.55],[29.5,29.9,29.31,30.16],[29.99,28.96,28.68,30.0],[28.39,28.17,27.84,28.56],[27.3,27.4,26.53,27.58],[27.13,26.02,26.02,27.45],[26.74,27.02,26.38,27.07],[26.8,25.64,25.53,26.92],[26.0,27.26,25.53,27.99],[27.15,27.57,26.9,28.45],[28.39,29.03,28.2,29.1],[31.93,31.93,31.93,31.93],[35.12,35.12,35.12,35.12],[38.63,38.63,38.63,38.63],[42.0,42.49,40.67,42.49],[42.49,43.4,41.91,44.16],[44.0,42.8,41.46,44.0],[43.03,40.91,40.36,43.66],[41.48,43.7,40.41,44.17],[43.67,44.16,41.87,45.45],[44.3,43.74,42.73,44.96],[44.21,43.53,43.1,44.88],[43.4,41.69,41.51,43.54],[42.0,41.15,40.52,42.01],[41.0,40.0,39.71,41.89],[39.41,39.75,39.35,40.85],[39.75,40.79,38.85,41.49],[41.23,44.87,40.71,44.87],[45.08,46.3,44.47,46.75],[45.2,45.15,44.56,46.13],[45.48,44.73,43.83,45.8],[44.7,44.0,43.46,44.99],[44.5,48.4,43.65,48.4],[50.84,48.74,48.74,53.13],[49.5,47.85,46.95,49.8]];
+const volData = [25564941,27996540,18388828,16080553,15476455,17168515,20944120,32018896,49701099,36432600,19045305,16582039,13288287,12058827,20519263,13636424,16188242,25088337,40347918,47945340,27850084,39244796,24475430,21078601,22658551,24330100,35575612,46125231,31307550,54734398,62756207,40330556,25153984,28665885,29740608,38066406,53947063,77508123,68874089,90693727,94829944,72490869,84911190,64757080,43518041,35657490,40994757,35232921,28957188,25314948,44709129,33662078,47348555,47811605,42210604,26728182,56993154,56853108,42270177,30141746,36108050,24813608,21319185,51020134,38136178,39716266,37460899,38369510,25975704,45528824,50655700,31940928,31337686,83175050,73156593,57843142,54398948,43808945,35940314,33200170,35490885,26402351,20639895,25715419,33476184,27048478,25927604,18752827,24960680,27502544,28985883,23750150,21836034,44222910,31223892,32010356,7447020,3389150,15009391,86548929,155119648,117263843,104006317,119418561,115165947,94800329,79496834,68890619,49117096,52969490,40930602,52641749,72686885,81033035,45730504,44098997,34838716,86286824,89208539,59131507];
+const dates = ["2025-11-13","2025-11-14","2025-11-17","2025-11-18","2025-11-19","2025-11-20","2025-11-21","2025-11-24","2025-11-25","2025-11-26","2025-11-27","2025-11-28","2025-12-01","2025-12-02","2025-12-03","2025-12-04","2025-12-05","2025-12-08","2025-12-09","2025-12-10","2025-12-11","2025-12-12","2025-12-15","2025-12-16","2025-12-17","2025-12-18","2025-12-19","2025-12-22","2025-12-23","2025-12-24","2025-12-25","2025-12-26","2025-12-29","2025-12-30","2025-12-31","2026-01-05","2026-01-06","2026-01-07","2026-01-08","2026-01-09","2026-01-12","2026-01-13","2026-01-14","2026-01-15","2026-01-16","2026-01-19","2026-01-20","2026-01-21","2026-01-22","2026-01-23","2026-01-26","2026-01-27","2026-01-28","2026-01-29","2026-01-30","2026-02-02","2026-02-03","2026-02-04","2026-02-05","2026-02-06","2026-02-09","2026-02-10","2026-02-11","2026-02-12","2026-02-13","2026-02-24","2026-02-25","2026-02-26","2026-02-27","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-23","2026-03-24","2026-03-25","2026-03-26","2026-03-27","2026-03-30","2026-03-31","2026-04-01","2026-04-02","2026-04-03","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-13","2026-04-14","2026-04-15","2026-04-16","2026-04-17","2026-04-20","2026-04-21","2026-04-22","2026-04-23","2026-04-24","2026-04-27","2026-04-28","2026-04-29","2026-04-30","2026-05-06","2026-05-07","2026-05-08","2026-05-11","2026-05-12","2026-05-13","2026-05-14","2026-05-15"];
+
+// ===== 主营业务饼图 =====
+const pieData = [
+  {name: '数据中心电源', value: 7.76},
+  {name: '电力操作电源系统', value: 4.74},
+  {name: '软件开发销售及服务', value: 4.19},
+  {name: '通信电源系统', value: 3.84},
+  {name: '其他', value: 0.72}
+];
+
+// ===== 主题切换 =====
+document.getElementById('themeToggle').addEventListener('click', function(){
+  document.body.classList.toggle('light-mode');
+  this.textContent = document.body.classList.contains('light-mode') ? '🌙 深色模式' : '☀️ 浅色模式';
+});
+
+// ===== 导航高亮 =====
+(function(){
+  const links = document.querySelectorAll('.nav-links a');
+  const sections = [];
+  links.forEach(a => {
+    const id = a.getAttribute('href').substring(1);
+    const el = document.getElementById(id);
+    if(el) sections.push({el, a});
+  });
+  window.addEventListener('scroll', function(){
+    let current = sections[0];
+    sections.forEach(s => {
+      if(window.scrollY >= s.el.offsetTop - 200) current = s;
+    });
+    sections.forEach(s => s.a.classList.remove('active'));
+    if(current) current.a.classList.add('active');
+  });
+})();
+
+// ===== K线图（ECharts Candlestick + Volume）=====
+(function(){
+  const chart = echarts.init(document.getElementById('klineChart'));
+  const dates_ = dates;
+  const data_ = rawData;
+  const vol_ = volData;
+
+  function splitData(rawData) {
+    const categoryData = [];
+    const values = [];
+    for (let i = 0; i < rawData.length; i++) {
+      categoryData.push(dates_[i]);
+      values.push(rawData[i]);
+    }
+    return { categoryData, values };
+  }
+
+  const { categoryData, values } = splitData(data_);
+
+  const upColor = '#f55656';
+  const downColor = '#28c75b';
+
+  const option = {
+    backgroundColor: 'transparent',
+    animation: false,
+    grid: [
+      { left: '8%', right: '8%', top: '5%', height: '60%' },
+      { left: '8%', right: '8%', top: '72%', height: '18%' }
+    ],
+    xAxis: [
+      {
+        type: 'category', data: categoryData,
+        axisLine: { lineStyle: { color: '#2a2d3a' } },
+        axisLabel: { color: '#7a7d8a', fontSize: 10, showMinLabel: true, showMaxLabel: true },
+        splitLine: { show: false },
+        gridIndex: 0
+      },
+      {
+        type: 'category', data: categoryData,
+        axisLine: { lineStyle: { color: '#2a2d3a' } },
+        axisTick: { show: false },
+        axisLabel: { show: false },
+        splitLine: { show: false },
+        gridIndex: 1
+      }
+    ],
+    yAxis: [
+      {
+        scale: true, gridIndex: 0,
+        splitLine: { lineStyle: { color: '#1e2029', type: 'dashed' } },
+        axisLabel: { color: '#7a7d8a', fontSize: 10 }
+      },
+      {
+        scale: true, gridIndex: 1,
+        splitLine: { show: false },
+        axisLabel: { show: false },
+        axisTick: { show: false }
+      }
+    ],
+    dataZoom: [
+      { type: 'inside', xAxisIndex: [0,1], start: 50, end: 100 },
+      { type: 'slider', xAxisIndex: [0,1], start: 50, end: 100,
+        borderColor: '#2a2d3a', backgroundColor: '#1a1c24',
+        fillerColor: 'rgba(212,168,83,0.1)',
+        textStyle: { color: '#7a7d8a' }
+      }
+    ],
+    series: [
+      {
+        type: 'candlestick', xAxisIndex: 0, yAxisIndex: 0,
+        data: values,
+        itemStyle: {
+          color: upColor, color0: downColor,
+          borderColor: upColor, borderColor0: downColor
+        }
+      },
+      {
+        type: 'bar', xAxisIndex: 1, yAxisIndex: 1,
+        data: vol_.map((v, i) => {
+          const close = values[i][1];
+          const open = values[i][0];
+          return { value: v, itemStyle: { color: close >= open ? upColor : downColor } };
+        })
+      }
+    ],
+    tooltip: {
+      trigger: 'axis', axisPointer: { type: 'cross' },
+      backgroundColor: '#1a1c24', borderColor: '#2a2d3a',
+      textStyle: { color: '#e8e9ec', fontSize: 12 }
+    }
+  };
+
+  chart.setOption(option);
+  window.addEventListener('resize', () => chart.resize());
+})();
+
+// ===== 饼图 =====
+(function(){
+  const chart = echarts.init(document.getElementById('pieChart'));
+  chart.setOption({
+    backgroundColor: 'transparent',
+    tooltip: { trigger: 'item', formatter: '{b}: {c}亿 ({d}%)' },
+    series: [{
+      type: 'pie', radius: ['40%', '70%'],
+      center: ['50%', '55%'],
+      label: { color: '#b0b3be', fontSize: 11, formatter: '{b}\n{d}%' },
+      labelLine: { lineStyle: { color: '#2a2d3a' } },
+      data: pieData.map((d, i) => ({
+        ...d,
+        itemStyle: {
+          color: ['#f55656','#d4a853','#4a90d9','#28c75b','#7a7d8a'][i]
+        }
+      }))
+    }]
+  });
+  window.addEventListener('resize', () => chart.resize());
+})();
+</script>
