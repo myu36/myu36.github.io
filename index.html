@@ -14,12 +14,19 @@ h1{font-size:26px;font-weight:800;letter-spacing:1px;display:flex;align-items:ce
 h1 .badge{background:linear-gradient(135deg,#c0392b,#8b0000);color:#fff;font-size:12px;padding:2px 11px;border-radius:10px;font-weight:600}
 .subtitle{color:var(--text-muted);font-size:13px;margin:8px 0 32px;border-left:3px solid var(--gold);padding-left:14px}
 .stock-list{display:flex;flex-direction:column;gap:12px}
-.stock-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;transition:var(--transition)}
-.stock-card:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.stock-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;display:flex;align-items:center;gap:16px;cursor:pointer;text-decoration:none;color:inherit;transition:var(--transition);user-select:none}
+.stock-card:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(0,0,0,0.3);transform:translateY(-1px)}
+.stock-card:active{transform:translateY(0)}
 .stock-icon{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#2c1a1a,#1c1010);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:var(--gold);border:1px solid var(--gold-light);flex-shrink:0}
+.stock-info{flex:1;min-width:0}
 .stock-name{font-size:17px;font-weight:700}
-.stock-code{font-size:12px;color:var(--text-muted);font-family:"JetBrains Mono","Consolas",monospace;margin-top:1px}
-.stock-arrow{color:var(--gold-light);font-size:13px;margin-left:auto;opacity:0.6}
+.stock-code{font-size:12px;color:var(--text-muted);font-family:"JetBrains Mono","Consolas",monospace;margin-top:2px}
+.stock-dates{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.date-pill{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:500;background:rgba(212,168,83,0.08);border:1px solid var(--border);color:var(--text-sec);text-decoration:none;transition:var(--transition);cursor:default}
+a.date-pill{cursor:pointer;background:rgba(212,168,83,0.12);border-color:rgba(212,168,83,0.35);color:var(--gold-light)}
+a.date-pill:hover{background:rgba(212,168,83,0.25);border-color:var(--gold);color:var(--gold);transform:translateY(-1px)}
+a.date-pill.latest{background:rgba(212,168,83,0.2);border-color:var(--gold);color:var(--gold);font-weight:600}
+.stock-arrow{color:var(--gold-light);font-size:13px;opacity:0.4;transition:var(--transition);flex-shrink:0}
 .stock-card:hover .stock-arrow{opacity:1}
 .empty{text-align:center;padding:60px 20px;color:var(--text-muted);font-size:14px;border:2px dashed var(--border);border-radius:var(--radius)}
 footer{margin-top:48px;font-size:12px;color:var(--text-muted);text-align:center;padding-top:20px;border-top:1px solid var(--border);width:100%}
@@ -31,50 +38,58 @@ footer{margin-top:48px;font-size:12px;color:var(--text-muted);text-align:center;
 <div class="subtitle">AI全自动生成 · 三层架构（数据采集 → 深度分析 → HTML可视化）</div>
 <div class="stock-list">
 
-<a class="stock-card" href="002929.SZ/20260517.html">
+<div class="stock-card" onclick="location.href='002929.SZ/20260517.html'" role="link" tabindex="0">
 <div class="stock-icon">润</div>
-<div>
+<div class="stock-info">
 <div class="stock-name">润建股份</div>
-<div class="stock-code">002929.SZ · 2026-05-17</div>
+<div class="stock-code">002929.SZ</div>
+<div class="stock-dates"><a class="date-pill" href="002929.SZ/20260517.html" onclick="event.stopPropagation()">2026-05-17</a></div>
 </div>
 <div class="stock-arrow">→</div>
-</a>
+</div>
 
-<a class="stock-card" href="002837.SZ/20260517.html">
+<div class="stock-card" onclick="location.href='002837.SZ/20260517.html'" role="link" tabindex="0">
 <div class="stock-icon">英</div>
-<div>
+<div class="stock-info">
 <div class="stock-name">英维克</div>
-<div class="stock-code">002837.SZ · 2026-05-17</div>
+<div class="stock-code">002837.SZ</div>
+<div class="stock-dates"><a class="date-pill" href="002837.SZ/20260517.html" onclick="event.stopPropagation()">2026-05-17</a></div>
 </div>
 <div class="stock-arrow">→</div>
-</a>
+</div>
 
-<a class="stock-card" href="603629.SH/20260516.html">
+<div class="stock-card" onclick="location.href='603629.SH/20260517.html'" role="link" tabindex="0">
 <div class="stock-icon">利</div>
-<div>
+<div class="stock-info">
 <div class="stock-name">利通电子</div>
-<div class="stock-code">603629.SH · 2026-05-16</div>
+<div class="stock-code">603629.SH</div>
+<div class="stock-dates">
+<a class="date-pill latest" href="603629.SH/20260517.html" onclick="event.stopPropagation()">2026-05-17</a>
+<a class="date-pill" href="603629.SH/20260516.html" onclick="event.stopPropagation()">2026-05-16</a>
+</div>
 </div>
 <div class="stock-arrow">→</div>
-</a>
+</div>
 
-<a class="stock-card" href="002897.SZ/20260517.html">
+<div class="stock-card" onclick="location.href='002897.SZ/20260517.html'" role="link" tabindex="0">
 <div class="stock-icon">意</div>
-<div>
+<div class="stock-info">
 <div class="stock-name">意华股份</div>
-<div class="stock-code">002897.SZ · 2026-05-17</div>
+<div class="stock-code">002897.SZ</div>
+<div class="stock-dates"><a class="date-pill" href="002897.SZ/20260517.html" onclick="event.stopPropagation()">2026-05-17</a></div>
 </div>
 <div class="stock-arrow">→</div>
-</a>
+</div>
 
-<a class="stock-card" href="000062.SZ/20260517.html">
+<div class="stock-card" onclick="location.href='000062.SZ/20260517.html'" role="link" tabindex="0">
 <div class="stock-icon">华</div>
-<div>
+<div class="stock-info">
 <div class="stock-name">深圳华强</div>
-<div class="stock-code">000062.SZ · 2026-05-17</div>
+<div class="stock-code">000062.SZ</div>
+<div class="stock-dates"><a class="date-pill" href="000062.SZ/20260517.html" onclick="event.stopPropagation()">2026-05-17</a></div>
 </div>
 <div class="stock-arrow">→</div>
-</a>
+</div>
 
 </div>
 <footer>
