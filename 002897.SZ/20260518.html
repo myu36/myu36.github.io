@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>意华股份 002897 · 深度研报</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#0c0f15;--card-bg:#1a1c24;--card-bg-alt:#1e2029;--border:#2a2d3a;--text-primary:#e8e9ec;--text-secondary:#b0b3be;--text-muted:#7a7d8a;--red-up:#f55656;--green-down:#28c75b;--gold:#d4a853;--gold-light:#e3c26d;--blue-accent:#4a90d9;--orange-warn:#e8923a;--shadow:0 4px 20px rgba(0,0,0,0.3);--radius:10px;--font-sans:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;--font-mono:"JetBrains Mono","SF Mono","Consolas",monospace;--transition:0.2s ease;}
+body.light-mode{--bg:#fdf8f0;--card-bg:#fffbf5;--card-bg-alt:#fef5e7;--border:#e2cfa2;--text-primary:#2a1f12;--text-secondary:#6b5634;--text-muted:#9c8b6e;--red-up:#dc2626;--green-down:#16a34a;--gold:#b38a3c;--gold-light:#d4a853;--blue-accent:#2563eb;--orange-warn:#c2410c;--shadow:0 4px 20px rgba(162,125,57,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text-primary);font-family:var(--font-sans);line-height:1.7;font-size:14px;background-image:radial-gradient(circle at 15% 10%,rgba(212,168,83,0.03) 0%,transparent 35%),radial-gradient(circle at 85% 70%,rgba(212,168,83,0.03) 0%,transparent 35%);background-attachment:fixed}
+.top-nav{position:sticky;top:0;z-index:100;background:rgba(10,12,18,0.92);backdrop-filter:blur(12px);border-bottom:2px solid var(--gold-light);padding:10px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.top-nav .logo{display:flex;align-items:center;gap:10px;color:#fff}
+.top-nav .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#c0392b,#8b0000);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:#fff}
+.top-nav .stock-name{font-weight:700;font-size:17px;letter-spacing:0.5px}
+.top-nav .stock-code{font-size:12px;opacity:0.7;font-family:var(--font-mono)}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap}
+.nav-links a{font-size:12px;padding:5px 14px;border-radius:16px;color:var(--gold-light);text-decoration:none;border:1px solid transparent;transition:var(--transition);font-weight:500;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.08);color:#fff;border-color:var(--gold)}
+.theme-toggle{background:rgba(255,255,255,0.08);border:1px solid var(--gold-light);color:var(--gold-light);padding:5px 14px;border-radius:16px;font-size:12px;cursor:pointer;transition:var(--transition);margin-left:12px}
+.theme-toggle:hover{background:rgba(255,255,255,0.15)}
+.container{max-width:1300px;margin:0 auto;padding:24px 20px 40px}
+.hero{background:linear-gradient(105deg,#1c1010 0%,#2c1a1a 50%,#3d2424 100%);border-radius:var(--radius);padding:28px 32px;margin-bottom:24px;border:1px solid var(--gold-light);box-shadow:0 8px 28px rgba(100,55,55,0.2);display:flex;flex-wrap:wrap;gap:24px;align-items:center;color:#fff;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-price-block{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;z-index:1}
+.hero-price{font-size:56px;font-weight:900;line-height:1;font-family:var(--font-mono)}
+.hero-change{font-size:20px;font-weight:700;padding:4px 12px;border-radius:6px;background:rgba(245,86,86,0.2);color:#f87171;font-family:var(--font-mono)}
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;z-index:1}
+.hero-meta-item{text-align:center}
+.hero-meta-item .val{font-size:22px;font-weight:700;font-family:var(--font-mono);color:var(--gold-light)}
+.hero-meta-item .label{font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:1px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;z-index:1}
+.hero-tag{background:rgba(255,255,255,0.08);border:1px solid rgba(255,215,0,0.3);color:var(--gold-light);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500}
+.conclusion-top{background:linear-gradient(135deg,#1e1a10 0%,#241f14 100%);border:2px solid var(--gold);border-radius:var(--radius);padding:22px 28px;margin-bottom:24px;position:relative}
+.conclusion-top::before{content:'核心结论';position:absolute;top:-13px;left:24px;background:var(--gold);color:#000;padding:3px 16px;border-radius:12px;font-weight:700;font-size:12px;letter-spacing:1px}
+.conclusion-top .big-verdict{font-weight:800;font-size:20px;color:#fff;margin-top:8px}
+.conclusion-top .verdict-detail{font-size:14px;color:var(--text-secondary);margin-top:8px;line-height:1.7}
+.conclusion-top .verdict-tags{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:22px 28px;margin-bottom:20px;box-shadow:var(--shadow);transition:var(--transition)}
+.card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.5);border-color:var(--gold)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+.card-header .icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:var(--gold)}
+.card-header h2{font-size:18px;font-weight:700;color:#fff;letter-spacing:0.5px}
+.card-header .sub{margin-left:auto;font-size:11px;color:var(--text-muted)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.news-list{max-height:300px;overflow-y:auto;font-size:13px}
+.news-item{display:flex;align-items:baseline;gap:6px;padding:7px 0;border-bottom:1px dashed var(--border);color:var(--text-secondary)}
+.news-item .bullet{color:var(--red-up);font-weight:700;font-size:16px}
+.tag{display:inline-block;padding:3px 12px;border-radius:14px;font-size:11px;font-weight:600;background:rgba(212,168,83,0.15);color:var(--gold-light);border:1px solid var(--gold);margin-right:6px;margin-bottom:4px}
+table.cons{width:100%;border-collapse:collapse;font-size:13px;background:var(--card-bg-alt);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:12px 0}
+table.cons thead th{background:linear-gradient(180deg,#2c1a1a 0%,#1c1010 100%);color:#fff;font-weight:600;padding:10px 12px;text-align:left;font-size:12px;letter-spacing:1px}
+table.cons tbody tr{border-bottom:1px dashed var(--border)}
+table.cons tbody tr:hover{background:rgba(255,255,255,0.02)}
+table.cons tbody td{padding:9px 12px;vertical-align:middle;color:var(--text-secondary)}
+.val-up{color:var(--red-up);font-weight:600}
+.val-down{color:var(--green-down);font-weight:600}
+.chain-svg{background:var(--card-bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:16px 0;text-align:center}
+.scenario{background:var(--card-bg-alt);border:1px solid var(--border);border-radius:8px;padding:14px 16px;text-align:center;border-left:4px solid var(--gold)}
+.scenario.bear{border-left-color:var(--green-down)}
+.scenario.bull{border-left-color:var(--red-up)}
+.scenario .prob{font-size:11px;color:var(--text-muted)}
+.alert-list{list-style:none;padding:0}
+.alert-list li{padding:8px 14px;margin:6px 0;border-radius:6px;background:var(--card-bg-alt);border-left:4px solid var(--orange-warn);font-size:13px;font-weight:500;color:var(--text-secondary)}
+.rating-callout{background:linear-gradient(135deg,#1e1a10 0%,#241f14 100%);border:2px solid var(--gold);border-radius:var(--radius);padding:18px 24px;margin-top:16px;display:flex;align-items:center;gap:16px}
+.rating-callout .badge{min-width:64px;height:64px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;letter-spacing:1px}
+.rating-callout .body{flex:1}
+.rating-callout .body .title{font-size:16px;font-weight:700;color:#fff}
+.rating-callout .body .desc{font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.6}
+.verdict-highlight{background:var(--card-bg-alt);border-radius:10px;padding:18px 22px;margin-top:8px}
+.verdict-highlight .judgment{font-size:22px;font-weight:800;color:var(--gold);text-align:center;margin-bottom:12px}
+.verdict-highlight .verdict-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.verdict-highlight .verdict-item{text-align:center;padding:8px}
+.verdict-highlight .verdict-item .v-val{font-size:18px;font-weight:800}
+.verdict-highlight .verdict-item .v-label{font-size:11px;color:var(--text-muted);margin-top:2px}
+.score-bar{display:flex;align-items:center;gap:8px;margin:6px 0}
+.score-bar .score-label{width:100px;text-align:right;font-size:12px;color:var(--text-muted)}
+.score-bar .score-track{flex:1;height:8px;background:#2a2d3a;border-radius:6px;overflow:hidden}
+.score-bar .score-fill{height:100%;border-radius:6px;background:var(--gold)}
+.score-bar .score-num{width:50px;font-size:13px;font-weight:700;text-align:center;color:var(--text-primary)}
+.kpi-info-row{display:flex;justify-content:space-around;margin-top:18px;padding-top:14px;border-top:2px solid var(--border)}
+.kpi-info-item{text-align:center}
+.kpi-info-item .label{font-size:12px;color:var(--text-muted)}
+.kpi-info-item .value{font-size:20px;font-weight:700;color:var(--gold-light)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;font-size:13px}
+.info-grid dt{color:var(--text-muted)}
+.info-grid dd{color:var(--text-secondary);font-weight:500}
+.checklist{list-style:none;padding:0;font-size:13px}
+.checklist li{padding:5px 0;color:var(--text-secondary)}
+.checklist li::before{content:'☐ ';color:var(--gold)}
+@media(max-width:850px){.grid-2,.grid-3{grid-template-columns:1fr}.hero{flex-direction:column;align-items:flex-start}.hero-price{font-size:40px}}
+footer{text-align:center;padding:24px 16px;font-size:12px;color:var(--text-muted);border-top:1px solid var(--border);margin-top:24px}
+body.light-mode .top-nav{background:rgba(255,251,245,0.92);border-bottom-color:var(--gold)}
+body.light-mode .nav-links a{color:var(--gold)}
+body.light-mode .nav-links a:hover,body.light-mode .nav-links a.active{background:rgba(0,0,0,0.05);color:#7f1d1d}
+body.light-mode .hero{background:linear-gradient(105deg,#fef5e7,#fffbf5);color:var(--text-primary);border-color:var(--gold)}
+body.light-mode .hero-price{color:var(--text-primary)}
+body.light-mode .hero-change{background:rgba(220,38,38,0.1);color:var(--red-up)}
+body.light-mode .hero-meta-item .val{color:var(--gold)}
+body.light-mode .hero-meta-item .label{color:var(--text-muted)}
+body.light-mode .hero-tag{background:rgba(212,168,83,0.15);border-color:var(--gold);color:var(--gold)}
+body.light-mode .conclusion-top{background:linear-gradient(135deg,#fff9f0,#fef5e7)}
+body.light-mode .conclusion-top .big-verdict{color:var(--text-primary)}
+body.light-mode .card-header h2{color:var(--text-primary)}
+body.light-mode .tag{background:rgba(212,168,83,0.15);color:var(--gold);border-color:var(--gold)}
+body.light-mode table.cons thead th{background:linear-gradient(180deg,#f55656,#c0392b)}
+body.light-mode .score-bar .score-track{background:#f0e4ce}
+body.light-mode .rating-callout{background:linear-gradient(135deg,#fff9f0,#fef5e7)}
+body.light-mode .rating-callout .body .title{color:var(--text-primary)}
+body.light-mode .verdict-highlight{background:#fef5e7}
+body.light-mode .verdict-highlight .judgment{color:var(--gold)}
+body.light-mode .verdict-highlight .v-val{color:var(--text-primary)}
+.chain-svg .svg-hdr{fill:#e8e9ec}
+.chain-svg .svg-sub{fill:#b0b3be}
+body.light-mode .chain-svg .svg-hdr{fill:#2a1f12}
+body.light-mode .chain-svg .svg-sub{fill:#6b5634}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+<div class="logo"><div class="logo-icon">意</div><span class="stock-name">意华股份</span><span class="stock-code">002897.SZ</span></div>
+<div class="nav-links">
+<a href="#hero" class="active">行情</a><a href="#conclusion-top">结论</a><a href="#profile">画像</a><a href="#kline-section">K线</a><a href="#mission">任务</a><a href="#macro">宏观</a><a href="#chain">产业链</a><a href="#quality">质量</a><a href="#elasticity">弹性</a><a href="#risk">风险</a><a href="#valuation">估值</a><a href="#compare">对标</a><a href="#tracking">跟踪</a>
+</div>
+<button class="theme-toggle" id="themeToggle">☀️ 浅色模式</button>
+</nav>
+<div class="container">
+
+<div class="hero" id="hero">
+<div class="hero-price-block"><span class="hero-price">68.10</span><span class="hero-change">-2.73%</span></div>
+<div class="hero-meta">
+<div class="hero-meta-item"><div class="val">B+</div><div class="label">公司质地</div></div>
+<div class="hero-meta-item"><div class="val">81元</div><div class="label">中期目标价</div></div>
+<div class="hero-meta-item"><div class="val">1.60:1</div><div class="label">盈亏比</div></div>
+<div class="hero-meta-item"><div class="val" style="color:var(--orange-warn);">⚠️ 中</div><div class="label">风险等级</div></div>
+</div>
+<div class="hero-tags"><span class="hero-tag">AI算力连接器</span><span class="hero-tag">光伏支架</span><span class="hero-tag">800G量产</span><span class="hero-tag">双轮驱动</span><span class="hero-tag">国产替代</span></div>
+</div>
+
+<div class="conclusion-top" id="conclusion-top">
+<div class="big-verdict">意华股份是AI算力连接器国产替代浪潮中的核心受益者，汇兑扰动不改中长期成长逻辑</div>
+<div class="verdict-detail">
+意华股份是国内少数具备800G高速连接器量产能力的民营企业，通讯连接器2025年收入14.46亿（+39.26%），受益于全球AI算力基础设施建设加速。光伏支架业务绑定全球龙头NEXTracker，三地产能布局（中国/泰国/美国）提供稳健基本盘。2025年归母净利润3.18亿（+156%），2026Q1受汇兑损益短期承压（财务费用+305%），但剔除后同环比均正增长。<strong style="color:#f55656;">核心逻辑：AI连接器量价齐升 + 光伏支架全球布局 + 估值合理。</strong>适合在回调至65元以下区间作为AI算力产业链中期配置。
+</div>
+<div class="verdict-tags"><span class="tag">成长型配置</span><span class="tag">AI算力产业链</span><span class="tag">800G/1.6T</span><span class="tag">汇兑扰动</span><span class="tag">中线持有</span><span class="tag">五维71/100</span></div>
+</div>
+
+<div class="grid-2" id="profile">
+<div class="card">
+<div class="card-header"><span class="icon">🏢</span><h2>公司画像</h2></div>
+<p><strong style="color:#f55656;">主营业务：</strong>太阳能支架（54.62%）+ 连接器（41.15%）— 全球光伏跟踪支架核心供应商 + AI算力高速连接器制造商</p>
+<div style="margin:12px 0;"><span class="tag">深交所主板</span><span class="tag">意华控股持股43.48%</span><span class="tag">NEXTracker核心供应商</span><span class="tag">800G量产</span></div>
+<dl class="info-grid" style="margin-top:12px;">
+<dt>公司全称</dt><dd>温州意华接插件股份有限公司</dd>
+<dt>上市日期</dt><dd>2017-09-07 · 深交所主板</dd>
+<dt>注册地</dt><dd>浙江省温州市</dd>
+<dt>所属行业</dt><dd>电子元器件 / 光伏设备</dd>
+<dt>总股本</dt><dd>1.94亿股</dd>
+<dt>当前市值</dt><dd>约132亿元</dd>
+<dt>资产负债率</dt><dd>57.3%</dd>
+<dt>员工人数</dt><dd>约5000人</dd>
+</dl>
+</div>
+
+<div class="card">
+<div class="card-header"><span class="icon">📰</span><h2>近期动态</h2></div>
+<div class="news-list">
+<div class="news-item"><span class="bullet">•</span><span>2026-05-05 国金证券维持"买入"评级，预计2026E净利润4.21亿元</span></div>
+<div class="news-item"><span class="bullet">•</span><span>2026-04-29 2025年报发布：营收64.01亿（+4.99%），归母净利3.18亿（+156%）</span></div>
+<div class="news-item"><span class="bullet">•</span><span>2026-04-10 公司披露高速连接器产品已广泛应用于数据中心、基站、服务器</span></div>
+<div class="news-item"><span class="bullet">•</span><span>2026-03-20 国泰海通首次覆盖给予"增持"评级，目标价80.96元</span></div>
+<div class="news-item"><span class="bullet">•</span><span>2026-01-28 2025年业绩预增：归母净利润预计3.1-3.9亿（+149.66%至+214.09%）</span></div>
+<div class="news-item"><span class="bullet">•</span><span>2026-01-19 公司确认主营业务为连接器及光伏支架，双轮驱动格局清晰</span></div>
+</div>
+</div>
+</div>
+<div class="grid-2">
+<div class="card">
+<div class="card-header"><span class="icon">📊</span><h2>主营业务构成</h2><span class="sub">2025年 · 按产品</span></div>
+<div id="chart-business-pie" style="width:100%;height:280px;"></div>
+<div style="font-size:12px;color:var(--text-muted);text-align:center;margin-top:6px;">太阳能支架54.6% · 通讯连接器22.6% · 消费电子连接器14.1% · 其他4.5% · 补充4.2%</div>
+</div>
+<div class="card">
+<div class="card-header"><span class="icon">📈</span><h2>关键财务指标</h2><span class="sub">2023-2025</span></div>
+<table class="cons" style="margin:0;">
+<thead><tr><th>指标</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
+<tbody>
+<tr><td>营业收入（亿）</td><td>50.59</td><td>60.97</td><td class="val-up">64.01</td></tr>
+<tr><td>归母净利润（亿）</td><td>0.78</td><td>1.24</td><td class="val-up">3.18</td></tr>
+<tr><td>毛利率</td><td>16.42%</td><td>17.58%</td><td class="val-up">19.69%</td></tr>
+<tr><td>净利率</td><td>1.54%</td><td>2.04%</td><td class="val-up">4.97%</td></tr>
+<tr><td>ROE（摊薄）</td><td>3.38%</td><td>5.21%</td><td class="val-up">11.83%</td></tr>
+<tr><td>经营性现金流（亿）</td><td>2.15</td><td>2.89</td><td>2.80</td></tr>
+</tbody>
+</table>
+<div style="font-size:11px;color:var(--text-muted);margin-top:8px;">2025年毛利率同比+2.11pct，净利率+2.93pct，盈利能力显著改善</div>
+</div>
+</div>
+
+<div class="card" id="kline-section">
+<div class="card-header"><span class="icon">📉</span><h2>K线走势</h2><span class="sub">3年日K · 前复权</span></div>
+<div id="chart-kline-full" style="width:100%;height:480px;"></div>
+<div class="kpi-info-row">
+<div class="kpi-info-item"><div class="label">向上空间（中期）</div><div class="value" style="color:var(--red-up);">+19.0%</div></div>
+<div class="kpi-info-item"><div class="label">盈亏比</div><div class="value">1.60:1</div></div>
+<div class="kpi-info-item"><div class="label">中期目标价</div><div class="value">81元</div></div>
+<div class="kpi-info-item"><div class="label">研究周期</div><div class="value">中线</div></div>
+</div>
+</div>
+
+<div class="card" id="mission">
+<div class="card-header"><span class="icon">🎯</span><h2>任务锁定</h2><span class="sub">Step 0</span></div>
+<div class="grid-2">
+<div class="scenario" style="border-left-color:var(--gold);">
+<div style="font-size:13px;font-weight:700;color:#fff;">标的</div>
+<div style="font-size:12px;color:var(--text-secondary);">意华股份（002897.SZ）· 深交所主板</div>
+</div>
+<div class="scenario" style="border-left-color:var(--red-up);">
+<div style="font-size:13px;font-weight:700;color:#fff;">研究周期</div>
+<div style="font-size:12px;color:var(--text-secondary);">中线（6-12个月）· 首次覆盖</div>
+</div>
+<div class="scenario" style="border-left-color:var(--blue-accent);">
+<div style="font-size:13px;font-weight:700;color:#fff;">风格预判</div>
+<div style="font-size:12px;color:var(--text-secondary);">成长型（AI连接器驱动）+ 价值型（支架现金牛）</div>
+</div>
+<div class="scenario" style="border-left-color:var(--orange-warn);">
+<div style="font-size:13px;font-weight:700;color:#fff;">核心命题</div>
+<div style="font-size:12px;color:var(--text-secondary);">AI算力连接器量价齐升能否驱动业绩持续高增长？</div>
+</div>
+</div>
+</div>
+
+<div class="card" id="macro">
+<div class="card-header"><span class="icon">🌐</span><h2>宏观与周期定位</h2><span class="sub">Step 1</span></div>
+<table class="cons">
+<thead><tr><th>周期维度</th><th>当前位置</th><th>对意华的影响</th></tr></thead>
+<tbody>
+<tr><td>全球半导体周期</td><td>上行中后期</td><td class="val-up">正面 — AI算力投资持续高景气</td></tr>
+<tr><td>光伏装机周期</td><td>平稳增长期</td><td>中性偏正 — 全球光伏新增装机突破1000GW</td></tr>
+<tr><td>中美贸易周期</td><td>博弈持续</td><td class="val-down">偏负面 — 泰国/美国产能可对冲关税风险</td></tr>
+<tr><td>汇率周期</td><td>人民币升值压力</td><td class="val-down">负面 — 2026Q1汇兑损益致财务费用+305%</td></tr>
+</tbody>
+</table>
+<div style="margin-top:12px;padding:12px 16px;background:var(--card-bg-alt);border-radius:8px;border-left:4px solid var(--red-up);">
+<strong style="color:var(--red-up);">核心矛盾：</strong>AI算力连接器高增长（通讯连接器+39.26%）vs 汇兑损益短期压制（2026Q1财务费用0.49亿，+305%）。剔除汇兑后同环比均正增长，业务基本面未恶化。
+</div>
+</div>
+
+<div class="card" id="chain">
+<div class="card-header"><span class="icon">🔗</span><h2>产业链深度拆解</h2><span class="sub">Step 2</span></div>
+<div class="chain-svg">
+<svg viewBox="0 0 800 200" style="width:100%;max-width:800px;">
+<rect x="30" y="20" width="180" height="70" rx="8" fill="none" stroke="#d4a853" stroke-width="1.5"/>
+<text x="70" y="50" class="svg-hdr">上游原材料</text>
+<text x="50" y="72" class="svg-sub">铜材/钢卷/铝合金</text>
+<line x1="210" y1="55" x2="280" y2="55" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="245" y1="55" x2="245" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="280" y1="55" x2="280" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="245" y1="85" x2="280" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+
+<rect x="280" y="20" width="240" height="70" rx="8" fill="none" stroke="#f55656" stroke-width="1.5"/>
+<text x="330" y="50" class="svg-hdr">意华股份 · 中游制造</text>
+<text x="290" y="72" class="svg-sub">连接器(模具精密度0.0015mm,800G量产)</text>
+
+<line x1="520" y1="55" x2="590" y2="55" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="555" y1="55" x2="555" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="590" y1="55" x2="590" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="555" y1="85" x2="590" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+
+<rect x="590" y="20" width="180" height="70" rx="8" fill="none" stroke="#d4a853" stroke-width="1.5"/>
+<text x="625" y="50" class="svg-hdr">下游应用</text>
+<text x="600" y="72" class="svg-sub">AI服务器/数据中心/光伏电站</text>
+
+<rect x="30" y="120" width="350" height="60" rx="8" fill="none" stroke="#e8923a" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="55" y="150" class="svg-sub" fill="#e8923a">核心客户：华为/中兴/NEXTracker(全球#1)/富士康</text>
+</svg>
+</div>
+<div class="grid-2" style="margin-top:12px;">
+<div>
+<h4 style="font-size:13px;color:var(--gold);margin-bottom:6px;">题材来源</h4>
+<p style="font-size:12px;color:var(--text-secondary);">① <strong>AI算力</strong>：高速连接器是AI服务器必备元件，800G/1.6T量价齐升<br/>② <strong>光伏全球化</strong>：绑定NEXTracker，中美泰三地产能</p>
+</div>
+<div>
+<h4 style="font-size:13px;color:var(--gold);margin-bottom:6px;">趋势三要素</h4>
+<p style="font-size:12px;color:var(--text-secondary);">AI算力资本开支 ★★★★★ · 光伏装机增长 ★★★☆☆ · 连接器国产替代 ★★★★☆</p>
+</div>
+</div>
+</div>
+
+<div class="card" id="quality">
+<div class="card-header"><span class="icon">⭐</span><h2>公司筛选与质量评分</h2><span class="sub">Step 3</span></div>
+<div class="grid-2">
+<div>
+<h4 style="font-size:13px;color:var(--green-down);margin-bottom:8px;">✅ 正面筛选清单</h4>
+<div style="font-size:12px;color:var(--text-secondary);line-height:2;">
+✓ 行业空间>500亿 — 全球连接器市场>800亿美元<br/>
+✓ 市占率提升 — 800G连接器国产替代加速<br/>
+✓ ROE>10% — 2025年ROE 11.83%（摊薄）<br/>
+✓ 营收增长 — 3年CAGR 12.8%<br/>
+✓ 毛利率提升 — 2025年19.69%（+2.11pct）<br/>
+✓ 经营现金流为正 — 2.80亿覆盖净利润
+</div>
+</div>
+<div>
+<h4 style="font-size:13px;color:var(--orange-warn);margin-bottom:8px;">⚠️ 负面排查清单</h4>
+<div style="font-size:12px;color:var(--text-secondary);line-height:2;">
+✓ 大股东质押 — 未公开高质押<br/>
+✓ 商誉占比 — 规模较小，无问题<br/>
+✓ 经营现金流 — 近5年均为正<br/>
+✓ 营收趋势 — 连续5年正增长<br/>
+⚠️ 实控人减持 — 需持续关注
+</div>
+</div>
+</div>
+
+<div class="rating-callout">
+<div class="badge">B+</div>
+<div class="body">
+<div class="title">公司质地评分：79.1 / 100 — 良好（B+）</div>
+<div class="desc">盈利能力78分：毛利率19.69%处于行业中上；成长能力85分：AI连接器驱动+39.26%增长为最大亮点；财务健康70分：负债率57.3%偏高；竞争壁垒82分：模具精密度0.0015mm+800G量产先发优势</div>
+</div>
+</div>
+<div style="margin-top:12px;">
+<div class="score-bar"><span class="score-label">盈利能力</span><div class="score-track"><div class="score-fill" style="width:78%;background:var(--gold);"></div></div><span class="score-num">78</span></div>
+<div class="score-bar"><span class="score-label">成长能力</span><div class="score-track"><div class="score-fill" style="width:85%;background:var(--gold);"></div></div><span class="score-num">85</span></div>
+<div class="score-bar"><span class="score-label">财务健康</span><div class="score-track"><div class="score-fill" style="width:70%;"></div></div><span class="score-num">70</span></div>
+<div class="score-bar"><span class="score-label">竞争壁垒</span><div class="score-track"><div class="score-fill" style="width:82%;background:var(--gold);"></div></div><span class="score-num">82</span></div>
+<div class="score-bar"><span class="score-label">管理团队</span><div class="score-track"><div class="score-fill" style="width:75%;"></div></div><span class="score-num">75</span></div>
+<div class="score-bar"><span class="score-label">行业地位</span><div class="score-track"><div class="score-fill" style="width:78%;background:var(--gold);"></div></div><span class="score-num">78</span></div>
+</div>
+</div>
+<div class="card" id="elasticity">
+<div class="card-header"><span class="icon">⚡</span><h2>业绩弹性测算</h2><span class="sub">Step 4</span></div>
+<div style="padding:16px;background:var(--card-bg-alt);border-radius:8px;margin-bottom:16px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+<div style="width:12px;height:12px;border-radius:50%;background:var(--red-up);"></div>
+<span style="font-size:13px;color:#fff;font-weight:600;">意华股份业绩弹性树</span>
+</div>
+<div style="border:2px solid var(--gold);border-radius:8px;padding:14px;text-align:center;margin-bottom:12px;background:var(--card-bg);">
+<span style="font-size:13px;color:var(--gold);font-weight:700;">意华股份总营收 64.01亿</span>
+</div>
+<div style="display:flex;justify-content:center;margin:6px 0;">
+<div style="width:2px;height:10px;background:var(--gold);"></div>
+</div>
+<div style="border-top:2px solid var(--gold);margin-bottom:8px;"></div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;">
+<div style="flex:2;min-width:200px;border:1px solid var(--red-up);border-radius:8px;padding:12px;background:var(--card-bg);">
+<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+<div style="width:8px;height:8px;border-radius:50%;background:var(--red-up);"></div>
+<span style="font-size:12px;color:var(--red-up);font-weight:700;">高速连接器 🔴 HIGH</span>
+</div>
+<div style="font-size:11px;color:var(--text-secondary);line-height:1.8;">
+收入占比 22.59% · 2025增速 +39.26%<br/>
+毛利率 27.38%（最高板块）<br/>
+800G量产·1.6T在研<br/>
+客户：华为/中兴/新华三
+</div>
+</div>
+<div style="flex:1;min-width:140px;border:1px solid var(--gold);border-radius:8px;padding:12px;background:var(--card-bg);">
+<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+<div style="width:8px;height:8px;border-radius:50%;background:var(--gold);"></div>
+<span style="font-size:12px;color:var(--gold);font-weight:700;">太阳能支架 🟡 MED</span>
+</div>
+<div style="font-size:11px;color:var(--text-secondary);line-height:1.8;">
+收入占比 54.62%<br/>
+毛利率 15.15%<br/>
+NEXTracker全球#1<br/>
+中/泰/美三地产能
+</div>
+</div>
+<div style="flex:1;min-width:140px;border:1px solid var(--border);border-radius:8px;padding:12px;background:var(--card-bg);">
+<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+<div style="width:8px;height:8px;border-radius:50%;background:var(--text-muted);"></div>
+<span style="font-size:12px;color:var(--text-muted);font-weight:700;">消费电子连接器 ⚪ LOW</span>
+</div>
+<div style="font-size:11px;color:var(--text-secondary);line-height:1.8;">
+收入占比 14.09%<br/>
+毛利率 24.90%<br/>
+行业平稳，跟随周期
+</div>
+</div>
+</div>
+</div>
+
+<div class="grid-2" style="margin-bottom:16px;">
+<div class="scenario">
+<div style="font-weight:700;color:#fff;font-size:13px;">价格敏感度公式</div>
+<div style="font-size:12px;color:var(--text-secondary);margin-top:6px;">
+营收 = 64.01 × (0.226×r₁ + 0.546×r₂ + 0.141×r₃)<br/>
+其中r₁=连接器增速, r₂=支架增速, r₃=消费电子增速
+</div>
+</div>
+<div class="scenario">
+<div style="font-weight:700;color:#fff;font-size:13px;">汇率敏感度</div>
+<div style="font-size:12px;color:var(--text-secondary);margin-top:6px;">
+海外收入39.68亿（占62%）<br/>
+人民币每升值1%，汇兑损失约0.40亿
+</div>
+</div>
+</div>
+
+<div class="grid-3">
+<div class="scenario bear">
+<div style="font-weight:700;font-size:14px;color:var(--green-down);">悲观</div>
+<div style="font-size:22px;font-weight:700;color:var(--text-primary);margin:4px 0;">2.5亿</div>
+<div style="font-size:11px;color:var(--text-muted);">EPS 1.29元</div>
+<div class="prob">连接器+15% · 支架0% · 毛利率18.5%</div>
+</div>
+<div class="scenario" style="border-left-color:var(--gold);">
+<div style="font-weight:700;font-size:14px;color:var(--gold);">基准</div>
+<div style="font-size:22px;font-weight:700;color:var(--text-primary);margin:4px 0;">4.2亿</div>
+<div style="font-size:11px;color:var(--text-muted);">EPS 2.17元</div>
+<div class="prob">连接器+30% · 支架+5% · 毛利率19.5%</div>
+</div>
+<div class="scenario bull">
+<div style="font-weight:700;font-size:14px;color:var(--red-up);">乐观</div>
+<div style="font-size:22px;font-weight:700;color:var(--text-primary);margin:4px 0;">5.8亿</div>
+<div style="font-size:11px;color:var(--text-muted);">EPS 2.99元</div>
+<div class="prob">连接器+45% · 支架+10% · 毛利率21%</div>
+</div>
+</div>
+</div>
+
+<div class="card" id="risk">
+<div class="card-header"><span class="icon">🛡️</span><h2>风险分析</h2><span class="sub">Step 5</span></div>
+<table class="cons">
+<thead><tr><th>风险类型</th><th>影响</th><th>概率</th><th>应对措施</th></tr></thead>
+<tbody>
+<tr><td>汇率风险</td><td style="color:var(--red-up);">高</td><td>中等</td><td>增持美元资产/远期锁汇</td></tr>
+<tr><td>客户集中（NEXTracker）</td><td style="color:var(--orange-warn);">中高</td><td>低</td><td>合作关系超5年，粘结性强</td></tr>
+<tr><td>原材料涨价</td><td>中</td><td>中等</td><td>成本加成合同转嫁</td></tr>
+<tr><td>技术迭代（1.6T/3.2T）</td><td style="color:var(--orange-warn);">中高</td><td>低</td><td>800G已量产，技术路线清晰</td></tr>
+<tr><td>中美贸易摩擦</td><td style="color:var(--orange-warn);">中高</td><td>中等偏上</td><td>美国本土产能可对冲</td></tr>
+</tbody>
+</table>
+<h4 style="font-size:13px;color:var(--red-up);margin:12px 0 8px;">🔴 逻辑破坏条件（止损信号）</h4>
+<ul class="alert-list">
+<li>🔴 核心逻辑破灭：华为/中兴高速连接器订单环比下降>30%</li>
+<li>🔴 核心逻辑破灭：NEXTracker更换供应商，意华失去主力地位</li>
+<li>🟡 盈利恶化：连续两季度毛利率环比下降>2pct</li>
+<li>🟡 竞争劣势：1.6T产品量产进度落后竞品>6个月</li>
+<li>🔴 信心危机：控股股东减持>5%</li>
+</ul>
+</div>
+
+<div class="card" id="valuation">
+<div class="card-header"><span class="icon">💰</span><h2>估值与买卖时机</h2><span class="sub">Step 6</span></div>
+<div class="grid-2">
+<div>
+<h4 style="font-size:13px;color:var(--gold);margin-bottom:8px;">可比公司估值</h4>
+<table class="cons" style="margin:0;">
+<thead><tr><th>公司</th><th>PE(TTM)</th><th>2026E PE</th><th>营收增速</th></tr></thead>
+<tbody>
+<tr><td>立讯精密</td><td>22x</td><td>18x</td><td>8%</td></tr>
+<tr><td>中航光电</td><td>25x</td><td>22x</td><td>12%</td></tr>
+<tr><td>瑞可达</td><td>35x</td><td>28x</td><td>25%</td></tr>
+<tr><td><strong style="color:var(--gold);">意华股份</strong></td><td><strong style="color:var(--gold);">36x</strong></td><td><strong style="color:var(--gold);">26.5x</strong></td><td><strong style="color:var(--gold);">18%</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h4 style="font-size:13px;color:var(--gold);margin-bottom:8px;">三档目标价</h4>
+<table class="cons" style="margin:0;">
+<thead><tr><th>期限</th><th>目标价</th><th>空间</th><th>估值依据</th></tr></thead>
+<tbody>
+<tr><td>短期（3个月）</td><td>75元</td><td style="color:var(--val-up);">+10.1%</td><td>28x PE</td></tr>
+<tr><td><strong style="color:var(--gold);">中期（6-12月）</strong></td><td><strong style="color:var(--gold);">81元</strong></td><td style="color:var(--red-up);"><strong>+19.0%</strong></td><td>30x PE</td></tr>
+<tr><td>长期（12-24月）</td><td>96元</td><td style="color:var(--val-up);">+41.0%</td><td>28x 2027E PE</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="margin-top:12px;padding:12px 16px;background:var(--card-bg-alt);border-radius:8px;border-left:4px solid var(--gold);">
+<div class="grid-2">
+<div>
+<div style="font-size:11px;color:var(--text-muted);">向上空间（中期）</div>
+<div style="font-size:22px;font-weight:700;color:var(--red-up);">+19.0%</div>
+</div>
+<div>
+<div style="font-size:11px;color:var(--text-muted);">向下风险（支撑位）</div>
+<div style="font-size:22px;font-weight:700;color:var(--green-down);">-11.9%</div>
+</div>
+<div>
+<div style="font-size:11px;color:var(--text-muted);">盈亏比</div>
+<div style="font-size:22px;font-weight:700;color:var(--gold);">1.60 : 1</div>
+</div>
+<div>
+<div style="font-size:11px;color:var(--text-muted);">技术面</div>
+<div style="font-size:20px;font-weight:700;color:var(--text-primary);">均线多头排列</div>
+</div>
+</div>
+</div>
+</div>
+<div class="card" id="compare">
+<div class="card-header"><span class="icon">🔍</span><h2>对标分析</h2><span class="sub">Step 7</span></div>
+<div class="grid-2">
+<div>
+<h4 style="font-size:13px;color:var(--gold);margin-bottom:8px;">案例类比：立讯精密早期（2018-2020）</h4>
+<table class="cons" style="margin:0;">
+<thead><tr><th>对比维度</th><th>立讯精密(2018-2020)</th><th>意华股份(2025-2027E)</th></tr></thead>
+<tbody>
+<tr><td>核心驱动</td><td>AirPods+iPhone代工</td><td>AI算力连接器+光伏支架</td></tr>
+<tr><td>营收增速</td><td>50-65%</td><td>5-18%（加速中）</td></tr>
+<tr><td>净利润增速</td><td>50-70%</td><td>156%/32%（2025/2026E）</td></tr>
+<tr><td>PE估值</td><td>30-45x</td><td>26-36x</td></tr>
+<tr><td>市值扩张</td><td>500亿→4000亿</td><td>132亿→？（潜在空间）</td></tr>
+</tbody>
+</table>
+<div style="font-size:11px;color:var(--text-muted);margin-top:6px;">意华在连接器领域的成长路径与立讯早期有相似性，但规模小一个数量级</div>
+</div>
+<div>
+<h4 style="font-size:13px;color:var(--gold);margin-bottom:8px;">增长引擎切换路径</h4>
+<div style="padding:8px 12px;background:var(--card-bg-alt);border-radius:6px;margin-bottom:8px;">
+<div style="font-size:12px;font-weight:700;color:var(--gold);">当前（2025-2026）</div>
+<div style="font-size:11px;color:var(--text-secondary);">支架为主（55%营收），连接器为增长引擎（+39.26%）</div>
+</div>
+<div style="padding:8px 12px;background:var(--card-bg-alt);border-radius:6px;margin-bottom:8px;">
+<div style="font-size:12px;font-weight:700;color:var(--gold);">中期（2027-2028）</div>
+<div style="font-size:11px;color:var(--text-secondary);">连接器营收占比将逼近支架，800G→1.6T迭代推升单价</div>
+</div>
+<div style="padding:8px 12px;background:var(--card-bg-alt);border-radius:6px;">
+<div style="font-size:12px;font-weight:700;color:var(--gold);">长期（2028+）</div>
+<div style="font-size:11px;color:var(--text-secondary);">连接器50%+支架45%+其他5%，双轮驱动利润大头</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card" id="tracking">
+<div class="card-header"><span class="icon">📋</span><h2>跟踪计划与综合结论</h2><span class="sub">Step 8</span></div>
+<div class="grid-2">
+<div>
+<h4 style="font-size:13px;color:var(--gold);margin-bottom:8px;">分层跟踪锚点</h4>
+<div style="font-size:12px;color:var(--text-secondary);line-height:2;">
+<strong style="color:#fff;">高频（月度）：</strong><br/>
+• 高速连接器月度出货量环比<br/>
+• 人民币汇率走势<br/>
+• 通讯连接器毛利率变化<br/>
+<strong style="color:#fff;">季度：</strong><br/>
+• 营收分业务拆解及增速<br/>
+• 经营性现金流质量<br/>
+• 1.6T产品研发进展<br/>
+<strong style="color:#fff;">事件驱动：</strong><br/>
+• NEXTracker订单续签/变化<br/>
+• 800G→1.6T量产节点<br/>
+• 新客户导入进展
+</div>
+</div>
+<div>
+<h4 style="font-size:13px;color:var(--gold);margin-bottom:8px;">执行清单</h4>
+<ul class="checklist">
+<li>关注2026Q2业绩是否企稳，汇兑损失是否收窄</li>
+<li>跟踪65元支撑位，跌破需重新评估</li>
+<li>验证2026年连接器增速能否维持30%+</li>
+<li>跟踪机构盈利预测是否上修</li>
+<li>观察1.6T连接器量产节奏</li>
+<li>评估光伏支架毛利率改善趋势（2025年+3.28pct）</li>
+</ul>
+<div class="verdict-highlight" style="margin-top:12px;">
+<div class="judgment">中线逢低配置 · 65元以下较优</div>
+<div class="verdict-grid">
+<div class="verdict-item"><div class="v-val" style="color:var(--blue-accent);">中等</div><div class="v-label">风险等级</div></div>
+<div class="verdict-item"><div class="v-val" style="color:var(--gold);">≤5%</div><div class="v-label">仓位建议</div></div>
+<div class="verdict-item"><div class="v-val" style="color:var(--red-up);">+19.0%</div><div class="v-label">中期向上空间</div></div>
+<div class="verdict-item"><div class="v-val">B</div><div class="v-label">综合评级</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<h4 style="font-size:14px;color:var(--gold);margin:8px 0;">五维综合交易评分</h4>
+<div class="score-bar"><span class="score-label">基本面（30%）</span><div class="score-track"><div class="score-fill" style="width:78%;background:var(--gold);"></div></div><span class="score-num">78</span></div>
+<div class="score-bar"><span class="score-label">资金面（20%）</span><div class="score-track"><div class="score-fill" style="width:65%;"></div></div><span class="score-num">65</span></div>
+<div class="score-bar"><span class="score-label">技术面（20%）</span><div class="score-track"><div class="score-fill" style="width:68%;"></div></div><span class="score-num">68</span></div>
+<div class="score-bar"><span class="score-label">情绪面（15%）</span><div class="score-track"><div class="score-fill" style="width:72%;"></div></div><span class="score-num">72</span></div>
+<div class="score-bar"><span class="score-label">事件面（15%）</span><div class="score-track"><div class="score-fill" style="width:70%;"></div></div><span class="score-num">70</span></div>
+
+<div class="rating-callout" style="margin-top:12px;">
+<div class="badge">71.4</div>
+<div class="body">
+<div class="title">综合交易评分：71.4 / 100 — 可配置（B）</div>
+<div class="desc">基本面最强（78分）：AI连接器高景气+支架稳健双轮驱动；资金面偏弱（65分）：北向资金参与度偏低；技术面（68分）均线多头排列但面临前高压力。建议中线逢低配置，65元以下为较好介入区间。</div>
+</div>
+</div>
+
+<div class="card" style="border-left:4px solid var(--red-up);margin-top:16px;">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+<span style="font-size:16px;">📌</span><span style="font-size:16px;font-weight:700;color:#fff;">总结</span>
+</div>
+<p style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
+意华股份（002897.SZ）是国内少数具备高速连接器（800G/1.6T）量产能力的民营企业，核心受益于AI算力基础设施建设的结构性机会。2025年归母净利润同比增长156%，通讯连接器收入增长39.26%，增长动能强劲。2026年Q1因汇兑损益短期承压，但剔除汇兑影响后同环比均正增长，业务基本面未恶化。光伏支架业务绑定全球龙头NEXTracker，三地产能布局有效分散地缘风险。当前26-36x PE在连接器行业中处于合理区间，若2026年业绩兑现，估值中枢有望上移。核心风险为人民币汇率升值和下游需求波动。
+</p>
+</div>
+</div>
+
+<footer>
+<p>⚠️ 本系统所有分析仅供研究参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+<p style="margin-top:4px;">数据截止日期：2026-05-16 · 研究状态：首次覆盖</p>
+<p style="margin-top:4px;">数据来源：akshare、公司年报、券商研报、公开新闻 | 分析框架：深度研究Step 0-8体系</p>
+<p style="margin-top:4px;">个股深度研究系统 v2.2 · @明立玩AI</p>
+<p style="margin-top:4px;">联系方式：ll-mingli1221</p>
+</footer>
+</div>
+<script>
+(function() {
+const rawData = [
+  ['2025-11-13', 47.51, 48.38, 47.24, 47.68, 10599320.0],
+  ['2025-11-14', 47.42, 49.38, 46.61, 48.04, 14151277.0],
+  ['2025-11-17', 48.95, 50.88, 48.46, 49.39, 14280241.0],
+  ['2025-11-18', 48.93, 49.49, 48.45, 48.85, 7261040.0],
+  ['2025-11-19', 48.48, 49.4, 47.0, 47.42, 7754021.0],
+  ['2025-11-20', 47.8, 48.39, 46.5, 46.7, 6273659.0],
+  ['2025-11-21', 46.1, 46.77, 44.36, 44.5, 7664305.0],
+  ['2025-11-24', 44.89, 45.28, 43.38, 44.3, 6656975.0],
+  ['2025-11-25', 44.77, 47.12, 44.77, 46.03, 9676191.0],
+  ['2025-11-26', 45.84, 46.65, 45.25, 45.48, 5558351.0],
+  ['2025-11-27', 45.45, 46.88, 45.45, 45.55, 5364679.0],
+  ['2025-11-28', 45.5, 46.49, 45.31, 46.01, 4496191.0],
+  ['2025-12-01', 46.03, 46.6, 45.6, 46.29, 4785013.0],
+  ['2025-12-02', 46.16, 46.54, 45.4, 45.5, 5117099.0],
+  ['2025-12-03', 45.69, 45.98, 44.72, 45.02, 4527118.0],
+  ['2025-12-04', 45.02, 45.24, 44.2, 44.8, 3245860.0],
+  ['2025-12-05', 44.88, 46.25, 44.44, 46.24, 5489209.0],
+  ['2025-12-08', 46.24, 47.75, 46.05, 47.65, 7339739.0],
+  ['2025-12-09', 47.07, 48.13, 47.07, 47.65, 5445499.0],
+  ['2025-12-10', 47.59, 48.13, 46.69, 47.94, 4738441.0],
+  ['2025-12-11', 47.91, 47.91, 46.85, 46.86, 4141500.0],
+  ['2025-12-12', 46.77, 47.47, 46.17, 47.1, 5310828.0],
+  ['2025-12-15', 46.5, 46.85, 45.96, 46.1, 4157989.0],
+  ['2025-12-16', 46.0, 46.3, 44.58, 45.0, 4293895.0],
+  ['2025-12-17', 44.9, 47.31, 44.7, 47.1, 6109712.0],
+  ['2025-12-18', 46.55, 47.13, 46.25, 46.25, 4163500.0],
+  ['2025-12-19', 46.7, 46.85, 45.77, 45.8, 4493208.0],
+  ['2025-12-22', 46.19, 48.3, 46.16, 47.78, 8532663.0],
+  ['2025-12-23', 47.9, 49.3, 47.35, 48.7, 12606786.0],
+  ['2025-12-24', 48.49, 49.99, 48.29, 49.71, 10438228.0],
+  ['2025-12-25', 49.51, 49.8, 48.7, 49.13, 6684638.0],
+  ['2025-12-26', 49.09, 49.93, 48.48, 49.19, 6859876.0],
+  ['2025-12-29', 50.49, 54.01, 49.41, 51.77, 21293126.0],
+  ['2025-12-30', 51.48, 53.84, 51.08, 52.69, 15481999.0],
+  ['2025-12-31', 53.11, 56.25, 52.99, 54.07, 16965919.0],
+  ['2026-01-05', 54.76, 55.0, 52.01, 52.52, 16852612.0],
+  ['2026-01-06', 52.72, 53.95, 51.9, 53.25, 15105079.0],
+  ['2026-01-07', 53.25, 53.87, 52.01, 53.48, 10735964.0],
+  ['2026-01-08', 53.29, 55.2, 52.58, 53.44, 10763662.0],
+  ['2026-01-09', 52.92, 54.87, 52.39, 53.98, 10887600.0],
+  ['2026-01-12', 53.47, 54.31, 52.5, 54.2, 13549985.0],
+  ['2026-01-13', 54.01, 54.01, 51.8, 51.9, 10215821.0],
+  ['2026-01-14', 51.81, 54.2, 51.36, 53.14, 14803557.0],
+  ['2026-01-15', 52.94, 54.17, 52.6, 53.16, 7992393.0],
+  ['2026-01-16', 53.88, 55.14, 53.08, 54.67, 11125475.0],
+  ['2026-01-19', 54.4, 55.0, 53.09, 53.51, 9769544.0],
+  ['2026-01-20', 53.28, 53.64, 50.84, 51.36, 9646018.0],
+  ['2026-01-21', 50.99, 53.99, 50.6, 53.69, 11003940.0],
+  ['2026-01-22', 54.81, 55.66, 53.3, 53.82, 8184811.0],
+  ['2026-01-23', 53.7, 55.23, 53.25, 55.08, 10197906.0],
+  ['2026-01-26', 55.8, 55.98, 53.16, 53.85, 10738284.0],
+  ['2026-01-27', 53.8, 55.73, 52.01, 55.64, 13215624.0],
+  ['2026-01-28', 56.11, 56.99, 53.1, 53.56, 17935706.0],
+  ['2026-01-29', 53.01, 53.65, 50.73, 51.02, 13022864.0],
+  ['2026-01-30', 51.0, 52.93, 49.71, 52.5, 11002797.0],
+  ['2026-02-02', 52.19, 53.33, 51.05, 51.06, 6600893.0],
+  ['2026-02-03', 51.88, 55.15, 51.5, 54.87, 13674444.0],
+  ['2026-02-04', 54.43, 54.88, 53.32, 54.86, 7743268.0],
+  ['2026-02-05', 53.99, 54.4, 52.09, 52.9, 7825354.0],
+  ['2026-02-06', 52.15, 55.67, 51.89, 54.07, 10703086.0],
+  ['2026-02-09', 55.29, 59.48, 54.43, 57.9, 21887118.0],
+  ['2026-02-10', 57.0, 58.5, 57.0, 57.4, 11318102.0],
+  ['2026-02-11', 57.37, 57.61, 55.67, 55.8, 8647606.0],
+  ['2026-02-12', 55.95, 58.86, 55.84, 58.48, 15622244.0],
+  ['2026-02-13', 58.23, 60.2, 57.89, 58.28, 14848527.0],
+  ['2026-02-24', 59.45, 60.06, 57.18, 57.84, 15429294.0],
+  ['2026-02-25', 59.39, 61.31, 58.73, 60.2, 19462410.0],
+  ['2026-02-26', 59.41, 65.19, 59.41, 64.93, 25037170.0],
+  ['2026-02-27', 63.5, 69.75, 63.49, 68.75, 27205043.0],
+  ['2026-03-02', 69.37, 73.32, 68.6, 69.25, 28736391.0],
+  ['2026-03-03', 69.33, 69.73, 64.46, 64.8, 22911951.0],
+  ['2026-03-04', 64.0, 71.28, 63.51, 68.52, 28280686.0],
+  ['2026-03-05', 70.77, 71.28, 67.01, 69.8, 27015275.0],
+  ['2026-03-06', 68.1, 70.5, 67.35, 70.0, 18031378.0],
+  ['2026-03-09', 66.7, 70.83, 63.4, 69.75, 21388648.0],
+  ['2026-03-10', 71.17, 75.98, 70.68, 75.19, 24508499.0],
+  ['2026-03-11', 73.0, 76.2, 70.44, 71.56, 28150307.0],
+  ['2026-03-12', 70.7, 71.18, 66.42, 67.42, 23030516.0],
+  ['2026-03-13', 67.3, 67.57, 64.71, 64.87, 13290242.0],
+  ['2026-03-16', 64.84, 64.87, 61.61, 63.63, 11413488.0],
+  ['2026-03-17', 63.75, 64.15, 61.25, 61.5, 10277255.0],
+  ['2026-03-18', 62.74, 67.5, 61.7, 66.66, 17597454.0],
+  ['2026-03-19', 64.84, 66.69, 64.6, 65.0, 12767372.0],
+  ['2026-03-20', 66.0, 67.56, 63.51, 64.57, 14147543.0],
+  ['2026-03-23', 62.0, 65.5, 61.45, 61.95, 10541743.0],
+  ['2026-03-24', 63.01, 63.5, 58.69, 62.02, 11497808.0],
+  ['2026-03-25', 63.0, 64.6, 61.87, 62.14, 11097325.0],
+  ['2026-03-26', 61.73, 61.83, 58.15, 58.52, 12727283.0],
+  ['2026-03-27', 57.75, 60.83, 56.89, 60.77, 11069956.0],
+  ['2026-03-30', 58.46, 60.95, 57.8, 60.27, 9568833.0],
+  ['2026-03-31', 60.0, 60.9, 58.03, 58.23, 7040706.0],
+  ['2026-04-01', 59.87, 61.95, 59.39, 61.2, 12254702.0],
+  ['2026-04-02', 60.81, 61.76, 59.22, 59.7, 7549234.0],
+  ['2026-04-03', 60.38, 63.47, 59.72, 61.37, 13340716.0],
+  ['2026-04-07', 61.73, 63.42, 61.15, 61.46, 11616764.0],
+  ['2026-04-08', 63.6, 64.8, 63.0, 64.61, 14309720.0],
+  ['2026-04-09', 63.52, 67.5, 63.46, 66.85, 16351222.0],
+  ['2026-04-10', 66.61, 66.98, 65.38, 66.0, 12632159.0],
+  ['2026-04-13', 64.5, 65.99, 64.19, 64.92, 10202809.0],
+  ['2026-04-14', 65.99, 66.45, 64.73, 65.83, 10533209.0],
+  ['2026-04-15', 66.13, 67.68, 65.12, 66.3, 14590901.0],
+  ['2026-04-16', 66.29, 67.4, 65.58, 66.34, 11118029.0],
+  ['2026-04-17', 66.51, 68.76, 66.51, 67.19, 13122770.0],
+  ['2026-04-20', 68.98, 69.66, 66.54, 67.29, 13724846.0],
+  ['2026-04-21', 65.5, 67.0, 64.0, 66.7, 12111337.0],
+  ['2026-04-22', 66.0, 68.94, 65.51, 68.57, 14395019.0],
+  ['2026-04-23', 68.2, 68.5, 65.9, 66.64, 11932754.0],
+  ['2026-04-24', 66.7, 70.36, 64.45, 68.41, 22735647.0],
+  ['2026-04-27', 68.19, 68.87, 66.0, 66.74, 14420827.0],
+  ['2026-04-28', 66.48, 66.99, 64.0, 64.4, 12988797.0],
+  ['2026-04-29', 59.3, 60.2, 57.96, 58.49, 22733137.0],
+  ['2026-04-30', 58.49, 59.1, 56.64, 57.43, 12927049.0],
+  ['2026-05-06', 59.01, 60.94, 59.01, 59.54, 15257410.0],
+  ['2026-05-07', 59.46, 64.6, 58.7, 63.96, 17002547.0],
+  ['2026-05-08', 62.6, 64.36, 62.0, 63.24, 10401086.0],
+  ['2026-05-11', 64.55, 69.5, 64.07, 68.11, 23648929.0],
+  ['2026-05-12', 68.67, 74.92, 66.06, 72.4, 32241449.0],
+  ['2026-05-13', 72.5, 76.39, 72.28, 74.95, 24231870.0],
+  ['2026-05-14', 74.39, 74.39, 69.9, 70.01, 17943200.0],
+  ['2026-05-15', 71.28, 71.89, 67.35, 68.1, 13939170.0],
+];
+
+const dates = [], ohlc = [], volumesRaw = [];
+rawData.forEach(d => {
+  dates.push(d[0]);
+  ohlc.push([d[1], d[4], d[3], d[2]]);
+  volumesRaw.push(d[5]);
+});
+const closes = ohlc.map(d => d[1]);
+const calcMA = (arr, n) => arr.map((_, i) => {
+  if (i < n - 1) return null;
+  let sum = arr.slice(i - n + 1, i + 1).reduce((a, b) => a + b, 0);
+  return +(sum / n).toFixed(2);
+});
+const ma5 = calcMA(closes, 5), ma20 = calcMA(closes, 20), ma60 = calcMA(closes, 60);
+const volumes = volumesRaw.map(v => +(v / 10000).toFixed(2));
+const dateLabels = dates.map(d => { const parts = d.split('-'); return parts[1] + '-' + parts[2]; });
+
+function getThemeColors() {
+  const isLight = document.body.classList.contains('light-mode');
+  return {
+    textColor: isLight ? '#2a1f12' : '#e8e9ec',
+    textSecondary: isLight ? '#6b5634' : '#b0b3be',
+    textMuted: isLight ? '#9c8b6e' : '#7a7d8a',
+    upColor: isLight ? '#dc2626' : '#f55656',
+    downColor: isLight ? '#16a34a' : '#28c75b',
+    ma5Color: isLight ? '#2563eb' : '#4a90d9',
+    ma20Color: isLight ? '#16a34a' : '#28c75b',
+    ma60Color: isLight ? '#c2410c' : '#e8923a',
+    volUpColor: isLight ? 'rgba(220,38,38,0.25)' : 'rgba(245,86,86,0.35)',
+    volDownColor: isLight ? 'rgba(22,163,74,0.25)' : 'rgba(40,199,91,0.35)',
+  };
+}
+
+let pieChart, klineChart;
+function renderPie() {
+  if (pieChart) pieChart.dispose();
+  pieChart = echarts.init(document.getElementById('chart-business-pie'));
+  const c = getThemeColors();
+  pieChart.setOption({
+    tooltip: { trigger: 'item', formatter: function(p) { return p.name + ': ' + p.percent.toFixed(1) + '% (营收' + p.value.toFixed(2) + '亿)'; } },
+    series: [{
+      type: 'pie', radius: ['45%', '70%'],
+      data: [
+        { name: '太阳能支架', value: 34.96 },
+        { name: '通讯连接器产品', value: 14.46 },
+        { name: '消费电子连接器及组件', value: 9.02 },
+        { name: '其他连接器产品', value: 2.86 },
+        { name: '其他(补充)', value: 2.71 }
+      ],
+      label: { fontSize: 11, color: c.textSecondary },
+      color: ['#f55656', '#d4a853', '#e8923a', '#4a90d9', '#e3c26d']
+    }]
+  });
+}
+
+function renderKline() {
+  if (klineChart) klineChart.dispose();
+  klineChart = echarts.init(document.getElementById('chart-kline-full'));
+  const c = getThemeColors();
+  const volData = volumes.map((v, i) => ({
+    value: v,
+    itemStyle: { color: ohlc[i][1] >= ohlc[i][0] ? c.volUpColor : c.volDownColor }
+  }));
+  klineChart.setOption({
+    grid: [
+      { left: '9%', right: '6%', top: '12%', height: '55%' },
+      { left: '9%', right: '6%', top: '74%', height: '14%' }
+    ],
+    xAxis: [
+      { type: 'category', data: dateLabels, gridIndex: 0,
+        axisLabel: { color: c.textMuted, fontSize: 9, interval: 5 },
+        axisLine: { lineStyle: { color: c.textMuted } }, splitLine: { show: false } },
+      { type: 'category', data: dateLabels, gridIndex: 1, show: false, splitLine: { show: false } }
+    ],
+    yAxis: [
+      { scale: true, gridIndex: 0, axisLabel: { color: c.textMuted, fontSize: 10 }, splitLine: { show: false } },
+      { scale: true, gridIndex: 1, axisLabel: { color: c.textMuted, fontSize: 10, formatter: '{value}万' }, splitLine: { show: false } }
+    ],
+    dataZoom: [{ type: 'inside', xAxisIndex: [0, 1] }],
+    tooltip: { trigger: 'axis', axisPointer: { type: 'cross' },
+      formatter: function(params) {
+        const k = params.find(p => p.seriesName === 'K线');
+        const vol = params.find(p => p.seriesName === '成交量');
+        if (!k || !vol) return '';
+        return k.axisValue + '<br/>开: ' + k.data[1] + '  收: ' + k.data[0] + '<br/>低: ' + k.data[2] + '  高: ' + k.data[3] + '<br/>成交量: ' + vol.data.value + '万手';
+      }
+    },
+    legend: { data: ['K线', 'MA5', 'MA20', 'MA60'], top: 0, textStyle: { color: c.textSecondary } },
+    series: [
+      { name: 'K线', type: 'candlestick', data: ohlc, xAxisIndex: 0, yAxisIndex: 0,
+        itemStyle: { color: c.upColor, color0: c.downColor, borderColor: c.upColor, borderColor0: c.downColor } },
+      { name: 'MA5', type: 'line', data: ma5, smooth: true,
+        lineStyle: { width: 1.5, color: c.ma5Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+      { name: 'MA20', type: 'line', data: ma20, smooth: true,
+        lineStyle: { width: 1.5, color: c.ma20Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+      { name: 'MA60', type: 'line', data: ma60, smooth: true,
+        lineStyle: { width: 1.5, color: c.ma60Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+      { name: '成交量', type: 'bar', data: volData, xAxisIndex: 1, yAxisIndex: 1 }
+    ]
+  });
+}
+
+function renderCharts() { renderPie(); renderKline(); }
+
+const toggleBtn = document.getElementById('themeToggle');
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  toggleBtn.textContent = document.body.classList.contains('light-mode') ? '🌙 深色模式' : '☀️ 浅色模式';
+  renderCharts();
+});
+renderCharts();
+
+const sections = document.querySelectorAll('.card[id], .hero[id], .conclusion-top[id]');
+const navs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  navs.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + cur) a.classList.add('active');
+  });
+});
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+window.addEventListener('resize', () => {
+  pieChart && pieChart.resize();
+  klineChart && klineChart.resize();
+});
+})();
+</script>
+</body>
+</html>

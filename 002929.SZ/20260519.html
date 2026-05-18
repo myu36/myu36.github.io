@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>润建股份 002929 · 深度研报</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#0c0f15;--card-bg:#1a1c24;--card-bg-alt:#1e2029;--border:#2a2d3a;--text-primary:#e8e9ec;--text-secondary:#b0b3be;--text-muted:#7a7d8a;--red-up:#f55656;--green-down:#28c75b;--gold:#d4a853;--gold-light:#e3c26d;--blue-accent:#4a90d9;--orange-warn:#e8923a;--shadow:0 4px 20px rgba(0,0,0,0.3);--radius:10px;--font-sans:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;--font-mono:"JetBrains Mono","SF Mono","Consolas",monospace;--transition:0.2s ease;}
+body.light-mode{--bg:#fdf8f0;--card-bg:#fffbf5;--card-bg-alt:#fef5e7;--border:#e2cfa2;--text-primary:#2a1f12;--text-secondary:#6b5634;--text-muted:#9c8b6e;--red-up:#dc2626;--green-down:#16a34a;--gold:#b38a3c;--gold-light:#d4a853;--blue-accent:#2563eb;--orange-warn:#c2410c;--shadow:0 4px 20px rgba(162,125,57,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text-primary);font-family:var(--font-sans);line-height:1.7;font-size:14px;background-image:radial-gradient(circle at 15% 10%,rgba(212,168,83,0.03) 0%,transparent 35%),radial-gradient(circle at 85% 70%,rgba(212,168,83,0.03) 0%,transparent 35%);background-attachment:fixed}
+.top-nav{position:sticky;top:0;z-index:100;background:rgba(10,12,18,0.92);backdrop-filter:blur(12px);border-bottom:2px solid var(--gold-light);padding:10px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.top-nav .logo{display:flex;align-items:center;gap:10px;color:#fff}
+.top-nav .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#c0392b,#8b0000);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:#fff}
+.top-nav .stock-name{font-weight:700;font-size:17px;letter-spacing:0.5px}
+.top-nav .stock-code{font-size:12px;opacity:0.7;font-family:var(--font-mono)}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap}
+.nav-links a{font-size:12px;padding:5px 14px;border-radius:16px;color:var(--gold-light);text-decoration:none;border:1px solid transparent;transition:var(--transition);font-weight:500;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.08);color:#fff;border-color:var(--gold)}
+.theme-toggle{background:rgba(255,255,255,0.08);border:1px solid var(--gold-light);color:var(--gold-light);padding:5px 14px;border-radius:16px;font-size:12px;cursor:pointer;transition:var(--transition);margin-left:12px}
+.theme-toggle:hover{background:rgba(255,255,255,0.15)}
+.container{max-width:1300px;margin:0 auto;padding:24px 20px 40px}
+.hero{background:linear-gradient(105deg,#1c1010 0%,#2c1a1a 50%,#3d2424 100%);border-radius:var(--radius);padding:28px 32px;margin-bottom:24px;border:1px solid var(--gold-light);box-shadow:0 8px 28px rgba(100,55,55,0.2);display:flex;flex-wrap:wrap;gap:24px;align-items:center;color:#fff;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-price-block{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;z-index:1}
+.hero-price{font-size:56px;font-weight:900;line-height:1;font-family:var(--font-mono)}
+.hero-change{font-size:20px;font-weight:700;padding:4px 12px;border-radius:6px;background:rgba(245,86,86,0.2);color:#f87171;font-family:var(--font-mono)}
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;z-index:1}
+.hero-meta-item{text-align:center}
+.hero-meta-item .val{font-size:22px;font-weight:700;font-family:var(--font-mono);color:var(--gold-light)}
+.hero-meta-item .label{font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:1px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;z-index:1}
+.hero-tag{background:rgba(255,255,255,0.08);border:1px solid rgba(255,215,0,0.3);color:var(--gold-light);padding:4px 9px;border-radius:20px;font-size:11px;font-weight:500}
+.conclusion-top{background:linear-gradient(135deg,#1e1a10 0%,#241f14 100%);border:2px solid var(--gold);border-radius:var(--radius);padding:22px 28px;margin-bottom:24px;position:relative}
+.conclusion-top::before{content:'核心结论';position:absolute;top:-13px;left:24px;background:var(--gold);color:#000;padding:3px 16px;border-radius:12px;font-weight:700;font-size:12px;letter-spacing:1px}
+.conclusion-top .big-verdict{font-weight:800;font-size:20px;color:#fff;margin-top:8px}
+.conclusion-top .verdict-detail{font-size:14px;color:var(--text-secondary);margin-top:8px;line-height:1.7}
+.conclusion-top .verdict-tags{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:22px 28px;margin-bottom:20px;box-shadow:var(--shadow);transition:var(--transition)}
+.card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.5);border-color:var(--gold)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+.card-header .icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:var(--gold)}
+.card-header h2{font-size:18px;font-weight:700;color:#fff;letter-spacing:0.5px}
+.card-header .sub{margin-left:auto;font-size:11px;color:var(--text-muted)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+table.cons{width:100%;border-collapse:collapse;font-size:13px;background:var(--card-bg-alt);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:12px 0}
+table.cons thead th{background:linear-gradient(180deg,#2c1a1a 0%,#1c1010 100%);color:#fff;font-weight:600;padding:10px 12px;text-align:left;font-size:12px;letter-spacing:1px}
+table.cons tbody tr{border-bottom:1px dashed var(--border)}
+table.cons tbody tr:hover{background:rgba(255,255,255,0.02)}
+table.cons tbody td{padding:9px 12px;vertical-align:middle;color:var(--text-secondary)}
+.val-up{color:var(--red-up);font-weight:600}
+.val-down{color:var(--green-down);font-weight:600}
+.tag{display:inline-block;padding:3px 12px;border-radius:14px;font-size:11px;font-weight:600;background:rgba(212,168,83,0.15);color:var(--gold-light);border:1px solid var(--gold);margin-right:6px;margin-bottom:4px}
+.chain-svg{background:var(--card-bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:16px 0;text-align:center;overflow:hidden}
+.chain-svg svg{max-width:100%;height:auto}
+.chain-svg .svg-hdr{fill:#e8e9ec;font-size:14px;font-weight:700}
+.chain-svg .svg-sub{fill:#b0b3be;font-size:12px}
+.scenario{background:var(--card-bg-alt);border:1px solid var(--border);border-radius:8px;padding:14px 16px;text-align:center;border-left:4px solid var(--gold)}
+.scenario.bear{border-left-color:var(--green-down)}
+.scenario.bull{border-left-color:var(--red-up)}
+.scenario .prob{font-size:11px;color:var(--text-muted)}
+.alert-list{list-style:none;padding:0}
+.alert-list li{padding:8px 14px;margin:6px 0;border-radius:6px;background:var(--card-bg-alt);border-left:4px solid var(--orange-warn);font-size:13px;font-weight:500;color:var(--text-secondary)}
+.rating-callout{background:linear-gradient(135deg,#1e1a10 0%,#241f14 100%);border:2px solid var(--gold);border-radius:var(--radius);padding:18px 24px;margin-top:16px;display:flex;align-items:center;gap:16px}
+.rating-callout .badge{min-width:64px;height:64px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;letter-spacing:1px}
+.rating-callout .body{flex:1}
+.rating-callout .body .title{font-size:16px;font-weight:700;color:#fff}
+.rating-callout .body .desc{font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.6}
+.verdict-highlight{background:var(--card-bg-alt);border-radius:10px;padding:18px 22px;margin-top:8px}
+.verdict-highlight .judgment{font-size:22px;font-weight:800;color:var(--gold);text-align:center;margin-bottom:12px}
+.verdict-highlight .verdict-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.verdict-highlight .verdict-item{text-align:center;padding:8px}
+.verdict-highlight .verdict-item .v-val{font-size:18px;font-weight:800}
+.verdict-highlight .verdict-item .v-label{font-size:11px;color:var(--text-muted);margin-top:2px}
+.score-bar{display:flex;align-items:center;gap:8px;margin:6px 0}
+.score-bar .score-label{width:140px;text-align:right;font-size:12px;color:var(--text-muted)}
+.score-bar .score-track{flex:1;height:8px;background:#2a2d3a;border-radius:6px;overflow:hidden}
+.score-bar .score-fill{height:100%;border-radius:6px;background:var(--gold)}
+.score-bar .score-num{width:60px;font-size:13px;font-weight:700;text-align:center;color:var(--text-primary)}
+.kpi-info-row{display:flex;justify-content:space-around;margin-top:18px;padding-top:14px;border-top:2px solid var(--border)}
+.kpi-info-item{text-align:center}
+.kpi-info-item .label{font-size:12px;color:var(--text-muted)}
+.kpi-info-item .value{font-size:20px;font-weight:700;color:var(--gold-light)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;font-size:13px}
+.info-grid dt{color:var(--text-muted)}
+.info-grid dd{color:var(--text-secondary);font-weight:500}
+.news-list{max-height:300px;overflow-y:auto;font-size:13px}
+.news-item{display:flex;align-items:baseline;gap:6px;padding:7px 0;border-bottom:1px dashed var(--border);color:var(--text-secondary)}
+.news-item .bullet{color:var(--red-up);font-weight:700;font-size:16px}
+.news-date{font-size:11px;color:var(--text-muted);font-family:var(--font-mono);white-space:nowrap}
+.checklist{list-style:none;padding:0;font-size:13px}
+.checklist li{padding:5px 0;color:var(--text-secondary)}
+.checklist li::before{content:'☐ ';color:var(--gold)}
+footer{text-align:center;padding:24px 16px;font-size:12px;color:var(--text-muted);border-top:1px solid var(--border);margin-top:24px}
+body.light-mode .top-nav{background:rgba(255,251,245,0.92);border-bottom-color:var(--gold)}
+body.light-mode .nav-links a{color:var(--gold)}
+body.light-mode .nav-links a:hover,body.light-mode .nav-links a.active{background:rgba(0,0,0,0.05);color:#7f1d1d}
+body.light-mode .hero{background:linear-gradient(105deg,#fef5e7,#fffbf5);color:var(--text-primary);border-color:var(--gold)}
+body.light-mode .hero-price{color:var(--text-primary)}
+body.light-mode .hero-change{background:rgba(220,38,38,0.1);color:var(--red-up)}
+body.light-mode .hero-meta-item .val{color:var(--gold)}
+body.light-mode .hero-meta-item .label{color:var(--text-muted)}
+body.light-mode .hero-tag{background:rgba(212,168,83,0.15);border-color:var(--gold);color:var(--gold)}
+body.light-mode .conclusion-top{background:linear-gradient(135deg,#fff9f0,#fef5e7)}
+body.light-mode .conclusion-top .big-verdict{color:var(--text-primary)}
+body.light-mode .card-header h2{color:var(--text-primary)}
+body.light-mode .tag{background:rgba(212,168,83,0.15);color:var(--gold);border-color:var(--gold)}
+body.light-mode table.cons thead th{background:linear-gradient(180deg,#f55656,#c0392b)}
+body.light-mode .score-bar .score-track{background:#f0e4ce}
+body.light-mode .rating-callout{background:linear-gradient(135deg,#fff9f0,#fef5e7)}
+body.light-mode .rating-callout .body .title{color:var(--text-primary)}
+body.light-mode .verdict-highlight{background:#fef5e7}
+body.light-mode .verdict-highlight .judgment{color:var(--gold)}
+body.light-mode .verdict-highlight .v-val{color:var(--text-primary)}
+body.light-mode .chain-svg .svg-hdr{fill:#2a1f12}
+body.light-mode .chain-svg .svg-sub{fill:#6b5634}
+@media(max-width:850px){.grid-2,.grid-3{grid-template-columns:1fr}.hero{flex-direction:column;align-items:flex-start}.hero-price{font-size:40px}}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+<div class="logo"><div class="logo-icon">润</div><span class="stock-name">润建股份</span><span class="stock-code">002929.SZ</span></div>
+<div class="nav-links">
+<a href="#hero" class="active">行情</a><a href="#conclusion-top">结论</a><a href="#profile">画像</a><a href="#kline-section">K线</a><a href="#mission">任务</a><a href="#macro">宏观</a><a href="#chain">产业链</a><a href="#quality">质量</a><a href="#elasticity">弹性</a><a href="#risk">风险</a><a href="#valuation">估值</a><a href="#compare">对标</a><a href="#tracking">跟踪</a>
+</div>
+<button class="theme-toggle" id="themeToggle">☀️ 浅色模式</button>
+</nav>
+<div class="container">
+
+<div class="hero" id="hero">
+<div class="hero-price-block"><span class="hero-price">95.99</span><span class="hero-change">+3.23%</span></div>
+<div class="hero-meta">
+<div class="hero-meta-item"><div class="val">B-</div><div class="label">公司质地</div></div>
+<div class="hero-meta-item"><div class="val">100元</div><div class="label">中期目标价</div></div>
+<div class="hero-meta-item"><div class="val">0.16:1</div><div class="label">盈亏比</div></div>
+<div class="hero-meta-item"><div class="val" style="color:var(--red-up);">🔴 高</div><div class="label">风险等级</div></div>
+</div>
+<div class="hero-tags"><span class="hero-tag">Token工厂</span><span class="hero-tag">AI算力</span><span class="hero-tag">能源网络</span><span class="hero-tag">东盟出海</span><span class="hero-tag">V型反转</span></div>
+</div>
+
+<div class="conclusion-top" id="conclusion-top">
+<div class="big-verdict">润建股份是AI算力Token工厂先行者，转型方向正确但当前股价已大幅透支2026年盈利预期</div>
+<div class="verdict-detail">
+润建股份正从传统通信管维服务商向AI算力Token工厂转型，算力网络业务2025年+53.24%、能源网络+88.27%高速增长，在手订单230亿元。但2025年归母净利润仅0.38亿（-84.62%），毛利率从17.92%持续下滑至12.23%，受数字网络收缩+股份支付2.42亿+资产减值1.54亿叠加冲击。<strong style="color:#f55656;">核心逻辑：Token工厂按量计费模式重构盈利能力，但当前PE(TTM)高达720倍、机构目标价70元远低于现价95.99元，盈亏比仅0.16:1。</strong>建议等待回调至70-80元区间再评估介入机会。
+</div>
+<div class="verdict-tags"><span class="tag">转型阵痛期</span><span class="tag">AI算力产业链</span><span class="tag">Token工厂</span><span class="tag">V型反转预期</span><span class="tag">谨慎观望</span><span class="tag">五维56/100</span></div>
+</div>
+
+<div class="grid-2" id="profile">
+<div class="card">
+<div class="card-header"><span class="icon">🏢</span><h2>公司画像</h2></div>
+<p><strong style="color:#f55656;">主营业务：</strong>通信网络管维（42.9%）+ 能源网络（30.1%）+ 数字网络（19.0%）+ 算力网络Token工厂（7.8%）</p>
+<div style="margin:12px 0;"><span class="tag">深交所主板</span><span class="tag">李建国持股29.95%</span><span class="tag">五象云谷智算中心</span><span class="tag">Token工厂</span></div>
+<dl class="info-grid" style="margin-top:12px;">
+<dt>公司全称</dt><dd>润建股份有限公司</dd>
+<dt>上市日期</dt><dd>2018-03-01 · 深交所主板</dd>
+<dt>注册地</dt><dd>广东省广州市</dd>
+<dt>所属行业</dt><dd>通信服务 / 算力基础设施</dd>
+<dt>总股本</dt><dd>2.84亿股</dd>
+<dt>当前市值</dt><dd>约273亿元</dd>
+<dt>资产负债率</dt><dd>69.37%</dd>
+<dt>员工人数</dt><dd>约10000人</dd>
+</dl>
+</div>
+
+<div class="card">
+<div class="card-header"><span class="icon">📰</span><h2>近期动态</h2></div>
+<div class="news-list">
+<div class="news-item"><span class="bullet">•</span><span>2026-05-14 润建股份因算力租赁+Token工厂概念触及涨停，换手率20%上龙虎榜</span></div>
+<div class="news-item"><span class="bullet">•</span><span>2026-05-13 中邮证券首次覆盖给予"增持"评级，预测2026E净利润3.93亿元</span></div>
+<div class="news-item"><span class="bullet">•</span><span>2026-05-01 中金公司维持"跑赢行业"评级，目标价70元</span></div>
+<div class="news-item"><span class="bullet">•</span><span>2026-04-29 2025年报发布：营收103.49亿（+12.5%），归母净利0.38亿（-84.6%）</span></div>
+<div class="news-item"><span class="bullet">•</span><span>2026-04-10 公司公告Token工厂模式升级，2026年目标营收10亿毛利率50%+</span></div>
+<div class="news-item"><span class="bullet">•</span><span>2026-03-20 五象云谷智算中心一期推进中，可容纳2个万卡集群</span></div>
+<div class="news-item"><span class="bullet">•</span><span>2026-01-19 公司确认与阿里在AI应用、算力等领域业务合作</span></div>
+</div>
+</div>
+</div>
+<div class="grid-2">
+<div class="card">
+<div class="card-header"><span class="icon">📊</span><h2>主营业务构成</h2><span class="sub">2025年 · 按产品</span></div>
+<div id="chart-business-pie" style="width:100%;height:280px;"></div>
+<div style="font-size:12px;color:var(--text-muted);text-align:center;margin-top:6px;">通信网络42.9% · 能源网络30.1% · 数字网络19.0% · 算力网络7.8% · 其他0.1%</div>
+</div>
+<div class="card">
+<div class="card-header"><span class="icon">📈</span><h2>关键财务指标</h2><span class="sub">2023-2025</span></div>
+<table class="cons" style="margin:0;">
+<thead><tr><th>指标</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
+<tbody>
+<tr><td>营业收入（亿）</td><td>88.26</td><td>91.99</td><td class="val-up">103.49</td></tr>
+<tr><td>归母净利润（亿）</td><td>4.39</td><td>2.47</td><td class="val-down">0.38</td></tr>
+<tr><td>毛利率</td><td>17.92%</td><td>15.67%</td><td class="val-down">12.23%</td></tr>
+<tr><td>净利率</td><td>4.97%</td><td>2.68%</td><td class="val-down">0.37%</td></tr>
+<tr><td>EPS（元）</td><td>1.79</td><td>0.89</td><td class="val-down">0.14</td></tr>
+<tr><td>经营现金流（亿）</td><td>1.93</td><td>2.66</td><td>2.88</td></tr>
+</tbody>
+</table>
+<div style="font-size:11px;color:var(--text-muted);margin-top:8px;">毛利率连续3年下滑，净利润大幅承压；剔除股份支付2.42亿后经营利润约2.80亿（+13.66%）</div>
+</div>
+</div>
+
+<div class="card" id="kline-section">
+<div class="card-header"><span class="icon">📉</span><h2>K线走势</h2><span class="sub">3年日K · 前复权</span></div>
+<div id="chart-kline-full" style="width:100%;height:480px;"></div>
+<div class="kpi-info-row">
+<div class="kpi-info-item"><div class="label">向上空间（中期）</div><div class="value" style="color:var(--red-up);">+4.2%</div></div>
+<div class="kpi-info-item"><div class="label">盈亏比</div><div class="value" style="color:var(--orange-warn);">0.16:1</div></div>
+<div class="kpi-info-item"><div class="label">中期目标价</div><div class="value">100元</div></div>
+<div class="kpi-info-item"><div class="label">研究周期</div><div class="value">中线</div></div>
+</div>
+</div>
+<div class="card" id="mission">
+<div class="card-header"><span class="icon">🎯</span><h2>任务锁定</h2><span class="sub">Step 0</span></div>
+<div class="grid-2">
+<div class="scenario" style="border-left-color:var(--gold);">
+<div style="font-size:13px;font-weight:700;color:#fff;">标的</div>
+<div style="font-size:12px;color:var(--text-secondary);">润建股份（002929.SZ）· 深交所主板</div>
+</div>
+<div class="scenario" style="border-left-color:var(--red-up);">
+<div style="font-size:13px;font-weight:700;color:#fff;">研究周期</div>
+<div style="font-size:12px;color:var(--text-secondary);">中线（6-12个月）· 关注算力业务拐点</div>
+</div>
+<div class="scenario" style="border-left-color:var(--blue-accent);">
+<div style="font-size:13px;font-weight:700;color:#fff;">风格预判</div>
+<div style="font-size:12px;color:var(--text-secondary);">成长转型型（通信管维→AI算力Token工厂）</div>
+</div>
+<div class="scenario" style="border-left-color:var(--orange-warn);">
+<div style="font-size:13px;font-weight:700;color:#fff;">核心命题</div>
+<div style="font-size:12px;color:var(--text-secondary);">Token工厂能否在2026-2027年实现业绩V型反转？</div>
+</div>
+</div>
+</div>
+
+<div class="card" id="macro">
+<div class="card-header"><span class="icon">🌐</span><h2>宏观与周期定位</h2><span class="sub">Step 1</span></div>
+<table class="cons">
+<thead><tr><th>周期维度</th><th>当前位置</th><th>对润建的影响</th></tr></thead>
+<tbody>
+<tr><td>AI算力投资周期</td><td>高速扩张期</td><td class="val-up">正面 — 阿里3800亿capex，云厂资本开支持续上修</td></tr>
+<tr><td>通信服务周期</td><td>存量博弈期</td><td class="val-down">负面 — 传统通信网络建设进入平稳期</td></tr>
+<tr><td>能源转型周期</td><td>政策驱动期</td><td class="val-up">正面 — 新能源并网带动能源业务+88%增长</td></tr>
+<tr><td>债务/利率周期</td><td>低利率环境</td><td>中性 — 负债率69.37%偏高，低利率缓解压力</td></tr>
+</tbody>
+</table>
+<div style="margin-top:12px;padding:12px 16px;background:var(--card-bg-alt);border-radius:8px;border-left:4px solid var(--red-up);">
+<strong style="color:var(--red-up);">核心矛盾：</strong>Token工厂模式高弹性（算力+53%/能源+88%/订单230亿）vs 当前盈利能力巨大落差（归母净利润-84.6%，毛利率从17.92%→12.23%）。2025年是利润低点，2026年起万卡集群落地有望驱动V型反转。
+</div>
+</div>
+
+<div class="card" id="chain">
+<div class="card-header"><span class="icon">🔗</span><h2>产业链深度拆解</h2><span class="sub">Step 2</span></div>
+<div class="chain-svg">
+<svg viewBox="0 0 800 200" style="width:100%;max-width:800px;">
+<rect x="30" y="20" width="180" height="70" rx="8" fill="none" stroke="#d4a853" stroke-width="1.5"/>
+<text x="70" y="50" class="svg-hdr">上游原材料</text>
+<text x="50" y="72" class="svg-sub">GPU芯片/通信设备/光伏组件</text>
+<line x1="210" y1="55" x2="280" y2="55" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="245" y1="55" x2="245" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="280" y1="55" x2="280" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="245" y1="85" x2="280" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+<rect x="280" y="20" width="240" height="70" rx="8" fill="none" stroke="#f55656" stroke-width="1.5"/>
+<text x="330" y="50" class="svg-hdr">润建股份 · 中游服务</text>
+<text x="290" y="72" class="svg-sub">Token工厂/通信管维/能源EPC/东盟算力</text>
+<line x1="520" y1="55" x2="590" y2="55" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="555" y1="55" x2="555" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="590" y1="55" x2="590" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+<line x1="555" y1="85" x2="590" y2="85" stroke="#d4a853" stroke-width="1.5"/>
+<rect x="590" y="20" width="180" height="70" rx="8" fill="none" stroke="#d4a853" stroke-width="1.5"/>
+<text x="625" y="50" class="svg-hdr">下游应用</text>
+<text x="600" y="72" class="svg-sub">AI大模型/运营商/新能源电站</text>
+<rect x="30" y="120" width="350" height="60" rx="8" fill="none" stroke="#e8923a" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="55" y="150" class="svg-sub" fill="#e8923a">核心客户：阿里/字节跳动/中国移动/NEXTracker/东盟10国</text>
+</svg>
+</div>
+<div class="grid-2" style="margin-top:12px;">
+<div>
+<h4 style="font-size:13px;color:var(--gold);margin-bottom:6px;">题材来源</h4>
+<p style="font-size:12px;color:var(--text-secondary);">① <strong>AI算力Token工厂</strong>：首创按Token消耗计费，GPU利用率95%+<br/>② <strong>能源互联网</strong>：新能源并网+88%，储能EPC<br/>③ <strong>东盟出海</strong>：参与24个算力中心建设</p>
+</div>
+<div>
+<h4 style="font-size:13px;color:var(--gold);margin-bottom:6px;">趋势三要素</h4>
+<p style="font-size:12px;color:var(--text-secondary);">AI算力资本开支 ★★★★★ · 能源互联网 ★★★★☆ · 通信网络存量 ★★☆☆☆</p>
+</div>
+</div>
+</div>
+
+<div class="card" id="quality">
+<div class="card-header"><span class="icon">⭐</span><h2>公司筛选与质量评分</h2><span class="sub">Step 3</span></div>
+<div class="grid-2">
+<div>
+<h4 style="font-size:13px;color:var(--green-down);margin-bottom:8px;">✅ 正面筛选清单</h4>
+<div style="font-size:12px;color:var(--text-secondary);line-height:2;">
+✓ 行业空间>500亿 — 全球AI算力市场>2000亿美元<br/>
+✓ 市占率提升 — Token工厂模式差异化，在手订单230亿<br/>
+✓ 营收增长>10% — 3年CAGR 12.1%<br/>
+✗ ROE>10% — 2025年ROE仅约1.5%<br/>
+✗ 毛利率稳定 — 连续3年下滑：17.92%→15.67%→12.23%<br/>
+✓ 经营现金流为正 — 2.88亿，连续多年为正
+</div>
+</div>
+<div>
+<h4 style="font-size:13px;color:var(--orange-warn);margin-bottom:8px;">⚠️ 负面排查清单</h4>
+<div style="font-size:12px;color:var(--text-secondary);line-height:2;">
+✓ 商誉占比 — 1.17亿仅占资产0.6%<br/>
+✓ 经营现金流 — 近3年持续为正<br/>
+✓ 营收趋势 — 连续多年正增长<br/>
+⚠️ 毛利率连续3年下滑 — 2026年能否企稳是关键<br/>
+⚠️ 资产负债率69.37% — 接近70%警戒线
+</div>
+</div>
+</div>
+
+<div class="rating-callout">
+<div class="badge">B-</div>
+<div class="body">
+<div class="title">公司质地评分：61.5 / 100 — 关注（B-）</div>
+<div class="desc">盈利能力40分：毛利率持续下滑，2025年营业利润为负；成长能力75分：算力+53%/能源+88%高速增长；财务健康55分：负债率69.37%，应收账款63.9亿占营收62%；竞争壁垒70分：Token工厂+1GW绿电+万卡集群先行者优势</div>
+</div>
+</div>
+<div style="margin-top:12px;">
+<div class="score-bar"><span class="score-label">盈利能力</span><div class="score-track"><div class="score-fill" style="width:40%;"></div></div><span class="score-num">40</span></div>
+<div class="score-bar"><span class="score-label">成长能力</span><div class="score-track"><div class="score-fill" style="width:75%;background:var(--gold);"></div></div><span class="score-num">75</span></div>
+<div class="score-bar"><span class="score-label">财务健康</span><div class="score-track"><div class="score-fill" style="width:55%;"></div></div><span class="score-num">55</span></div>
+<div class="score-bar"><span class="score-label">竞争壁垒</span><div class="score-track"><div class="score-fill" style="width:70%;"></div></div><span class="score-num">70</span></div>
+<div class="score-bar"><span class="score-label">管理团队</span><div class="score-track"><div class="score-fill" style="width:65%;"></div></div><span class="score-num">65</span></div>
+<div class="score-bar"><span class="score-label">行业地位</span><div class="score-track"><div class="score-fill" style="width:60%;"></div></div><span class="score-num">60</span></div>
+</div>
+</div>
+<!-- Step 4: 业绩弹性测算 -->
+<div class="card" id="elasticity">
+<div class="card-header"><span class="icon">⚡</span><h2>业绩弹性测算</h2><span class="sub">Step 4</span></div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">分业务弹性树</h3>
+<div style="display:flex;flex-direction:column;align-items:center;padding:12px 0;">
+  <div style="padding:10px 20px;border:2px solid var(--gold);border-radius:8px;font-size:14px;font-weight:700;color:var(--gold);">润建股份业绩弹性（2025年营收103.49亿）</div>
+  <div style="width:2px;height:16px;background:var(--gold);"></div>
+  <div style="width:80%;border-top:2px solid var(--gold);"></div>
+  <div style="display:flex;width:100%;gap:16px;margin-top:6px;">
+    <div style="flex:2;background:var(--card-bg-alt);border-radius:8px;padding:12px;border-top:3px solid var(--red-up);">
+      <div style="font-size:13px;font-weight:700;color:var(--red-up);">🔴 Token工厂 · 弹性极高</div>
+      <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.7;">
+        2026E目标营收10亿毛利率50%+<br>
+        盈利弹性：每10亿营收 → +2.5亿毛利<br>
+        五象云谷→2个万卡集群<br>
+        弹性因子：AI算力需求↑10% → Token收入↑~15%
+      </div>
+    </div>
+    <div style="flex:1;background:var(--card-bg-alt);border-radius:8px;padding:12px;border-top:3px solid var(--gold);">
+      <div style="font-size:13px;font-weight:700;color:var(--gold);">🟡 通信网络 · 弹性低</div>
+      <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.7;">
+        营收44.44亿占比42.9%<br>
+        毛利率16.87%相对稳定<br>
+        弹性：存量市场，跟随通信周期
+      </div>
+    </div>
+    <div style="flex:1;background:var(--card-bg-alt);border-radius:8px;padding:12px;border-top:3px solid var(--gold);">
+      <div style="font-size:13px;font-weight:700;color:var(--gold);">🟡 能源网络 · 弹性中</div>
+      <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.7;">
+        营收31.14亿占比30.1%，+88.27%<br>
+        毛利率10.48%（EPC模式偏低）<br>
+        弹性：新能源装机↑10% → 营收↑~8%
+      </div>
+    </div>
+    <div style="flex:1;background:var(--card-bg-alt);border-radius:8px;padding:12px;border-top:3px solid var(--text-muted);">
+      <div style="font-size:13px;font-weight:700;color:var(--text-muted);">⚪ 数字网络 · 弹性低</div>
+      <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.7;">
+        营收19.71亿占比19.0%<br>
+        毛利率7.12%最低板块<br>
+        收缩调整期，短期拖累
+      </div>
+    </div>
+  </div>
+</div>
+<h3 style="font-size:15px;color:var(--gold-light);margin:16px 0 10px;">价格敏感度公式</h3>
+<div class="grid-2">
+  <div style="background:var(--card-bg-alt);border-radius:8px;padding:14px;font-size:13px;">
+    <strong style="color:var(--red-up);">公式1：Token营收弹性</strong>
+    <p style="color:var(--text-secondary);margin-top:6px;">
+      \(\Delta R_{token} = N_{cluster} \times U \times P_{token} \times Q_{output}\)
+    </p>
+    <p style="color:var(--text-secondary);font-size:12px;margin-top:4px;">每新增1个万卡集群，预计新增年营收5-8亿元</p>
+  </div>
+  <div style="background:var(--card-bg-alt);border-radius:8px;padding:14px;font-size:13px;">
+    <strong style="color:var(--gold);">公式2：净利润修复路径</strong>
+    <p style="color:var(--text-secondary);margin-top:6px;">
+      \(\Delta NI = (R_{token} \times GM_{token}) - (SBP + Imp) + \Delta NI_{energy}\)
+    </p>
+    <p style="color:var(--text-secondary);font-size:12px;margin-top:4px;">Token毛利率50%+是核心利润增量，股份支付2.42亿将消退</p>
+  </div>
+  <div style="background:var(--card-bg-alt);border-radius:8px;padding:14px;font-size:13px;">
+    <strong style="color:var(--blue-accent);">公式3：估值敏感度</strong>
+    <p style="color:var(--text-secondary);margin-top:6px;">
+      \(PE_{2026E} = P_{current} / EPS_{2026E} = 95.99 / 1.38 \approx 70x\)
+    </p>
+    <p style="color:var(--text-secondary);font-size:12px;margin-top:4px;">若2027E净利润6.94亿兑现，PE降至约39x</p>
+  </div>
+  <div style="background:var(--card-bg-alt);border-radius:8px;padding:14px;font-size:13px;">
+    <strong style="color:var(--orange-warn);">公式4：盈亏平衡点</strong>
+    <p style="color:var(--text-secondary);margin-top:6px;">
+      \(R_{break-even} = \frac{SBP + D\&A + SG\&A}{GM_{blended}}\)
+    </p>
+    <p style="color:var(--text-secondary);font-size:12px;margin-top:4px;">混合毛利率需从12.23%修复至15%+才能覆盖固定费用</p>
+  </div>
+</div>
+<h3 style="font-size:15px;color:var(--gold-light);margin:16px 0 10px;">情景分析</h3>
+<table class="cons"><thead><tr><th>情景</th><th>Token营收</th><th>通信/能源增速</th><th>毛利率</th><th>预计净利润</th><th>对应EPS</th></tr></thead>
+<tbody>
+<tr><td style="color:var(--orange-warn);">悲观</td><td>3亿</td><td>+5%</td><td>11.5%</td><td>1.5亿</td><td>0.53</td></tr>
+<tr><td style="color:var(--gold-light);">基准</td><td>10亿</td><td>+12%</td><td>13.5%</td><td>3.9亿</td><td>1.37</td></tr>
+<tr><td style="color:var(--red-up);">乐观</td><td>20亿</td><td>+18%</td><td>16%</td><td>6.9亿</td><td>2.43</td></tr>
+</tbody></table>
+</div>
+
+<!-- Step 5: 风险分析 -->
+<div class="card" id="risk">
+<div class="card-header"><span class="icon">⚠️</span><h2>风险分析</h2><span class="sub">Step 5</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">风险清单</h3>
+<table class="cons"><thead><tr><th>风险类型</th><th>影响</th><th>概率</th></tr></thead>
+<tbody>
+<tr><td>估值泡沫风险<br><span style="font-size:11px;color:var(--text-muted);">PE 720x TTM极度高估</span></td><td class="val-up">高</td><td style="color:var(--red-up);">高</td></tr>
+<tr><td>Token不及预期<br><span style="font-size:11px;color:var(--text-muted);">营收10亿+毛利率50%+能否兑现</span></td><td class="val-up">高</td><td style="color:var(--orange-warn);">中</td></tr>
+<tr><td>毛利率持续恶化<br><span style="font-size:11px;color:var(--text-muted);">连续3年下滑，2026需企稳</span></td><td style="color:var(--orange-warn);">中高</td><td style="color:var(--orange-warn);">中</td></tr>
+<tr><td>GPU供应受限<br><span style="font-size:11px;color:var(--text-muted);">美国对华芯片制裁升级</span></td><td style="color:var(--orange-warn);">中高</td><td style="color:var(--orange-warn);">中</td></tr>
+<tr><td>应收账款高企<br><span style="font-size:11px;color:var(--text-muted);">63.9亿占营收62%</span></td><td style="color:var(--orange-warn);">中</td><td style="color:var(--orange-warn);">中偏上</td></tr>
+</tbody></table>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--orange-warn);margin-bottom:10px;">逻辑破坏条件（止损信号）</h3>
+<ul class="alert-list">
+<li><strong>🔴 1.</strong> Token工厂营收不及预期50% → 2026H1 Token营收&lt;3亿或全年指引下调</li>
+<li><strong>🔴 2.</strong> 毛利率继续下行 → 2026年毛利率&lt;12%，连续第4年下降</li>
+<li><strong>🔴 3.</strong> 应收账款暴雷 → 坏账率&gt;10%或核销&gt;5亿</li>
+<li><strong>🟡 4.</strong> 大客户自建算力 → 阿里/字节减少外部算力采购</li>
+<li><strong>🔴 5.</strong> 控股股东大幅减持 → 李建国减持&gt;5%</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Step 6: 估值与买卖时机 -->
+<div class="card" id="valuation">
+<div class="card-header"><span class="icon">💰</span><h2>估值与买卖时机</h2><span class="sub">PE 70x 2026E · 盈亏比 0.16:1</span></div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">可比公司估值</h3>
+<table class="cons"><thead><tr><th>可比公司</th><th>PS(TTM)</th><th>2026E PE</th><th>营收增速</th><th>PEG</th></tr></thead>
+<tbody>
+<tr><td>润泽科技</td><td>8.5x</td><td>25x</td><td>25%</td><td>1.0</td></tr>
+<tr><td>中贝通信</td><td>2.1x</td><td>30x</td><td>20%</td><td>1.5</td></tr>
+<tr><td>利通电子</td><td>3.5x</td><td>28x</td><td>35%</td><td>0.8</td></tr>
+<tr><td style="color:var(--gold-light);font-weight:700;">润建股份</td><td style="color:var(--red-up);">2.6x</td><td style="color:var(--red-up);">70x</td><td>20%</td><td style="color:var(--red-up);">3.5</td></tr>
+</tbody></table>
+<div class="grid-2" style="margin-top:12px;">
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;font-size:13px;">
+<strong style="color:var(--gold);">资金面分析</strong>
+<p style="color:var(--text-secondary);margin-top:4px;">· 融资融券：约5.38亿融资+0.06亿融券<br>· 主力资金：近期持续净流出（5/18净流出3.66亿）<br>· 龙虎榜：2026-05-14因换手率20%上榜，游资主导<br>· 股东户数：近年呈下降趋势，筹码趋于集中</p>
+</div>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;font-size:13px;">
+<strong style="color:var(--gold);">技术面分析</strong>
+<p style="color:var(--text-secondary);margin-top:4px;">· 当前95.99元，近期新高99.89元<br>· 历史低点23.39元→高点99.89元涨幅超300%<br>· 支撑位：80元（前期平台）/ 70元（中金目标价）<br>· 压力位：100元（整数关口），超买乖离率偏大</p>
+</div>
+</div>
+<h3 style="font-size:15px;color:var(--gold-light);margin:16px 0 10px;">三档目标价</h3>
+<table class="cons"><thead><tr><th>档位</th><th>时间窗口</th><th>目标价</th><th>上行空间</th><th>估值依据</th></tr></thead>
+<tbody>
+<tr><td style="color:var(--orange-warn);">短期</td><td>3个月</td><td class="val-down">80元</td><td class="val-down">-16.7%</td><td>技术回调至前期平台，2026E PE 58x</td></tr>
+<tr><td style="color:var(--gold-light);">中期</td><td>6-12个月</td><td class="val-up">100元</td><td class="val-up">+4.2%</td><td>Token兑现+盈利拐点，2027E PE 41x</td></tr>
+<tr><td style="color:var(--red-up);">长期</td><td>12-24个月</td><td class="val-up">130元</td><td class="val-up">+35.4%</td><td>业务成熟利润6.94亿，PE压缩至30x</td></tr>
+</tbody></table>
+<h3 style="font-size:15px;color:var(--gold-light);margin:16px 0 10px;">盈亏比量化</h3>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:14px;font-size:13px;">
+<p style="color:var(--text-secondary);text-align:center;margin-bottom:8px;">
+<strong>现价 95.99元</strong> →
+向上空间（目标100元）：<strong style="color:var(--red-up);">+4.2%</strong><br>
+向下空间（支撑70元）：<strong style="color:var(--green-down);">-27.1%</strong>
+→ <strong style="color:var(--orange-warn);">盈亏比 0.16 : 1（极端不利）</strong>
+</p>
+<div style="padding:8px 12px;background:rgba(212,168,83,0.08);border-radius:6px;margin-top:8px;">
+<p style="color:var(--text-secondary);text-align:center;">
+<strong style="color:var(--gold-light);">💡 回调介入方案：</strong> 70-80元区间入场 → 目标100元 = <strong style="color:var(--red-up);">+25~43%</strong>，止损60元 = <strong style="color:var(--green-down);">-14~25%</strong> → <strong style="color:var(--gold);">盈亏比 1.0~3.0x</strong>
+</p>
+</div>
+</div>
+</div>
+<!-- Step 7: 对标分析 -->
+<div class="card" id="compare">
+<div class="card-header"><span class="icon">📊</span><h2>对标分析</h2><span class="sub">Token工厂 vs 传统IDC · 转型标的</span></div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">案例类比：润泽科技转型AIDC</h3>
+<table class="cons"><thead><tr><th>对比维度</th><th>润泽科技（2023-2024）</th><th>润建股份（2025-2027E）</th></tr></thead>
+<tbody>
+<tr><td>核心驱动</td><td>字节跳动AIDC需求爆发</td><td>Token工厂+能源互联网双轮</td></tr>
+<tr><td>营收增速</td><td>40-60%</td><td>12-20%（当前偏低）</td></tr>
+<tr><td>净利润增速</td><td>30-50%</td><td>-84.6%（2025）/ +936%（2026E）</td></tr>
+<tr><td>PS估值</td><td>8-12x</td><td>2.6x</td></tr>
+<tr><td>市值</td><td>500-800亿</td><td>273亿</td></tr>
+<tr><td>核心风险</td><td>客户集中（字节）</td><td>Token兑现+估值双杀风险</td></tr>
+</tbody></table>
+<p style="font-size:13px;color:var(--text-secondary);margin-top:10px;">润建2.6x PS处于转型期合理水平，但70x PE（2026E）远高于润泽科技25x。关键在于Token工厂能否兑现高利润增速。</p>
+<h3 style="font-size:15px;color:var(--gold-light);margin:16px 0 10px;">增长引擎切换</h3>
+<div style="display:flex;gap:12px;font-size:13px;color:var(--text-secondary);flex-wrap:wrap;">
+<div style="flex:1;min-width:180px;background:var(--card-bg-alt);padding:12px;border-radius:8px;opacity:0.6;"><strong>第一引擎（过去）：</strong><br>通信管维基本盘 → 存量低速下滑，营收占比42.9%→压缩</div>
+<div style="flex:1;min-width:180px;background:var(--card-bg-alt);padding:12px;border-radius:8px;border:1px solid var(--gold);"><strong style="color:var(--gold-light);">第二引擎（现在）：</strong><br>能源网络+Token工厂 → 能源+88%，Token+53%，双轮驱动</div>
+<div style="flex:1;min-width:180px;background:var(--card-bg-alt);padding:12px;border-radius:8px;border:1px solid var(--red-up);"><strong style="color:var(--red-up);">第三引擎（未来）：</strong><br>AI算力Token模式+东盟出海 → 万卡集群+24个东盟算力中心</div>
+</div>
+</div>
+
+<!-- Step 8: 跟踪计划与综合结论 -->
+<div class="card" id="tracking">
+<div class="card-header"><span class="icon">📋</span><h2>跟踪计划与综合结论</h2><span class="sub">五维 56.5/100 · C+ · 谨慎观望</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">分层跟踪锚点</h3>
+<table class="cons"><thead><tr><th>频率</th><th>跟踪指标</th><th>数据来源</th></tr></thead>
+<tbody>
+<tr><td>🔴 高频（月）</td><td>Token签约客户/合同金额/算力利用率</td><td>公司公告/调研</td></tr>
+<tr><td>🟡 中频（季）</td><td>分业务营收及毛利率/应收账款周转/在手订单</td><td>季报/年报</td></tr>
+<tr><td>⚪ 低频（事）</td><td>万卡集群投产/大客户签约/股权激励解禁</td><td>公司公告</td></tr>
+</tbody></table>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">执行清单</h3>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;font-size:13px;">
+<p style="color:var(--red-up);font-weight:600;">当前（观望）：</p>
+<ul class="checklist">
+<li>当前95.99元盈亏比仅0.16:1，不建议追高</li>
+<li>等待回调至70-80元区间再评估介入机会</li>
+<li>观察Token工厂2026H1实际营收数据</li>
+</ul>
+<p style="color:var(--red-up);font-weight:600;margin-top:8px;">中线（6-12个月）：</p>
+<ul class="checklist">
+<li>验证Token工厂2026年10亿营收目标兑现进度</li>
+<li>跟踪毛利率是否企稳回升（当前低点12.23%）</li>
+<li>评估股份支付费用消退后的利润弹性</li>
+<li>关注应收账款风险（63.9亿，占营收62%）</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="grid-2" style="margin-top:14px;">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">综合结论</h3>
+<div class="verdict-highlight">
+<div class="judgment">AI算力Token工厂先行者，方向正确但当前股价严重透支预期</div>
+<div class="verdict-grid">
+<div class="verdict-item"><div class="v-val" style="color:var(--red-up);">🔴 高</div><div class="v-label">风险等级</div></div>
+<div class="verdict-item"><div class="v-val" style="color:var(--gold-light);">观望</div><div class="v-label">操作建议</div></div>
+<div class="verdict-item"><div class="v-val" style="color:var(--red-up);">≤2%</div><div class="v-label">仓位上限</div></div>
+<div class="verdict-item"><div class="v-val">6-12月</div><div class="v-label">持仓周期</div></div>
+</div>
+</div>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">五维综合交易评分</h3>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;">
+<div class="score-bar"><span class="score-label">基本面 55 (30%)</span><div class="score-track"><div class="score-fill" style="width:55%;"></div></div><span class="score-num">16.5</span></div>
+<div class="score-bar"><span class="score-label">资金面 50 (20%)</span><div class="score-track"><div class="score-fill" style="width:50%;"></div></div><span class="score-num">10.0</span></div>
+<div class="score-bar"><span class="score-label">技术面 45 (20%)</span><div class="score-track"><div class="score-fill" style="width:45%;background:var(--orange-warn);"></div></div><span class="score-num">9.0</span></div>
+<div class="score-bar"><span class="score-label">情绪面 75 (15%)</span><div class="score-track"><div class="score-fill" style="width:75%;"></div></div><span class="score-num">11.3</span></div>
+<div class="score-bar"><span class="score-label">事件面 65 (15%)</span><div class="score-track"><div class="score-fill" style="width:65%;"></div></div><span class="score-num">9.8</span></div>
+<div class="score-bar" style="margin-top:8px;padding-top:8px;border-top:2px solid var(--border);">
+<span class="score-label" style="font-weight:700;color:var(--text-primary);">综合评分</span>
+<div class="score-track"><div class="score-fill" style="width:56.5%;background:var(--gold);"></div></div>
+<span class="score-num" style="font-size:16px;font-weight:800;color:var(--gold);">56.5</span>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top:14px;padding:14px 18px;background:rgba(245,86,86,0.08);border-left:4px solid var(--red-up);border-radius:6px;font-size:13px;color:var(--text-secondary);line-height:1.75;">
+<strong style="color:var(--red-up);font-size:15px;">📌 总结</strong><br>
+润建股份正处于从传统通信服务商向AI算力Token工厂转型的关键时期。2025年归母净利润暴跌84.6%至0.38亿，但扣除股份支付2.42亿后经营利润约2.80亿（+13.66%）。算力+53%/能源+88%高速增长验证转型方向，在手订单230亿元提供能见度。核心逻辑是Token工厂按量计费模式重构盈利能力（毛利率从12%→50%+），2026年预计为业绩拐点（机构预测净利3.93亿）。<strong style="color:var(--red-up);">但当前股价95.99元已严重透支预期，PE(TTM)高达720倍，盈亏比仅0.16:1，建议等待回调至70-80元区间再评估介入机会。</strong>
+</div>
+</div>
+
+<footer>
+<p style="font-size:13px;color:var(--text-muted);margin-bottom:6px;">免责声明：本报告仅供研究参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+<p style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">数据截止：2026-05-18 · 研究状态：首次覆盖</p>
+<p style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">数据来源：akshare、公司年报、券商研报、公开新闻</p>
+<p style="font-size:12px;color:var(--text-muted);margin-bottom:2px;">分析框架：深度研究Step 0-8体系</p>
+<p style="font-size:12px;color:var(--text-muted);">版本：v2.2</p>
+</footer>
+
+</div>
+</body>
+</html>
+<script>
+(function() {
+const rawData = [
+['2025-11-14',42.53,42.6,41.5,41.5,6394273.0],
+['2025-11-17',41.25,42.36,41.01,41.88,4465585.0],
+['2025-11-18',41.86,43.3,41.55,42.64,7550280.0],
+['2025-11-19',43.08,43.33,41.5,41.63,4980035.0],
+['2025-11-20',41.79,41.99,40.95,41.26,3896200.0],
+['2025-11-21',40.76,41.25,39.88,39.9,4954076.0],
+['2025-11-24',40.28,41.88,39.42,41.67,8122375.0],
+['2025-11-25',41.61,42.9,41.6,42.28,7147243.0],
+['2025-11-26',43.5,43.84,42.57,42.61,11309508.0],
+['2025-11-27',42.0,42.41,41.61,41.66,5414198.0],
+['2025-11-28',41.51,42.0,41.2,41.43,3645800.0],
+['2025-12-01',41.44,41.83,40.91,41.58,3685406.0],
+['2025-12-02',41.78,41.78,40.91,41.01,2975492.0],
+['2025-12-03',40.95,40.95,40.07,40.21,3790293.0],
+['2025-12-04',40.21,40.25,39.59,40.01,2590649.0],
+['2025-12-05',39.95,40.38,39.64,40.33,2847139.0],
+['2025-12-08',40.4,40.91,40.35,40.6,3319309.0],
+['2025-12-09',41.81,42.28,40.65,40.79,5862986.0],
+['2025-12-10',40.43,40.92,40.08,40.89,3522853.0],
+['2025-12-11',40.78,40.92,39.9,39.94,3760637.0],
+['2025-12-12',39.84,40.34,39.63,40.04,2621800.0],
+['2025-12-15',39.9,39.92,39.24,39.34,3288559.0],
+['2025-12-16',39.33,39.33,38.2,38.4,3329800.0],
+['2025-12-17',38.4,38.95,38.01,38.74,2726707.0],
+['2025-12-18',38.5,39.04,38.27,38.27,2482255.0],
+['2025-12-19',38.29,38.83,38.29,38.53,2392013.0],
+['2025-12-22',38.8,39.29,38.61,39.13,2901013.0],
+['2025-12-23',39.05,39.14,38.56,38.68,2635505.0],
+['2025-12-24',38.67,39.24,38.61,39.17,2653881.0],
+['2025-12-25',39.2,39.79,39.1,39.67,2992780.0],
+['2025-12-26',39.6,39.95,39.4,39.57,2992893.0],
+['2025-12-29',39.68,40.28,39.61,39.86,3464570.0],
+['2025-12-30',39.8,40.05,39.56,39.68,2630048.0],
+['2025-12-31',39.71,40.04,39.42,39.81,3250049.0],
+['2026-01-05',40.25,40.86,39.92,40.57,5503304.0],
+['2026-01-06',40.57,40.98,40.35,40.84,5766728.0],
+['2026-01-07',40.84,44.92,40.64,44.92,27786736.0],
+['2026-01-08',45.33,46.73,45.01,45.31,32744736.0],
+['2026-01-09',46.12,48.52,45.32,47.45,33444688.0],
+['2026-01-12',47.45,48.62,46.16,48.1,27869933.0],
+['2026-01-13',48.59,48.69,45.8,46.06,20153284.0],
+['2026-01-14',46.4,50.06,46.3,48.9,30183035.0],
+['2026-01-15',49.77,50.06,48.0,49.05,28364205.0],
+['2026-01-16',48.0,48.0,46.0,46.2,16998407.0],
+['2026-01-19',45.48,46.05,44.57,45.2,9773257.0],
+['2026-01-20',45.31,45.7,43.77,44.1,8902611.0],
+['2026-01-21',43.7,44.99,43.6,44.53,6523319.0],
+['2026-01-22',44.84,44.96,44.14,44.42,6137200.0],
+['2026-01-23',45.1,45.38,44.55,44.93,7240922.0],
+['2026-01-26',45.88,46.95,44.83,45.91,11539173.0],
+['2026-01-27',46.04,47.55,45.48,47.55,15583151.0],
+['2026-01-28',47.93,48.25,46.88,47.35,13499329.0],
+['2026-01-29',46.5,48.18,45.12,46.38,14190062.0],
+['2026-01-30',46.01,48.35,46.01,46.44,10445256.0],
+['2026-02-02',46.23,47.69,45.61,46.09,11066830.0],
+['2026-02-03',46.21,47.31,45.65,47.25,10573307.0],
+['2026-02-04',46.66,46.77,44.09,45.0,12850687.0],
+['2026-02-05',44.34,45.32,44.07,44.81,6006000.0],
+['2026-02-06',44.59,47.77,43.89,46.41,13942651.0],
+['2026-02-09',47.35,47.98,46.58,47.36,12227087.0],
+['2026-02-10',47.22,48.96,47.22,48.3,15192811.0],
+['2026-02-11',48.22,49.5,48.22,48.65,13900857.0],
+['2026-02-12',49.3,50.86,48.68,50.32,20408789.0],
+['2026-02-13',49.82,51.89,49.51,49.87,16796399.0],
+['2026-02-24',50.28,50.8,47.23,47.38,16643666.0],
+['2026-02-25',47.38,47.8,46.11,46.17,10823332.0],
+['2026-02-26',46.18,49.21,46.01,48.37,15816696.0],
+['2026-02-27',47.81,50.46,47.55,49.24,13926582.0],
+['2026-03-02',48.01,48.49,47.21,47.85,10777984.0],
+['2026-03-03',48.4,52.64,48.36,49.75,44421703.0],
+['2026-03-04',49.0,51.0,48.62,50.3,32578840.0],
+['2026-03-05',51.0,51.5,48.53,49.68,25048938.0],
+['2026-03-06',49.46,50.88,48.71,50.39,19416366.0],
+['2026-03-09',49.0,53.22,47.7,53.08,28471880.0],
+['2026-03-10',53.5,54.1,51.81,52.89,23283012.0],
+['2026-03-11',51.98,53.15,51.8,52.05,14382683.0],
+['2026-03-12',53.0,54.55,52.5,54.19,26794890.0],
+['2026-03-13',52.51,53.2,49.86,50.2,19757596.0],
+['2026-03-16',50.0,51.2,47.54,50.42,16595897.0],
+['2026-03-17',50.05,50.98,48.5,48.5,10215891.0],
+['2026-03-18',48.51,52.0,48.51,51.36,16876981.0],
+['2026-03-19',50.08,53.85,50.0,51.86,21878960.0],
+['2026-03-20',51.71,52.77,49.5,49.63,18420233.0],
+['2026-03-23',48.5,49.3,46.0,46.38,13413766.0],
+['2026-03-24',47.5,49.18,45.02,48.26,14769708.0],
+['2026-03-25',48.83,51.78,48.83,50.55,16656521.0],
+['2026-03-26',50.62,50.9,47.79,47.91,12263328.0],
+['2026-03-27',47.08,49.27,46.54,48.25,9176801.0],
+['2026-03-30',47.21,50.96,45.8,50.66,16840690.0],
+['2026-03-31',50.35,50.48,48.47,48.47,8895792.0],
+['2026-04-01',49.86,51.22,49.53,49.84,12405106.0],
+['2026-04-02',50.11,50.3,46.38,46.75,16124980.0],
+['2026-04-03',47.64,48.53,46.1,47.21,11868983.0],
+['2026-04-07',47.2,49.49,46.86,47.42,12482945.0],
+['2026-04-08',48.72,52.16,48.71,52.16,25251275.0],
+['2026-04-09',53.93,55.03,53.2,53.64,34084007.0],
+['2026-04-10',53.7,53.9,51.71,51.8,16388462.0],
+['2026-04-13',51.75,56.98,51.15,56.98,18467790.0],
+['2026-04-14',59.0,61.87,58.0,59.82,36521919.0],
+['2026-04-15',59.0,60.5,58.7,59.35,19972550.0],
+['2026-04-16',59.01,65.29,58.99,65.29,28323173.0],
+['2026-04-17',64.5,64.64,61.28,61.34,27075666.0],
+['2026-04-20',60.24,61.5,58.68,59.16,20473116.0],
+['2026-04-21',59.31,59.6,54.55,55.67,22938377.0],
+['2026-04-22',55.48,57.0,54.45,56.65,20874082.0],
+['2026-04-23',56.32,59.98,56.0,57.12,20125244.0],
+['2026-04-24',57.14,57.47,55.02,56.77,15001657.0],
+['2026-04-27',56.78,57.83,55.29,55.35,13781472.0],
+['2026-04-28',55.35,55.9,54.13,54.98,10794965.0],
+['2026-04-29',54.4,56.0,53.77,54.25,12555345.0],
+['2026-04-30',56.18,59.68,55.66,59.68,30198011.0],
+['2026-05-06',64.3,65.44,62.21,64.65,28681780.0],
+['2026-05-07',70.0,71.12,68.7,71.12,6422543.0],
+['2026-05-08',78.23,78.23,75.88,78.23,21296371.0],
+['2026-05-11',78.99,80.27,74.3,77.65,52425809.0],
+['2026-05-12',77.4,81.5,75.88,79.8,36225816.0],
+['2026-05-13',80.0,87.78,78.65,87.78,28218081.0],
+['2026-05-14',96.56,96.56,86.08,86.9,55662445.0],
+['2026-05-15',88.14,95.59,87.0,92.99,57542843.0],
+['2026-05-18',98.0,99.89,92.23,95.99,48277097.0]
+];
+
+// ── 数据处理（无需修改）──
+const dates = [], ohlc = [], volumesRaw = [];
+rawData.forEach(d => {
+  dates.push(d[0]);
+  ohlc.push([d[1], d[4], d[3], d[2]]);  // [open, close, low, high]
+  volumesRaw.push(d[5]);
+});
+const closes = ohlc.map(d => d[1]);
+const calcMA = (arr, n) => arr.map((_, i) => {
+  if (i < n - 1) return null;
+  let sum = arr.slice(i - n + 1, i + 1).reduce((a, b) => a + b, 0);
+  return +(sum / n).toFixed(2);
+});
+const ma5 = calcMA(closes, 5), ma20 = calcMA(closes, 20), ma60 = calcMA(closes, 60);
+const volumes = volumesRaw.map(v => +(v / 10000).toFixed(2));
+const dateLabels = dates.map(d => { const parts = d.split('-'); return parts[1] + '-' + parts[2]; });
+
+// ── 主题色获取 ──
+function getThemeColors() {
+  const isLight = document.body.classList.contains('light-mode');
+  return {
+    textColor: isLight ? '#2a1f12' : '#e8e9ec',
+    textSecondary: isLight ? '#6b5634' : '#b0b3be',
+    textMuted: isLight ? '#9c8b6e' : '#7a7d8a',
+    upColor: isLight ? '#dc2626' : '#f55656',
+    downColor: isLight ? '#16a34a' : '#28c75b',
+    ma5Color: isLight ? '#2563eb' : '#4a90d9',
+    ma20Color: isLight ? '#16a34a' : '#28c75b',
+    ma60Color: isLight ? '#c2410c' : '#e8923a',
+    volUpColor: isLight ? 'rgba(220,38,38,0.25)' : 'rgba(245,86,86,0.35)',
+    volDownColor: isLight ? 'rgba(22,163,74,0.25)' : 'rgba(40,199,91,0.35)',
+  };
+}
+
+// ── 饼图渲染 ──
+let pieChart, klineChart;
+function renderPie() {
+  if (pieChart) pieChart.dispose();
+  const el = document.getElementById('chart-business-pie');
+  if (!el) return;
+  pieChart = echarts.init(el);
+  const c = getThemeColors();
+  pieChart.setOption({
+    tooltip: { trigger: 'item', formatter: '{b}: {d}% (营收{c}亿)' },
+    series: [{
+      type: 'pie', radius: ['45%', '70%'],
+      data: [
+        {name: '通信网络', value: 44.44},
+        {name: '能源网络', value: 31.14},
+        {name: '数字网络', value: 19.71},
+        {name: '算力网络', value: 8.10},
+        {name: '其他', value: 0.10}
+      ],
+      label: { fontSize: 11, color: c.textSecondary },
+      color: ['#f55656', '#d4a853', '#e8923a', '#4a90d9', '#e3c26d']
+    }]
+  });
+}
+
+// ── K线图渲染 ──
+function renderKline() {
+  if (klineChart) klineChart.dispose();
+  const el = document.getElementById('chart-kline-full');
+  if (!el) return;
+  klineChart = echarts.init(el);
+  const c = getThemeColors();
+  const volData = volumes.map((v, i) => ({
+    value: v,
+    itemStyle: { color: ohlc[i][1] >= ohlc[i][0] ? c.volUpColor : c.volDownColor }
+  }));
+  klineChart.setOption({
+    grid: [
+      { left: '9%', right: '6%', top: '12%', height: '55%' },
+      { left: '9%', right: '6%', top: '74%', height: '14%' }
+    ],
+    xAxis: [
+      { type: 'category', data: dateLabels, gridIndex: 0,
+        axisLabel: { color: c.textMuted, fontSize: 9, interval: 5 },
+        axisLine: { lineStyle: { color: c.textMuted } }, splitLine: { show: false } },
+      { type: 'category', data: dateLabels, gridIndex: 1, show: false, splitLine: { show: false } }
+    ],
+    yAxis: [
+      { scale: true, gridIndex: 0, axisLabel: { color: c.textMuted, fontSize: 10 }, splitLine: { show: false } },
+      { scale: true, gridIndex: 1, axisLabel: { color: c.textMuted, fontSize: 10, formatter: '{value}万' }, splitLine: { show: false } }
+    ],
+    dataZoom: [{ type: 'inside', xAxisIndex: [0, 1] }],
+    tooltip: { trigger: 'axis', axisPointer: { type: 'cross' },
+      formatter: function(params) {
+        const k = params.find(p => p.seriesName === 'K线');
+        const vol = params.find(p => p.seriesName === '成交量');
+        if (!k || !vol) return '';
+        return k.axisValue + '<br/>开: ' + k.data[0] + '  收: ' + k.data[1] + '<br/>低: ' + k.data[2] + '  高: ' + k.data[3] + '<br/>成交量: ' + vol.data.value + '万手';
+      }
+    },
+    legend: { data: ['K线', 'MA5', 'MA20', 'MA60'], top: 0, textStyle: { color: c.textSecondary } },
+    series: [
+      { name: 'K线', type: 'candlestick', data: ohlc, xAxisIndex: 0, yAxisIndex: 0,
+        itemStyle: { color: c.upColor, color0: c.downColor, borderColor: c.upColor, borderColor0: c.downColor } },
+      { name: 'MA5', type: 'line', data: ma5, smooth: true,
+        lineStyle: { width: 1.5, color: c.ma5Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+      { name: 'MA20', type: 'line', data: ma20, smooth: true,
+        lineStyle: { width: 1.5, color: c.ma20Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+      { name: 'MA60', type: 'line', data: ma60, smooth: true,
+        lineStyle: { width: 1.5, color: c.ma60Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+      { name: '成交量', type: 'bar', data: volData, xAxisIndex: 1, yAxisIndex: 1 }
+    ]
+  });
+}
+
+// ── 渲染入口 ──
+function renderCharts() { renderPie(); renderKline(); }
+
+// ── 主题切换 ──
+const toggleBtn = document.getElementById('themeToggle');
+if (toggleBtn) {
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    toggleBtn.textContent = document.body.classList.contains('light-mode') ? '🌙 深色模式' : '☀️ 浅色模式';
+    renderCharts();
+  });
+}
+renderCharts();
+
+// ── 导航滚动高亮 ──
+const sections = document.querySelectorAll('.card[id], .hero[id], .conclusion-top[id]');
+const navs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  navs.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + cur) a.classList.add('active');
+  });
+});
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// ── 响应式图表 ──
+window.addEventListener('resize', () => {
+  pieChart && pieChart.resize();
+  klineChart && klineChart.resize();
+});
+})();
+</script>

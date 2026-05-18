@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>利通电子 603629 · 深度研报</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#0c0f15;--card-bg:#1a1c24;--card-bg-alt:#1e2029;--border:#2a2d3a;--text-primary:#e8e9ec;--text-secondary:#b0b3be;--text-muted:#7a7d8a;--red-up:#f55656;--green-down:#28c75b;--gold:#d4a853;--gold-light:#e3c26d;--blue-accent:#4a90d9;--orange-warn:#e8923a;--shadow:0 4px 20px rgba(0,0,0,0.3);--radius:10px;--font-sans:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;--font-mono:"JetBrains Mono","SF Mono","Consolas",monospace;--transition:0.2s ease;}
+body.light-mode{--bg:#fdf8f0;--card-bg:#fffbf5;--card-bg-alt:#fef5e7;--border:#e2cfa2;--text-primary:#2a1f12;--text-secondary:#6b5634;--text-muted:#9c8b6e;--red-up:#dc2626;--green-down:#16a34a;--gold:#b38a3c;--gold-light:#d4a853;--blue-accent:#2563eb;--orange-warn:#c2410c;--shadow:0 4px 20px rgba(162,125,57,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text-primary);font-family:var(--font-sans);line-height:1.7;font-size:14px;background-image:radial-gradient(circle at 15% 10%,rgba(212,168,83,0.03) 0%,transparent 35%),radial-gradient(circle at 85% 70%,rgba(212,168,83,0.03) 0%,transparent 35%);background-attachment:fixed}
+.top-nav{position:sticky;top:0;z-index:100;background:rgba(10,12,18,0.92);backdrop-filter:blur(12px);border-bottom:2px solid var(--gold-light);padding:10px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.top-nav .logo{display:flex;align-items:center;gap:10px;color:#fff}
+.top-nav .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#c0392b,#8b0000);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:#fff}
+.top-nav .stock-name{font-weight:700;font-size:17px;letter-spacing:0.5px}
+.top-nav .stock-code{font-size:12px;opacity:0.7;font-family:var(--font-mono)}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap}
+.nav-links a{font-size:12px;padding:5px 14px;border-radius:16px;color:var(--gold-light);text-decoration:none;border:1px solid transparent;transition:var(--transition);font-weight:500;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.08);color:#fff;border-color:var(--gold)}
+.theme-toggle{background:rgba(255,255,255,0.08);border:1px solid var(--gold-light);color:var(--gold-light);padding:5px 14px;border-radius:16px;font-size:12px;cursor:pointer;transition:var(--transition);margin-left:12px}
+.theme-toggle:hover{background:rgba(255,255,255,0.15)}
+.container{max-width:1300px;margin:0 auto;padding:24px 20px 40px}
+.hero{background:linear-gradient(105deg,#1c1010 0%,#2c1a1a 50%,#3d2424 100%);border-radius:var(--radius);padding:28px 32px;margin-bottom:24px;border:1px solid var(--gold-light);box-shadow:0 8px 28px rgba(100,55,55,0.2);display:flex;flex-wrap:wrap;gap:24px;align-items:center;color:#fff;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-price-block{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;z-index:1}
+.hero-price{font-size:56px;font-weight:900;line-height:1;font-family:var(--font-mono)}
+.hero-change{font-size:20px;font-weight:700;padding:4px 12px;border-radius:6px;background:rgba(245,86,86,0.2);color:#f87171;font-family:var(--font-mono)}
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;z-index:1}
+.hero-meta-item{text-align:center}
+.hero-meta-item .val{font-size:22px;font-weight:700;font-family:var(--font-mono);color:var(--gold-light)}
+.hero-meta-item .label{font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:1px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;z-index:1}
+.hero-tag{background:rgba(255,255,255,0.08);border:1px solid rgba(255,215,0,0.3);color:var(--gold-light);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500}
+.conclusion-top{background:linear-gradient(135deg,#1e1a10 0%,#241f14 100%);border:2px solid var(--gold);border-radius:var(--radius);padding:22px 28px;margin-bottom:24px;position:relative}
+.conclusion-top::before{content:'核心结论';position:absolute;top:-13px;left:24px;background:var(--gold);color:#000;padding:3px 16px;border-radius:12px;font-weight:700;font-size:12px;letter-spacing:1px}
+.conclusion-top .big-verdict{font-weight:800;font-size:20px;color:#fff;margin-top:8px}
+.conclusion-top .verdict-detail{font-size:14px;color:var(--text-secondary);margin-top:8px;line-height:1.7}
+.conclusion-top .verdict-tags{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:22px 28px;margin-bottom:20px;box-shadow:var(--shadow);transition:var(--transition)}
+.card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.5);border-color:var(--gold)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+.card-header .icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:var(--gold)}
+.card-header h2{font-size:18px;font-weight:700;color:#fff;letter-spacing:0.5px}
+.card-header .sub{margin-left:auto;font-size:11px;color:var(--text-muted)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.news-list{max-height:300px;overflow-y:auto;font-size:13px}
+.news-item{display:flex;align-items:baseline;gap:6px;padding:7px 0;border-bottom:1px dashed var(--border);color:var(--text-secondary)}
+.news-item .bullet{color:var(--red-up);font-weight:700;font-size:16px}
+.tag{display:inline-block;padding:3px 12px;border-radius:14px;font-size:11px;font-weight:600;background:rgba(212,168,83,0.15);color:var(--gold-light);border:1px solid var(--gold);margin-right:6px;margin-bottom:4px}
+table.cons{width:100%;border-collapse:collapse;font-size:13px;background:var(--card-bg-alt);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:12px 0}
+table.cons thead th{background:linear-gradient(180deg,#2c1a1a 0%,#1c1010 100%);color:#fff;font-weight:600;padding:10px 12px;text-align:left;font-size:12px;letter-spacing:1px}
+table.cons tbody tr{border-bottom:1px dashed var(--border)}
+table.cons tbody tr:hover{background:rgba(255,255,255,0.02)}
+table.cons tbody td{padding:9px 12px;vertical-align:middle;color:var(--text-secondary)}
+.val-up{color:var(--red-up);font-weight:600}
+.val-down{color:var(--green-down);font-weight:600}
+.chain-svg{background:var(--card-bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:16px 0;text-align:center}
+.scenario{background:var(--card-bg-alt);border:1px solid var(--border);border-radius:8px;padding:14px 16px;text-align:center;border-left:4px solid var(--gold)}
+.scenario.bear{border-left-color:var(--green-down)}
+.scenario.bull{border-left-color:var(--red-up)}
+.scenario .prob{font-size:11px;color:var(--text-muted)}
+.alert-list{list-style:none;padding:0}
+.alert-list li{padding:8px 14px;margin:6px 0;border-radius:6px;background:var(--card-bg-alt);border-left:4px solid var(--orange-warn);font-size:13px;font-weight:500;color:var(--text-secondary)}
+.rating-callout{background:linear-gradient(135deg,#1e1a10 0%,#241f14 100%);border:2px solid var(--gold);border-radius:var(--radius);padding:18px 24px;margin-top:16px;display:flex;align-items:center;gap:16px}
+.rating-callout .badge{min-width:64px;height:64px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;letter-spacing:1px}
+.rating-callout .body{flex:1}
+.rating-callout .body .title{font-size:16px;font-weight:700;color:#fff}
+.rating-callout .body .desc{font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.6}
+.verdict-highlight{background:var(--card-bg-alt);border-radius:10px;padding:18px 22px;margin-top:8px}
+.verdict-highlight .judgment{font-size:22px;font-weight:800;color:var(--gold);text-align:center;margin-bottom:12px}
+.verdict-highlight .verdict-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.verdict-highlight .verdict-item{text-align:center;padding:8px}
+.verdict-highlight .verdict-item .v-val{font-size:18px;font-weight:800}
+.verdict-highlight .verdict-item .v-label{font-size:11px;color:var(--text-muted);margin-top:2px}
+.score-bar{display:flex;align-items:center;gap:8px;margin:6px 0}
+.score-bar .score-label{width:100px;text-align:right;font-size:12px;color:var(--text-muted)}
+.score-bar .score-track{flex:1;height:8px;background:#2a2d3a;border-radius:6px;overflow:hidden}
+.score-bar .score-fill{height:100%;border-radius:6px;background:var(--gold)}
+.score-bar .score-num{width:50px;font-size:13px;font-weight:700;text-align:center;color:var(--text-primary)}
+.kpi-info-row{display:flex;justify-content:space-around;margin-top:18px;padding-top:14px;border-top:2px solid var(--border)}
+.kpi-info-item{text-align:center}
+.kpi-info-item .label{font-size:12px;color:var(--text-muted)}
+.kpi-info-item .value{font-size:20px;font-weight:700;color:var(--gold-light)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;font-size:13px}
+.info-grid dt{color:var(--text-muted)}
+.info-grid dd{color:var(--text-secondary);font-weight:500}
+.checklist{list-style:none;padding:0;font-size:13px}
+.checklist li{padding:5px 0;color:var(--text-secondary)}
+.checklist li::before{content:'☐ ';color:var(--gold)}
+@media(max-width:850px){.grid-2,.grid-3{grid-template-columns:1fr}.hero{flex-direction:column;align-items:flex-start}.hero-price{font-size:40px}}
+footer{text-align:center;padding:24px 16px;font-size:12px;color:var(--text-muted);border-top:1px solid var(--border);margin-top:24px}
+body.light-mode .top-nav{background:rgba(255,251,245,0.92);border-bottom-color:var(--gold)}
+body.light-mode .nav-links a{color:var(--gold)}
+body.light-mode .nav-links a:hover,body.light-mode .nav-links a.active{background:rgba(0,0,0,0.05);color:#7f1d1d}
+body.light-mode .hero{background:linear-gradient(105deg,#fef5e7,#fffbf5);color:var(--text-primary);border-color:var(--gold)}
+body.light-mode .hero-price{color:var(--text-primary)}
+body.light-mode .hero-change{background:rgba(220,38,38,0.1);color:var(--red-up)}
+body.light-mode .hero-meta-item .val{color:var(--gold)}
+body.light-mode .hero-meta-item .label{color:var(--text-muted)}
+body.light-mode .hero-tag{background:rgba(212,168,83,0.15);border-color:var(--gold);color:var(--gold)}
+body.light-mode .conclusion-top{background:linear-gradient(135deg,#fff9f0,#fef5e7)}
+body.light-mode .conclusion-top .big-verdict{color:var(--text-primary)}
+body.light-mode .card-header h2{color:var(--text-primary)}
+body.light-mode .tag{background:rgba(212,168,83,0.15);color:var(--gold);border-color:var(--gold)}
+body.light-mode table.cons thead th{background:linear-gradient(180deg,#f55656,#c0392b)}
+body.light-mode .score-bar .score-track{background:#f0e4ce}
+body.light-mode .rating-callout{background:linear-gradient(135deg,#fff9f0,#fef5e7)}
+body.light-mode .rating-callout .body .title{color:var(--text-primary)}
+body.light-mode .verdict-highlight{background:#fef5e7}
+body.light-mode .verdict-highlight .judgment{color:var(--gold)}
+body.light-mode .verdict-highlight .v-val{color:var(--text-primary)}
+.chain-svg .svg-hdr{fill:#e8e9ec}
+.chain-svg .svg-sub{fill:#b0b3be}
+body.light-mode .chain-svg .svg-hdr{fill:#2a1f12}
+body.light-mode .chain-svg .svg-sub{fill:#6b5634}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+<div class="logo"><div class="logo-icon">利</div><span class="stock-name">利通电子</span><span class="stock-code">603629.SH</span></div>
+<div class="nav-links">
+<a href="#hero" class="active">行情</a><a href="#conclusion-top">结论</a><a href="#profile">画像</a><a href="#kline-section">K线</a><a href="#mission">任务</a><a href="#macro">宏观</a><a href="#chain">产业链</a><a href="#quality">质量</a><a href="#elasticity">弹性</a><a href="#risk">风险</a><a href="#valuation">估值</a><a href="#compare">对标</a><a href="#tracking">跟踪</a>
+</div>
+<button class="theme-toggle" id="themeToggle">☀️ 浅色模式</button>
+</nav>
+<div class="container">
+<div class="hero" id="hero">
+<div class="hero-price-block"><span class="hero-price">170.00</span><span class="hero-change">-0.40 -0.23%</span></div>
+<div class="hero-meta">
+<div class="hero-meta-item"><div class="val">B级</div><div class="label">公司质地</div></div>
+<div class="hero-meta-item"><div class="val">200元</div><div class="label">中期目标价</div></div>
+<div class="hero-meta-item"><div class="val">1.25:1</div><div class="label">盈亏比</div></div>
+<div class="hero-meta-item"><div class="val" style="color:var(--orange-warn);">⚠️ 中高</div><div class="label">风险等级</div></div>
+</div>
+<div class="hero-tags"><span class="hero-tag">AI算力租赁</span><span class="hero-tag">英伟达伙伴</span><span class="hero-tag">腾讯长协</span><span class="hero-tag">业绩爆发</span><span class="hero-tag">高杠杆</span></div>
+</div>
+
+<div class="conclusion-top" id="conclusion-top">
+<div class="big-verdict">🎯 结论：AI算力转型成功的稀缺标的，英伟达Preferred伙伴+腾讯50亿长协构筑增长底座，但高杠杆与芯片风险需警惕</div>
+<div class="verdict-detail">
+利通电子从传统精密金属结构件制造商成功转型为AI算力服务商，2025年净利润同比大增1088%。公司是<strong style="color:#f55656;">英伟达中国区唯一Preferred级合作伙伴</strong>，独享高端GPU优先配额，与腾讯签订50亿3年长协。2026年Q1净利润2.71亿（环比继续高增），算力规模已达38,000P，年底目标6万P+。但资产负率69%、实控人近期减持套现约3.7亿元、芯片断供风险不容忽视。<strong>当前170元对应2026年PE约44x（基准情景），估值合理偏高，建议等待回调至140-160元区间分批布局。</strong>核心跟踪指标：算力规模扩张节奏、腾讯订单续约、毛利率变化。
+</div>
+<div class="verdict-tags"><span class="tag">交易型高波动</span><span class="tag">AI算力核心</span><span class="tag">英伟达概念</span><span class="tag">等待回调</span><span class="tag">仓位≤8%</span><span class="tag">五维69/100</span></div>
+</div>
+
+<div class="grid-2" id="profile">
+<div class="card">
+<div class="card-header"><span class="icon">🏢</span><h2>公司画像</h2></div>
+<p><strong style="color:#f55656;">双主业运营：</strong>AI算力服务(36.3%收入 / 72.7%利润) + 精密金属结构件(56.5%收入) — 算力已成核心增长引擎</p>
+<div style="margin:12px 0;"><span class="tag">AI算力租赁</span><span class="tag">英伟达Preferred</span><span class="tag">腾讯50亿长协</span><span class="tag">高成长</span><span class="tag">双主业</span></div>
+<dl class="info-grid" style="margin-top:12px;">
+<dt>公司全称</dt><dd>江苏利通电子股份有限公司</dd>
+<dt>上市日期</dt><dd>2018-12-24 · 上交所主板</dd>
+<dt>注册地</dt><dd>江苏省无锡市宜兴市</dd>
+<dt>所属行业</dt><dd>电子 / AI算力服务</dd>
+<dt>总股本</dt><dd>2.62亿股</dd>
+<dt>实际控制人</dt><dd>邵树伟（直接持股36.17%）</dd>
+<dt>算力规模</dt><dd>38,000P（英伟达高端GPU）</dd>
+<dt>核心客户</dt><dd>腾讯（50亿长协，占算力70%+）</dd>
+</dl>
+<p style="font-size:12px;color:var(--text-secondary);margin-top:10px;">利通电子原为液晶电视精密金属结构件龙头企业，2023年起战略转型AI算力服务。通过子公司世纪利通获得英伟达Preferred级合作伙伴资质，快速搭建起38,000P算力规模，全部搭载英伟达H100/H200/B200等高端GPU。公司通过"直租+转租"双模式运营，出租率维持100%。2025年算力业务贡献净利润3.38亿元，成为核心利润来源。公司正在向"轻资产技术服务"模式升级，目标降低资本开支强度。</p>
+</div>
+<div class="card">
+<div class="card-header"><span class="icon">📰</span><h2>近期动态</h2></div>
+<div class="news-list">
+<div class="news-item"><span class="bullet">•</span> 2026-05-13 CPO概念涨停，收172.71元，成交67.98亿</div>
+<div class="news-item"><span class="bullet">•</span> 2026-05-06 公司AI算力云规模已达38,000P</div>
+<div class="news-item"><span class="bullet">•</span> 2026-04-28 2025年报：净利2.93亿(+1088%)，2026Q1净利2.71亿(+821%)</div>
+<div class="news-item"><span class="bullet">•</span> 2026-04-22 实控人邵树伟解除2100万股质押</div>
+<div class="news-item"><span class="bullet">•</span> 邵树伟24个月不减持承诺变更（增加例外条款）</div>
+<div class="news-item"><span class="bullet">•</span> 部分实控人累计减持套现约3.7亿元</div>
+<div class="news-item"><span class="bullet">•</span> 在手订单超70亿元，排期至2028年</div>
+<div class="news-item"><span class="bullet">•</span> 英伟达H100租金持续上涨（$1.70→$2.35/卡时）</div>
+</div>
+</div>
+</div>
+<div class="grid-2">
+<div class="card">
+<div class="card-header"><span class="icon">📊</span><h2>主营业务构成</h2><span class="sub">FY2025年报</span></div>
+<div id="chart-business-pie" style="width:100%;height:280px;"></div>
+<div style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:6px;">
+精密结构件(56.5%·毛利率9.9%) | 算力业务(36.3%·毛利率49.7%) | 电子元器件(4.1%·毛利率14.1%) | 其他(3.1%·毛利率4.0%)
+</div>
+</div>
+<div class="card">
+<div class="card-header"><span class="icon">📈</span><h2>关键财务指标</h2><span class="sub">FY2022-FY2025</span></div>
+<table class="cons">
+<thead><tr><th>指标</th><th>FY2025</th><th>FY2024</th><th>FY2023</th><th>FY2022</th></tr></thead>
+<tbody>
+<tr><td>营收(亿)</td><td>33.07</td><td>22.48</td><td>18.93</td><td>20.25</td></tr>
+<tr><td>营收增速</td><td class="val-up">+47.2%</td><td class="val-up">+18.7%</td><td class="val-down">-6.5%</td><td class="val-up">+12.2%</td></tr>
+<tr><td>归母净利(亿)</td><td class="val-up">2.93</td><td>0.25</td><td>0.40</td><td>0.66</td></tr>
+<tr><td>净利增速</td><td class="val-up">+1088.6%</td><td class="val-down">-38.8%</td><td class="val-down">-39.0%</td><td class="val-up">+14.2%</td></tr>
+<tr><td>扣非净利(亿)</td><td class="val-up">2.36</td><td>0.06</td><td>0.20</td><td>0.35</td></tr>
+<tr><td>毛利率</td><td>28.3%</td><td>16.5%</td><td>18.2%</td><td>18.8%</td></tr>
+<tr><td>ROE</td><td>16.18%</td><td>1.50%</td><td>2.47%</td><td>4.11%</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<div class="card" id="kline-section">
+<div class="card-header"><span class="icon">📈</span><h2>K线图 · 近120个交易日</h2><span class="sub">前复权日K · MA5/MA20/MA60</span></div>
+<div id="chart-kline-full" style="width:100%;height:480px;"></div>
+<div class="kpi-info-row">
+<div class="kpi-info-item"><div class="label">向上空间(目标200元)</div><div class="value">+17.6%</div></div>
+<div class="kpi-info-item"><div class="label">盈亏比(回调介入)</div><div class="value">1.25:1</div></div>
+<div class="kpi-info-item"><div class="label">目标价(中期)</div><div class="value">180-220元</div></div>
+<div class="kpi-info-item"><div class="label">建议周期</div><div class="value">6-12月</div></div>
+</div>
+</div>
+
+<!-- Step 0: 任务锁定 -->
+<div class="card" id="mission">
+<div class="card-header"><span class="icon">🎯</span><h2>任务锁定与核心矛盾</h2></div>
+<p style="color:var(--text-secondary);line-height:1.8;">利通电子从传统精密金属结构件制造商成功转型为<strong style="color:var(--red-up);">AI算力服务商</strong>，2025年净利润同比暴增1088%。公司是英伟达中国区唯一Preferred级合作伙伴，与腾讯签订50亿3年长协。当前正处于<strong style="color:var(--red-up);">算力规模快速扩张→利润释放</strong>的关键阶段，但高杠杆扩张、芯片断供风险和竞争格局变化是主要隐忧。</p>
+<div style="margin-top:14px;display:flex;gap:16px;flex-wrap:wrap;">
+<div style="background:var(--card-bg-alt);padding:10px 16px;border-radius:8px;text-align:center;"><div style="font-size:11px;color:var(--text-muted);">标的</div><div style="font-weight:700;color:#fff;">利通电子 603629.SH</div></div>
+<div style="background:var(--card-bg-alt);padding:10px 16px;border-radius:8px;text-align:center;"><div style="font-size:11px;color:var(--text-muted);">周期</div><div style="font-weight:700;color:var(--gold-light);">中线6-12月</div></div>
+<div style="background:var(--card-bg-alt);padding:10px 16px;border-radius:8px;text-align:center;"><div style="font-size:11px;color:var(--text-muted);">风格预判</div><div style="font-weight:700;color:var(--orange-warn);">交易型+成长驱动</div></div>
+<div style="background:var(--card-bg-alt);padding:10px 16px;border-radius:8px;text-align:center;"><div style="font-size:11px;color:var(--text-muted);">核心命题</div><div style="font-weight:700;color:#fff;">算力增长可持续性</div></div>
+</div>
+</div>
+
+<!-- Step 1: 宏观与周期定位 -->
+<div class="card" id="macro">
+<div class="card-header"><span class="icon">🌍</span><h2>宏观与周期定位</h2></div>
+<div style="margin-bottom:16px;">
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">经济周期映射</h3>
+<ul style="list-style:none;padding:0;font-size:13px;color:var(--text-secondary);">
+<li style="padding:4px 0;">• 宏观经济阶段：全球AI军备竞赛持续升温，算力成为核心战略资源，中国算力租赁市场规模2025年达2116亿元</li>
+<li style="padding:4px 0;">• 行业周期位置：AI算力基础设施处于<strong style="color:var(--red-up);">S曲线早期</strong>，高端GPU供需严重失衡（H100租金年涨40%），未来3-5年高景气</li>
+<li style="padding:4px 0;">• 政策周期：数字中国战略+"东数西算"+新质生产力政策持续推动算力基建</li>
+<li style="padding:4px 0;">• 公司所处阶段：算力收入从0到12亿（3年），净利润从亏损到2.93亿，处于高速成长期</li>
+</ul>
+</div>
+<div style="margin-bottom:16px;">
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">政策与环境扫描</h3>
+<ul style="list-style:none;padding:0;font-size:13px;color:var(--text-secondary);">
+<li style="padding:4px 0;">• AI算力纳入新质生产力：国家层面对算力基础设施的政策支持持续加码</li>
+<li style="padding:4px 0;">• 芯片出口管制：对华高端GPU限制利好存量GPU资源持有者，但也带来供应链不确定性</li>
+<li style="padding:4px 0;">• 腾讯/字节等Capex暴增：2026年腾讯资本开支预计超1500亿元，算力采购需求旺盛</li>
+<li style="padding:4px 0;">• 行业竞争加剧：算力租赁企业扎堆进场，"二八法则"加速行业洗牌</li>
+</ul>
+</div>
+<div style="background:var(--card-bg-alt);padding:14px 18px;border-radius:8px;border-left:4px solid var(--gold);">
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:6px;">核心矛盾</h3>
+<p style="font-size:14px;color:var(--text-secondary);"><strong style="color:var(--red-up);">算力业务的爆发式增长</strong> vs <strong style="color:var(--green-down);">高杠杆扩张与芯片断供风险</strong> — 在手订单70亿+、出租率100%，但资产负率69%、GPU供应受地缘政治影响、行业竞争者持续涌入，高增长能否持续是关键。</p>
+</div>
+</div>
+
+<!-- Step 2: 产业链深度拆解 -->
+<div class="card" id="chain">
+<div class="card-header"><span class="icon">🔗</span><h2>产业链深度拆解</h2></div>
+<div style="margin-bottom:16px;">
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">题材来源判断</h3>
+<p style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
+1. <strong style="color:var(--red-up);">AI算力租赁（核心逻辑）：</strong>英伟达Preferred级伙伴+38000P算力规模，独享高端GPU优先配额<br>
+2. <strong style="color:var(--red-up);">腾讯生态（确定性逻辑）：</strong>50亿3年长协在手，订单排至2028年，贡献算力收入70%+<br>
+3. <strong style="color:var(--gold-light);">算力涨价（弹性逻辑）：</strong>H100租金从$1.70涨至$2.35/卡时（+38%），直接提升收入和利润
+</p>
+</div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">产业链图谱</h3>
+<div class="chain-svg">
+<svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto"><polygon points="0 0,10 4,0 8" fill="#d4a853"/></marker></defs>
+<rect x="10" y="30" width="170" height="120" fill="var(--card-bg-alt)" stroke="#d4a853" stroke-width="2" rx="10"/>
+<text x="95" y="55" text-anchor="middle" font-weight="700" font-size="14" class="svg-hdr">上游·GPU/芯片</text>
+<text x="95" y="78" text-anchor="middle" font-size="11" class="svg-sub">英伟达H100/H200/B200</text>
+<text x="95" y="96" text-anchor="middle" font-size="11" class="svg-sub">超聚变服务器代工</text>
+<text x="95" y="114" text-anchor="middle" font-size="11" class="svg-sub">三星HBM内存供应</text>
+<text x="95" y="132" text-anchor="middle" font-size="11" class="svg-sub">信通网络带宽</text>
+<line x1="180" y1="90" x2="230" y2="90" stroke="#d4a853" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="235" y="15" width="260" height="150" fill="var(--card-bg-alt)" stroke="#f55656" stroke-width="3" rx="12"/>
+<text x="365" y="45" text-anchor="middle" font-weight="800" font-size="16" fill="#f55656">中游·算力服务</text>
+<text x="365" y="68" text-anchor="middle" font-size="12" class="svg-hdr">利通电子·世纪利通</text>
+<text x="365" y="88" text-anchor="middle" font-size="12" class="svg-sub">直租模式(16,000P·净利率~28%)</text>
+<text x="365" y="106" text-anchor="middle" font-size="12" class="svg-sub">转租模式(22,000P·净利率~18%)</text>
+<text x="365" y="124" text-anchor="middle" font-size="12" class="svg-sub">分成模式(拓展中·净利率~35%)</text>
+<text x="365" y="144" text-anchor="middle" font-size="12" class="svg-sub">轻资产技术服务(目标方向)</text>
+<line x1="495" y1="90" x2="545" y2="90" stroke="#d4a853" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="550" y="30" width="230" height="120" fill="var(--card-bg-alt)" stroke="#d4a853" stroke-width="2" rx="10"/>
+<text x="665" y="55" text-anchor="middle" font-weight="700" font-size="14" class="svg-hdr">下游·应用/客户</text>
+<text x="665" y="78" text-anchor="middle" font-size="11" class="svg-sub">腾讯云(50亿长协·70%收入)</text>
+<text x="665" y="96" text-anchor="middle" font-size="11" class="svg-sub">字节火山引擎(拓展中)</text>
+<text x="665" y="114" text-anchor="middle" font-size="11" class="svg-sub">阿里通义千问(拓展中)</text>
+<text x="665" y="132" text-anchor="middle" font-size="11" class="svg-sub">AI初创公司集群</text>
+</svg>
+</div>
+<div class="grid-2" style="margin-top:16px;">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">趋势三要素</h3>
+<table class="cons"><thead><tr><th>维度</th><th>评估</th><th>打分</th></tr></thead>
+<tbody>
+<tr><td>算力需求增长</td><td>Token调用量两年增长千倍</td><td>⭐⭐⭐⭐⭐</td></tr>
+<tr><td>GPU供给格局</td><td>英伟达主导，国产替代待成熟</td><td>⭐⭐⭐⭐</td></tr>
+<tr><td>公司竞争卡位</td><td>英伟达Preferred伙伴+腾讯长协</td><td>⭐⭐⭐⭐</td></tr>
+</tbody></table>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">价值链利润分布</h3>
+<table class="cons"><thead><tr><th>环节</th><th>代表企业</th><th>毛利率</th></tr></thead>
+<tbody>
+<tr><td>GPU芯片</td><td>英伟达</td><td>70-80%</td></tr>
+<tr><td>算力租赁</td><td>利通电子/润泽</td><td style="color:var(--red-up);">45-50%</td></tr>
+<tr><td>IDC托管</td><td>万国数据/世纪互联</td><td>25-35%</td></tr>
+<tr><td>AI应用</td><td>各AI公司</td><td>30-60%</td></tr>
+</tbody></table>
+</div>
+</div>
+<p style="font-size:13px;color:var(--text-secondary);margin-top:12px;padding:10px 14px;background:var(--card-bg-alt);border-radius:6px;">💡 <strong>关键判断：</strong>算力租赁目前处于产业链高利润区间（45-50%毛利率），核心原因是GPU严重供不应求。长期看毛利率将趋于下降，但1-2年内仍可维持高位。利通电子的核心竞争力在于英伟达合作关系和先发算力规模。</p>
+</div>
+
+<!-- Step 3: 公司筛选与质量评分 -->
+<div class="card" id="quality">
+<div class="card-header"><span class="icon">⭐</span><h2>公司筛选与质量评分</h2><span class="sub">75/100 · B级良好</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">正面清单</h3>
+<table class="cons"><tbody>
+<tr><td>✅ 行业高景气</td><td>AI算力投入处于超级周期，行业增速40%+</td></tr>
+<tr><td>✅ 竞争壁垒</td><td>英伟达Preferred伙伴，独享高端GPU优先配额</td></tr>
+<tr><td>✅ 业绩高增长</td><td>2025年净利+1088%，2026Q1净利+821%</td></tr>
+<tr><td>✅ 大客户绑定</td><td>腾讯50亿长协在手，订单排至2028年</td></tr>
+<tr><td>✅ 现金流强劲</td><td>经营性现金流9.38亿（2025），净现比3.2</td></tr>
+</tbody></table>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">负面排查</h3>
+<table class="cons"><tbody>
+<tr><td>❌ 财务造假</td><td>无明显迹象（审计正常，数据自洽）</td></tr>
+<tr><td>⚠️ 高负债</td><td>资产负债率69%，财务费用同比+50%</td></tr>
+<tr><td>⚠️ 客户集中</td><td>腾讯单客户占算力收入70%+</td></tr>
+<tr><td>⚠️ 芯片断供</td><td>英伟达出口管制升级，GPU供应不确定性</td></tr>
+<tr><td>⚠️ 实控人减持</td><td>部分实控人累计减持套现约3.7亿元</td></tr>
+</tbody></table>
+</div>
+</div>
+<div style="margin-top:16px;">
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">公司质地评分 · 100分制</h3>
+<div class="score-bar"><span class="score-label">行业前景</span><div class="score-track"><div class="score-fill" style="width:90%;"></div></div><span class="score-num">23/25</span></div>
+<div class="score-bar"><span class="score-label">竞争优势</span><div class="score-track"><div class="score-fill" style="width:85%;"></div></div><span class="score-num">21/25</span></div>
+<div class="score-bar"><span class="score-label">盈利能力</span><div class="score-track"><div class="score-fill" style="width:80%;background:var(--gold);"></div></div><span class="score-num">12/15</span></div>
+<div class="score-bar"><span class="score-label">成长性</span><div class="score-track"><div class="score-fill" style="width:95%;"></div></div><span class="score-num">19/20</span></div>
+<div class="score-bar"><span class="score-label">财务安全</span><div class="score-track"><div class="score-fill" style="width:60%;background:var(--orange-warn);"></div></div><span class="score-num">6/10</span></div>
+<div class="score-bar"><span class="score-label">管理层能力</span><div class="score-track"><div class="score-fill" style="width:80%;"></div></div><span class="score-num">10/12</span></div>
+<div class="rating-callout">
+<div class="badge">B</div>
+<div class="body"><div class="title">74.8 / 100 · AI算力转型成功，高成长确定性强，但负债偏高</div><div class="desc">公司成功从传统制造转型AI算力，英伟达Preferred伙伴+腾讯长协构筑了坚实的成长底座。2025年业绩爆发式增长验证了商业模式可行性。主要不足在于技术护城河不深（以硬件租赁为主）、负债率偏高。整体属于"高成长、中壁垒"类型。</div></div>
+</div>
+</div>
+</div>
+<div class="card" id="elasticity">
+<div class="card-header"><span class="icon">⚡</span><h2>业绩弹性测算</h2></div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">分业务弹性树</h3>
+<div style="background:var(--card-bg-alt);border:2px solid var(--gold);border-radius:10px;padding:16px;margin-bottom:16px;">
+<div style="display:flex;flex-direction:column;align-items:center;">
+<div style="background:linear-gradient(135deg,#1e1a10,#2c1a1a);border:2px solid var(--gold);border-radius:10px;padding:10px 24px;font-weight:700;font-size:15px;color:#fff;">利通电子 2026E 净利润 10-16亿</div>
+<div style="text-align:center;width:100%;"><span style="display:inline-block;width:2px;height:6px;background:var(--gold);vertical-align:top;"></span></div>
+<div style="display:flex;width:100%;">
+<div style="flex:2;padding-right:5px;text-align:center;border-top:2px solid var(--gold);"><span style="display:inline-block;width:2px;height:8px;background:var(--gold);vertical-align:top;"></span></div>
+<div style="flex:1;padding:0 5px;text-align:center;border-top:2px solid var(--gold);"><span style="display:inline-block;width:2px;height:8px;background:var(--gold);vertical-align:top;"></span></div>
+<div style="flex:1;padding-left:5px;text-align:center;border-top:2px solid var(--gold);"><span style="display:inline-block;width:2px;height:8px;background:var(--gold);vertical-align:top;"></span></div>
+</div>
+<div style="display:flex;gap:10px;width:100%;">
+<div style="flex:2;background:rgba(245,86,86,0.08);border:1px solid rgba(245,86,86,0.3);border-radius:8px;padding:12px;text-align:center;">
+<div style="font-weight:700;color:var(--red-up);font-size:14px;">🔴 算力-分成模式</div>
+<div style="font-size:11px;color:var(--text-muted);">占比~50% · 净利率~35%</div>
+<div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">腾讯长协50亿<br>收入年化16-18亿<br>贡献利润~8亿</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:4px;">弹性因子：分成比例·算力需求</div>
+</div>
+<div style="flex:1;background:rgba(212,168,83,0.08);border:1px solid rgba(212,168,83,0.3);border-radius:8px;padding:12px;text-align:center;">
+<div style="font-weight:700;color:var(--gold-light);font-size:13px;">🟡 算力-传统模式</div>
+<div style="font-size:11px;color:var(--text-muted);">占比~50% · 净利率~20%</div>
+<div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">直租+转租<br>贡献利润~4.5亿</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:4px;">弹性因子：租金价格·出租率</div>
+</div>
+<div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;">
+<div style="font-weight:700;color:var(--text-secondary);font-size:13px;">⚪ 传统制造业务</div>
+<div style="font-size:11px;color:var(--text-muted);">扭亏中 · 净利率~3%</div>
+<div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">精密结构件<br>贡献利润~0.5亿</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:4px;">弹性因子：AI赋能·关税影响</div>
+</div>
+</div>
+</div>
+</div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">价格敏感度公式</h3>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:14px 18px;margin-bottom:12px;">
+<div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;text-align:center;">核心公式</div>
+<div style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);text-align:center;padding:10px 16px;background:rgba(245,86,86,0.06);border-radius:8px;margin-bottom:10px;">
+<strong>净利润 = 总算力(P) &times; 单位租金(元/P/年) &times; 净利率 &times; 分成比例</strong>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+<div style="background:rgba(245,86,86,0.06);border-radius:8px;padding:12px;text-align:center;">
+<div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">底线情景 · 4万P · 租金持平</div>
+<div style="font-size:14px;font-family:var(--font-mono);color:var(--text-primary);">
+4万P &times; 35万 &times; 18% = <strong style="color:var(--orange-warn);font-size:16px;">~5亿</strong>
+</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:2px;">现有规模+保守净利率</div>
+</div>
+<div style="background:rgba(40,199,91,0.06);border-radius:8px;padding:12px;text-align:center;">
+<div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">基准情景 · 5万P · 净利率25%</div>
+<div style="font-size:14px;font-family:var(--font-mono);color:var(--text-primary);">
+5万P &times; 38万 &times; 25% = <strong style="color:var(--gold-light);font-size:16px;">~10亿</strong>
+</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:2px;">扩产+净利率稳定</div>
+</div>
+<div style="background:rgba(212,168,83,0.08);border-radius:8px;padding:12px;text-align:center;">
+<div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">乐观情景 · 6.5万P · 净利率30%</div>
+<div style="font-size:14px;font-family:var(--font-mono);color:var(--text-primary);">
+6.5万P &times; 40万 &times; 30% = <strong style="color:var(--red-up);font-size:16px;">~16亿</strong>
+</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:2px;">大增规模+分成模式放量</div>
+</div>
+<div style="background:rgba(245,86,86,0.1);border-radius:8px;padding:12px;text-align:center;border:1px solid rgba(245,86,86,0.3);">
+<div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">每增1万P · 增量利润</div>
+<div style="font-size:14px;font-family:var(--font-mono);color:var(--text-primary);">
+1万P &times; 38万 &times; 28% = <strong style="color:var(--red-up);font-size:18px;">~1.1亿</strong>
+</div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:2px;">净利润随规模线性增长</div>
+</div>
+</div>
+<div style="margin-top:10px;font-size:12px;color:var(--text-muted);padding:8px 12px;background:rgba(212,168,83,0.08);border-radius:6px;">💡 关键结论：业绩弹性核心在<strong style="color:var(--gold-light);">算力规模扩张速度</strong>和<strong style="color:var(--gold-light);">分成模式占比提升</strong>。每新增1万P算力，增量利润约1.1亿。纯算力规模扩张可驱动2026年净利至10-16亿。</div>
+</div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">情景分析</h3>
+<div class="grid-3">
+<div class="scenario bull"><strong>🟢 乐观情景</strong><div class="prob">概率 25%</div><div style="font-size:13px;color:var(--text-secondary);margin-top:6px;">GPU供应顺畅<br>算力达6.5万P+<br>分成模式占比60%<br>净利16亿+<br><strong style="color:var(--red-up);">目标价250元+</strong></div></div>
+<div class="scenario"><strong>🟡 基准情景</strong><div class="prob">概率 50%</div><div style="font-size:13px;color:var(--text-secondary);margin-top:6px;">算力达5万P<br>净利率25%<br>腾讯订单正常履约<br>净利10亿<br><strong style="color:var(--gold-light);">目标价180-220元</strong></div></div>
+<div class="scenario bear"><strong>🔴 悲观情景</strong><div class="prob">概率 25%</div><div style="font-size:13px;color:var(--text-secondary);margin-top:6px;">芯片供应受限<br>GPU价格大跌<br>竞争恶化毛利率降<br>净利4-5亿<br><strong style="color:var(--green-down);">目标价120-150元</strong></div></div>
+</div>
+</div>
+
+<!-- Step 5: 风险分析 -->
+<div class="card" id="risk">
+<div class="card-header"><span class="icon">⚠️</span><h2>风险分析</h2><span class="sub">5个强制止损信号</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">风险清单</h3>
+<table class="cons"><thead><tr><th>风险类型</th><th>描述</th><th>影响</th><th>概率</th></tr></thead>
+<tbody>
+<tr><td>🔴 芯片断供</td><td>英伟达对华出口管制升级</td><td class="val-down">致命</td><td>中(30%)</td></tr>
+<tr><td>🔴 客户集中</td><td>腾讯单客户占算力70%+</td><td class="val-down">重大</td><td>低(20%)</td></tr>
+<tr><td>🟡 竞争恶化</td><td>行业新进者增多，毛利率下行</td><td style="color:var(--orange-warn);">重大</td><td>中(40%)</td></tr>
+<tr><td>🟡 高杠杆经营</td><td>资产负债率69%，财务费用+50%</td><td style="color:var(--orange-warn);">中</td><td>中(35%)</td></tr>
+<tr><td>🟡 实控人减持</td><td>部分实控人套现3.7亿，承诺变更</td><td style="color:var(--orange-warn);">中</td><td>中(30%)</td></tr>
+<tr><td>⚪ 技术路线变化</td><td>国产ASIC替代降低英伟达稀缺性</td><td style="color:var(--orange-warn);">中</td><td>低(15%)</td></tr>
+</tbody></table>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--orange-warn);margin-bottom:10px;">逻辑破坏条件（止损信号）</h3>
+<ul class="alert-list">
+<li><strong>1.</strong> 英伟达终止与世纪利通的Preferred合作 → 核心壁垒瓦解</li>
+<li><strong>2.</strong> 腾讯提前终止或大幅缩减50亿长协 → 最大客户流失</li>
+<li><strong>3.</strong> 连续两季度算力规模无增长 → 成长逻辑破坏</li>
+<li><strong>4.</strong> 算力业务毛利率跌破30% → 行业竞争急剧恶化</li>
+<li><strong>5.</strong> 资产负债率突破80%或出现债务违约 → 财务风险失控</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Step 6: 估值与买卖时机 -->
+<div class="card" id="valuation">
+<div class="card-header"><span class="icon">💰</span><h2>估值与买卖时机</h2><span class="sub">PE(2026E) ~44x · 盈亏比1.25:1</span></div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">三种估值方法交叉验证</h3>
+<table class="cons"><thead><tr><th>估值方法</th><th>计算依据</th><th>合理市值</th><th>对应股价</th></tr></thead>
+<tbody>
+<tr><td><strong>PE估值</strong></td><td>2026E净利10亿 × 30-40x</td><td>300-400亿</td><td>114-152元</td></tr>
+<tr><td><strong style="color:var(--gold-light);">PEG估值</strong></td><td>净利增速800%+ · PEG << 1</td><td style="color:var(--gold-light);">400-600亿</td><td style="color:var(--gold-light);">152-228元</td></tr>
+<tr><td><strong style="color:var(--red-up);">EV/EBITDA</strong></td><td>2026E EBITDA 18亿 × 12-15x</td><td style="color:var(--red-up);">450-550亿</td><td style="color:var(--red-up);">171-210元</td></tr>
+</tbody></table>
+<div class="grid-2" style="margin-top:12px;">
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;font-size:13px;">
+<strong style="color:var(--gold);">资金面分析</strong>
+<p style="color:var(--text-secondary);margin-top:4px;">· 股东户数从33,129暴增至83,490（+152%）<br>· 5/15主力净流出1.65亿，散户资金承接<br>· 日均成交额超60亿，换手率极高<br>· 融资融券标的，杠杆资金参与活跃</p>
+</div>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;font-size:13px;">
+<strong style="color:var(--gold);">技术面分析</strong>
+<p style="color:var(--text-secondary);margin-top:4px;">· 当前170元，从20.62元底部涨超700%<br>· 近期高位震荡（155-181元）<br>· MA5 ~165元短期偏强<br>· MA20 ~155元中期趋势向上</p>
+</div>
+</div>
+<h3 style="font-size:15px;color:var(--gold-light);margin:16px 0 10px;">三档目标价</h3>
+<table class="cons"><thead><tr><th>档位</th><th>时间窗口</th><th>目标价</th><th>上涨空间</th><th>核心假设</th></tr></thead>
+<tbody>
+<tr><td style="color:var(--red-up);">短期(交易)</td><td>1-3个月</td><td class="val-up">180-200元</td><td>+6~18%</td><td>CPO/AI算力板块情绪催化</td></tr>
+<tr><td style="color:var(--gold-light);">中期(配置)</td><td>6-12个月</td><td class="val-up">180-220元</td><td>+6~29%</td><td>2026年净利10亿+ EV/EBITDA 15x</td></tr>
+<tr><td>长期(价值)</td><td>12-24个月</td><td class="val-up">250-350元</td><td>+47~106%</td><td>算力6万P+ 分成模式放量</td></tr>
+</tbody></table>
+<h3 style="font-size:15px;color:var(--gold-light);margin:16px 0 10px;">盈亏比量化</h3>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:14px;font-size:13px;">
+<p style="color:var(--text-secondary);text-align:center;margin-bottom:8px;">
+<strong>现价 170元</strong> →
+向上空间（目标200元）：<strong style="color:var(--red-up);">+17.6%</strong><br>
+向下空间（止损130元）：<strong style="color:var(--green-down);">-23.5%</strong>
+→ <strong style="color:var(--orange-warn);">盈亏比 0.75（追高风险较大）</strong>
+</p>
+<div style="padding:8px 12px;background:rgba(212,168,83,0.08);border-radius:6px;margin-top:8px;">
+<p style="color:var(--text-secondary);text-align:center;">
+<strong style="color:var(--gold-light);">💡 回调介入方案：</strong> 140-150元入场 → 目标200元 = <strong style="color:var(--red-up);">+33~43%</strong>，止损120元 = <strong style="color:var(--green-down);">-14~20%</strong> → <strong style="color:var(--gold);">盈亏比 1.7~3.0x</strong>
+</p>
+</div>
+</div>
+</div>
+<div class="card" id="compare">
+<div class="card-header"><span class="icon">📊</span><h2>对标分析</h2><span class="sub">算力租赁核心玩家横向对比</span></div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:10px;">案例类比</h3>
+<table class="cons"><thead><tr><th>维度</th><th>利通电子</th><th>润泽科技</th><th>协创数据</th><th>鸿博股份</th></tr></thead>
+<tbody>
+<tr><td>核心定位</td><td style="color:var(--gold-light);">AI算力租赁+制造</td><td>AIDC算力龙头</td><td>算力+云服务</td><td>英伟达概念</td></tr>
+<tr><td>算力规模</td><td>38,000P</td><td>100,000P+</td><td>50,000P+</td><td>5,000P</td></tr>
+<tr><td>2025算力收入</td><td>12.0亿</td><td>~80亿</td><td>~28亿</td><td>~5亿</td></tr>
+<tr><td>2025净利</td><td class="val-up">2.93亿</td><td>~25亿</td><td>~6亿</td><td class="val-down">亏损</td></tr>
+<tr><td>算力毛利率</td><td>49.7%</td><td>~50%</td><td>~18%</td><td>~20%</td></tr>
+<tr><td>GPU资源</td><td class="val-up">英伟达Preferred</td><td>多供应商</td><td>多渠道采购</td><td>英伟达非Preferred</td></tr>
+<tr><td>核心客户</td><td>腾讯(70%+)</td><td>字节(60%+)</td><td>腾讯/字节</td><td>多家AI公司</td></tr>
+<tr><td>估值(PS)</td><td>~36x</td><td>~19x</td><td>~21x</td><td>~20x</td></tr>
+</tbody></table>
+<p style="font-size:13px;color:var(--text-secondary);margin-top:10px;">
+利通电子的算力毛利率（49.7%）与润泽科技相当，显著优于协创数据。但PS估值（36x）明显高于同行，反映市场给予其"英伟达Preferred伙伴"溢价。主要短板是算力规模只有润泽的1/3，客户集中度（腾讯70%+）高于同行。
+</p>
+<h3 style="font-size:15px;color:var(--gold-light);margin:16px 0 10px;">增长引擎切换</h3>
+<div style="display:flex;gap:12px;font-size:13px;color:var(--text-secondary);flex-wrap:wrap;">
+<div style="flex:1;min-width:180px;background:var(--card-bg-alt);padding:12px;border-radius:8px;opacity:0.6;"><strong>第一引擎(过去)：</strong><br>传统精密结构件制造 → 收入稳定但利润微薄</div>
+<div style="flex:1;min-width:180px;background:var(--card-bg-alt);padding:12px;border-radius:8px;border:1px solid var(--gold);"><strong style="color:var(--gold-light);">第二引擎(现在)：</strong><br>算力规模扩张(3千P→3.8万P) + 腾讯长协放量 → 高速成长期</div>
+<div style="flex:1;min-width:180px;background:var(--card-bg-alt);padding:12px;border-radius:8px;border:1px solid var(--red-up);"><strong style="color:var(--red-up);">第三引擎(未来)：</strong><br>分成模式(轻资产)+技术服务+轻资产运营 → 拓展中</div>
+</div>
+</div>
+
+<!-- Step 8: 跟踪计划与综合结论 -->
+<div class="card" id="tracking">
+<div class="card-header"><span class="icon">📋</span><h2>跟踪计划与综合结论</h2><span class="sub">五维 69/100 · 积极关注 · 仓位≤8%</span></div>
+<div class="grid-2">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">分层跟踪锚点</h3>
+<table class="cons"><thead><tr><th>频率</th><th>跟踪指标</th><th>关注阈值</th></tr></thead>
+<tbody>
+<tr><td>🔴 高频(日/周)</td><td>股价、融资余额、算力租金</td><td>H100租金≥$2.0/卡时</td></tr>
+<tr><td>🟡 中频(月)</td><td>算力规模、研报覆盖、新闻动态</td><td>月净增≥5,000P</td></tr>
+<tr><td>⚪ 低频(季)</td><td>财报(毛利率、净利、现金流)</td><td>算力毛利率≥45%</td></tr>
+<tr><td>📌 事件驱动</td><td>英伟达出口管制、腾讯续约</td><td>关注BIS实体清单</td></tr>
+</tbody></table>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">执行清单</h3>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;font-size:13px;">
+<p style="color:var(--red-up);font-weight:600;">短线（1-3个月）：</p>
+<ul class="checklist">
+<li>关注CPO/AI算力板块情绪联动和催化</li>
+<li>等待回调至140-150元区间再考虑介入</li>
+<li>追高风险大（当前盈亏比0.75不理想）</li>
+<li>止损位：<strong style="color:var(--green-down);">130元</strong>（跌破平台支撑）</li>
+</ul>
+<p style="color:var(--red-up);font-weight:600;margin-top:8px;">中线（6-12个月）：</p>
+<ul class="checklist">
+<li>在140-160元区间分批建仓（定投模式）</li>
+<li>跟踪季度财报验证算力规模增长</li>
+<li>关注腾讯合同续签和新客户拓展</li>
+<li>核心目标：算力规模达5万P+，净利10亿+</li>
+<li>目标价：<strong style="color:var(--red-up);">180-220元</strong>，止损：<strong style="color:var(--green-down);">120元</strong></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="grid-2" style="margin-top:14px;">
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">综合结论</h3>
+<div class="verdict-highlight">
+<div class="judgment">AI算力转型成功标的，英伟达伙伴+腾讯长协构筑核心壁垒</div>
+<div class="verdict-grid">
+<div class="verdict-item"><div class="v-val" style="color:var(--orange-warn);">⚠️ 中高</div><div class="v-label">风险等级</div></div>
+<div class="verdict-item"><div class="v-val" style="color:var(--gold-light);">分批低吸</div><div class="v-label">操作建议</div></div>
+<div class="verdict-item"><div class="v-val" style="color:var(--red-up);">≤8%</div><div class="v-label">仓位上限</div></div>
+<div class="verdict-item"><div class="v-val">6-12月</div><div class="v-label">持仓周期</div></div>
+</div>
+</div>
+</div>
+<div>
+<h3 style="font-size:15px;color:var(--gold-light);margin-bottom:8px;">五维综合评分</h3>
+<div style="background:var(--card-bg-alt);border-radius:8px;padding:12px;">
+<div class="score-bar"><span class="score-label">基本面 75 (25%)</span><div class="score-track"><div class="score-fill" style="width:75%;"></div></div><span class="score-num">18.8</span></div>
+<div class="score-bar"><span class="score-label">资金面 60 (20%)</span><div class="score-track"><div class="score-fill" style="width:60%;"></div></div><span class="score-num">12.0</span></div>
+<div class="score-bar"><span class="score-label">技术面 65 (15%)</span><div class="score-track"><div class="score-fill" style="width:65%;"></div></div><span class="score-num">9.8</span></div>
+<div class="score-bar"><span class="score-label">情绪面 70 (20%)</span><div class="score-track"><div class="score-fill" style="width:70%;"></div></div><span class="score-num">14.0</span></div>
+<div class="score-bar"><span class="score-label">事件催化 75 (20%)</span><div class="score-track"><div class="score-fill" style="width:75%;"></div></div><span class="score-num">15.0</span></div>
+<div class="score-bar" style="margin-top:8px;padding-top:8px;border-top:2px solid var(--border);">
+<span class="score-label" style="font-weight:700;color:var(--text-primary);">加权总评</span>
+<div class="score-track"><div class="score-fill" style="width:69.5%;background:var(--gold);"></div></div>
+<span class="score-num" style="font-size:16px;font-weight:800;color:var(--gold);">69.5</span>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top:14px;padding:14px 18px;background:rgba(245,86,86,0.08);border-left:4px solid var(--red-up);border-radius:6px;font-size:13px;color:var(--text-secondary);line-height:1.75;">
+<strong style="color:var(--red-up);font-size:15px;">📌 总结</strong><br>
+利通电子是AI算力租赁赛道中"资源禀赋最强、订单确定性最高"的标的之一。英伟达Preferred级合作伙伴锁定高端GPU资源，腾讯50亿长协保障收入确定性，2025年业绩爆发增长（净利+1088%）验证了商业模式。<strong style="color:var(--red-up);">当前170元对应2026年PE约44倍（基准情景），估值处于合理偏高区间。建议等待回调至140-160元区间分批布局（仓位≤8%），不追高。</strong>核心跟踪：算力规模扩张节奏、腾讯订单续约、芯片供应变化。
+</div>
+</div>
+
+<footer>
+<p>⚠️ 免责声明：本报告仅供研究参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+<p>数据截止：2026-05-17 | 研究状态：首次覆盖</p>
+<p style="font-size:11px;color:var(--text-muted);">数据来源：akshare(雪球/新浪/同花顺/东方财富/巨潮资讯) · GLM5.1 · DeepSeek-V4-Pro · Claude Opus-4.7 · 2026-05-03 · @明立玩AI · 个股深度研究系统 v2.2</p>
+<p style="margin-top:6px;">作者：明立 · AI教育资深玩家 · AI应用落地近4年经验</p>
+<p>📮 联系作者获取更多skill：ll-mingli1221</p>
+</footer>
+</div>
+<!-- .container end -->
+<script>
+(function() {
+const rawData = [
+["2025-11-13",27.55,27.94,27.4,27.84,9810312],["2025-11-14",27.47,27.7,27.3,27.3,7351899],["2025-11-17",27.37,27.82,27.23,27.41,7998936],["2025-11-18",27.27,27.76,27.01,27.23,8395096],["2025-11-19",27.08,27.47,26.13,26.42,10637096],["2025-11-20",26.86,27.01,25.96,26.01,8196580],["2025-11-21",25.48,26.0,24.53,24.56,11359287],["2025-11-24",24.86,25.16,24.54,25.03,8489764],["2025-11-25",25.29,26.45,25.18,26.17,12932100],["2025-11-26",26.04,26.58,25.95,26.1,7376100],["2025-11-27",26.06,26.94,26.02,26.52,8506571],["2025-11-28",26.49,26.87,26.28,26.5,6638746],["2025-12-01",26.5,26.85,26.37,26.62,7582800],["2025-12-02",26.62,26.79,26.26,26.38,5768696],["2025-12-03",26.28,26.32,25.71,25.82,5246634],["2025-12-04",25.86,25.99,25.32,25.72,5147000],["2025-12-05",25.78,25.93,25.4,25.83,5643400],["2025-12-08",25.85,26.45,25.83,26.27,7039500],["2025-12-09",26.71,27.6,26.47,26.73,16255380],["2025-12-10",27.75,28.88,27.09,28.3,34933272],["2025-12-11",28.38,28.49,27.5,27.54,20174530],["2025-12-12",27.45,27.8,27.01,27.54,12154960],["2025-12-15",27.22,27.27,26.69,26.77,9252280],["2025-12-16",26.66,26.76,25.85,26.1,8833342],["2025-12-17",26.0,26.43,25.5,26.39,8724060],["2025-12-18",25.98,26.41,25.89,25.93,6154140],["2025-12-19",26.03,26.35,25.83,26.1,6847390],["2025-12-22",26.23,26.53,26.1,26.19,7448600],["2025-12-23",26.25,26.88,25.85,26.6,13213900],["2025-12-24",26.6,26.96,26.52,26.87,9384808],["2025-12-25",26.57,27.32,26.25,27.26,12886860],["2025-12-26",27.1,27.15,26.63,26.81,9895575],["2025-12-29",26.71,27.12,26.46,26.71,7536924],["2025-12-30",26.51,27.2,26.37,26.96,7949100],["2025-12-31",26.96,27.1,26.33,26.65,7935297],["2026-01-05",26.65,27.74,26.65,27.65,13569699],["2026-01-06",27.67,27.91,27.21,27.76,11388690],["2026-01-07",27.64,28.38,27.48,28.04,12489640],["2026-01-08",27.86,28.39,27.76,28.28,11115354],["2026-01-09",28.1,29.4,28.1,29.09,15464219],["2026-01-12",29.1,29.15,28.4,28.58,17385673],["2026-01-13",28.59,28.74,27.82,27.93,13848259],["2026-01-14",28.0,30.3,27.9,29.64,27150144],["2026-01-15",29.01,29.59,28.82,29.28,13853998],["2026-01-16",29.4,30.3,28.73,29.95,15634593],["2026-01-19",29.64,30.15,29.32,30.08,15520890],["2026-01-20",29.98,29.99,29.21,29.84,11855656],["2026-01-21",29.69,32.78,29.51,32.08,25103008],["2026-01-22",32.16,33.72,32.16,33.1,21588912],["2026-01-23",32.88,34.1,32.33,32.62,22137800],["2026-01-26",33.21,33.95,31.9,32.63,18934424],["2026-01-27",35.89,35.89,32.88,34.65,63051896],["2026-01-28",34.97,35.6,33.0,33.6,40512537],["2026-01-29",32.58,36.72,32.37,34.0,42614195],["2026-01-30",34.6,37.4,34.33,37.4,33734832],["2026-02-02",40.99,41.14,38.01,41.14,60063546],["2026-02-03",40.0,45.25,39.0,44.1,64728577],["2026-02-04",42.12,42.99,39.69,40.0,45366188],["2026-02-05",38.44,43.88,37.41,43.16,52792444],["2026-02-06",42.0,47.48,41.08,46.01,55862048],["2026-02-09",48.0,50.61,46.5,50.61,49997363],["2026-02-10",50.56,52.97,49.97,51.93,44483022],["2026-02-11",52.39,57.12,52.39,57.12,38566465],["2026-02-12",61.1,62.68,57.57,59.96,50373615],["2026-02-13",60.12,61.62,57.19,57.47,33216913],["2026-02-24",59.0,59.0,53.66,55.84,31453261],["2026-02-25",55.99,56.0,52.53,53.7,28766412],["2026-02-26",54.7,55.24,52.4,53.2,28931457],["2026-02-27",51.31,58.52,51.31,58.52,38912280],["2026-03-02",56.81,64.37,56.8,64.37,44431989],["2026-03-03",61.74,65.66,57.98,58.1,40374924],["2026-03-04",58.0,62.02,57.0,57.26,29751153],["2026-03-05",59.8,60.17,55.8,57.79,32781096],["2026-03-06",57.0,58.2,54.9,56.13,23815357],["2026-03-09",55.49,58.89,53.08,58.14,45514268],["2026-03-10",58.8,59.01,54.2,57.41,48343041],["2026-03-11",58.14,63.15,58.14,63.15,51663496],["2026-03-12",62.4,65.99,61.51,64.22,48032749],["2026-03-13",62.3,64.38,61.45,61.7,32250784],["2026-03-16",61.93,62.5,59.75,61.43,22774500],["2026-03-17",62.81,62.83,58.14,58.14,23204600],["2026-03-18",58.49,62.22,56.6,61.88,25755690],["2026-03-19",61.53,68.07,60.52,68.07,33485788],["2026-03-20",69.5,71.88,61.26,61.26,44387745],["2026-03-23",58.71,61.9,57.11,57.55,34187765],["2026-03-24",58.7,58.9,55.17,56.98,25437393],["2026-03-25",57.63,62.68,57.63,62.68,15389000],["2026-03-26",63.31,68.29,63.0,66.05,40379690],["2026-03-27",65.2,66.24,63.32,64.48,25648400],["2026-03-30",64.45,66.9,63.19,64.37,23440892],["2026-03-31",64.37,66.05,61.91,64.24,26181860],["2026-04-01",65.32,70.0,63.0,65.87,43546524],["2026-04-02",63.5,64.2,59.61,60.26,31362644],["2026-04-03",61.51,62.43,58.45,59.42,19856600],["2026-04-07",59.5,65.36,59.5,64.0,38310900],["2026-04-08",66.66,70.4,65.62,70.4,28878712],["2026-04-09",71.42,76.99,71.42,74.62,43152432],["2026-04-10",74.0,75.81,72.0,72.68,27942300],["2026-04-13",73.98,79.95,70.71,72.68,52671536],["2026-04-14",78.0,79.95,74.0,79.95,32023979],["2026-04-15",81.55,87.95,79.95,87.95,44220895],["2026-04-16",87.95,96.75,87.95,95.85,55569160],["2026-04-17",96.61,105.44,96.61,105.44,37240304],["2026-04-20",108.0,109.97,104.0,107.28,54492482],["2026-04-21",104.0,106.0,99.35,101.19,37160494],["2026-04-22",101.3,110.18,99.02,108.2,49101744],["2026-04-23",108.0,119.02,107.91,116.48,44252491],["2026-04-24",111.68,116.1,105.0,109.42,43818541],["2026-04-27",107.11,111.99,105.0,108.5,35985599],["2026-04-28",119.35,119.35,119.35,119.35,6257508],["2026-04-29",130.99,131.29,128.11,131.29,14419082],["2026-04-30",142.32,144.42,136.72,144.41,44705508],["2026-05-06",149.95,158.85,144.11,158.85,33417208],["2026-05-07",160.2,166.55,157.01,158.28,40009974],["2026-05-08",153.01,173.58,153.01,167.59,37473136],["2026-05-11",167.55,167.55,152.25,162.82,43880593],["2026-05-12",162.82,169.33,154.9,157.01,33551699],["2026-05-13",157.0,172.71,156.43,172.71,40176216],["2026-05-14",175.0,178.88,168.0,170.4,38103590],["2026-05-15",169.86,181.5,166.49,170.0,38847221]
+];
+const dates = [], ohlc = [], volumesRaw = [];
+rawData.forEach(d => {
+dates.push(d[0]);
+ohlc.push([d[1], d[4], d[3], d[2]]);
+volumesRaw.push(d[5]);
+});
+const closes = ohlc.map(d => d[1]);
+const calcMA = (arr, n) => arr.map((_, i) => {
+if (i < n - 1) return null;
+let sum = arr.slice(i - n + 1, i + 1).reduce((a, b) => a + b, 0);
+return +(sum / n).toFixed(2);
+});
+const ma5 = calcMA(closes, 5), ma20 = calcMA(closes, 20), ma60 = calcMA(closes, 60);
+const volumes = volumesRaw.map(v => +(v / 10000).toFixed(2));
+const dateLabels = dates.map(d => { const parts = d.split('-'); return parts[1] + '-' + parts[2]; });
+
+function getThemeColors() {
+const isLight = document.body.classList.contains('light-mode');
+return {
+textColor: isLight ? '#2a1f12' : '#e8e9ec',
+textSecondary: isLight ? '#6b5634' : '#b0b3be',
+textMuted: isLight ? '#9c8b6e' : '#7a7d8a',
+upColor: isLight ? '#dc2626' : '#f55656',
+downColor: isLight ? '#16a34a' : '#28c75b',
+ma5Color: isLight ? '#2563eb' : '#4a90d9',
+ma20Color: isLight ? '#16a34a' : '#28c75b',
+ma60Color: isLight ? '#c2410c' : '#e8923a',
+volUpColor: isLight ? 'rgba(220,38,38,0.25)' : 'rgba(245,86,86,0.35)',
+volDownColor: isLight ? 'rgba(22,163,74,0.25)' : 'rgba(40,199,91,0.35)',
+};
+}
+
+let pieChart, klineChart;
+function renderPie() {
+if (pieChart) pieChart.dispose();
+pieChart = echarts.init(document.getElementById('chart-business-pie'));
+const c = getThemeColors();
+pieChart.setOption({
+tooltip: { trigger: 'item', formatter: '{b}: {d}% (营收{c}亿)' },
+series: [{
+type: 'pie', radius: ['45%', '70%'],
+data: [
+{value:18.69,name:"精密结构件"},
+{value:12.00,name:"算力业务"},
+{value:1.37,name:"电子元器件"},
+{value:1.02,name:"其他"}
+],
+label: { fontSize: 11, color: c.textSecondary },
+color: ['#f55656', '#d4a853', '#e8923a', '#4a90d9']
+}]
+});
+}
+
+function renderKline() {
+if (klineChart) klineChart.dispose();
+klineChart = echarts.init(document.getElementById('chart-kline-full'));
+const c = getThemeColors();
+const volData = volumes.map((v, i) => ({
+value: v,
+itemStyle: { color: ohlc[i][1] >= ohlc[i][0] ? c.volUpColor : c.volDownColor }
+}));
+klineChart.setOption({
+grid: [
+{ left: '9%', right: '6%', top: '12%', height: '55%' },
+{ left: '9%', right: '6%', top: '74%', height: '14%' }
+],
+xAxis: [
+{ type: 'category', data: dateLabels, gridIndex: 0,
+axisLabel: { color: c.textMuted, fontSize: 9, interval: 5 },
+axisLine: { lineStyle: { color: c.textMuted } }, splitLine: { show: false } },
+{ type: 'category', data: dateLabels, gridIndex: 1, show: false, splitLine: { show: false } }
+],
+yAxis: [
+{ scale: true, gridIndex: 0, axisLabel: { color: c.textMuted, fontSize: 10 }, splitLine: { show: false } },
+{ scale: true, gridIndex: 1, axisLabel: { color: c.textMuted, fontSize: 10, formatter: '{value}万' }, splitLine: { show: false } }
+],
+dataZoom: [{ type: 'inside', xAxisIndex: [0, 1] }],
+tooltip: { trigger: 'axis', axisPointer: { type: 'cross' },
+formatter: function(params) {
+const k = params.find(p => p.seriesName === 'K线');
+const vol = params.find(p => p.seriesName === '成交量');
+if (!k || !vol) return '';
+return k.axisValue + '<br/>开: ' + k.data[0] + '  收: ' + k.data[1] + '<br/>低: ' + k.data[2] + '  高: ' + k.data[3] + '<br/>成交量: ' + vol.data.value + '万手';
+}
+},
+legend: { data: ['K线', 'MA5', 'MA20', 'MA60'], top: 0, textStyle: { color: c.textSecondary } },
+series: [
+{ name: 'K线', type: 'candlestick', data: ohlc, xAxisIndex: 0, yAxisIndex: 0,
+itemStyle: { color: c.upColor, color0: c.downColor, borderColor: c.upColor, borderColor0: c.downColor } },
+{ name: 'MA5', type: 'line', data: ma5, smooth: true,
+lineStyle: { width: 1.5, color: c.ma5Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+{ name: 'MA20', type: 'line', data: ma20, smooth: true,
+lineStyle: { width: 1.5, color: c.ma20Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+{ name: 'MA60', type: 'line', data: ma60, smooth: true,
+lineStyle: { width: 1.5, color: c.ma60Color }, showSymbol: false, xAxisIndex: 0, yAxisIndex: 0 },
+{ name: '成交量', type: 'bar', data: volData, xAxisIndex: 1, yAxisIndex: 1 }
+]
+});
+}
+
+function renderCharts() { renderPie(); renderKline(); }
+const toggleBtn = document.getElementById('themeToggle');
+toggleBtn.addEventListener('click', () => {
+document.body.classList.toggle('light-mode');
+toggleBtn.textContent = document.body.classList.contains('light-mode') ? '🌙 深色模式' : '☀️ 浅色模式';
+renderCharts();
+});
+renderCharts();
+const sections = document.querySelectorAll('.card[id], .hero[id], .conclusion-top[id]');
+const navs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+let cur = '';
+sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+navs.forEach(a => {
+a.classList.remove('active');
+if (a.getAttribute('href') === '#' + cur) a.classList.add('active');
+});
+});
+document.querySelectorAll('.nav-links a').forEach(a => {
+a.addEventListener('click', function(e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+});
+window.addEventListener('resize', () => {
+pieChart && pieChart.resize();
+klineChart && klineChart.resize();
+});
+})();
+</script>
+</body>
+</html>
